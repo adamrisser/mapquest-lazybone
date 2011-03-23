@@ -1,0 +1,8 @@
+
+#pane {
+    float: left;
+    width: 350px;
+    padding: 10px;
+    border-right: 1px solid #000;
+}
+

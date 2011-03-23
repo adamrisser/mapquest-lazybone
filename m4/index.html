@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en" class="gecko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<title>MapQuest</title>
+	
+    <link rel="stylesheet" href="css/main.css" />
+    
+    <script src="http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js"></script>
+    <script type="text/javascript" src="http://localhost:8008/js/dev.js"></script>
+    
+	<script type="text/javascript">
+        // start the show
+        $(document).ready(function(){
+            m4.bootstrap.initialize();
+        });
+    </script>
+</head>
+<body>
+    <div id="pane">
+        
+        <div id="summaryForm">
+            <form class="form" onsubmit="return false;">
+                <div>
+                    <input id="summaryFormTin" class="tin" type="text" name="" value="" />
+                </div>
+                <div>
+                    <input type="submit" value="Search" id="summaryFormBtn" />
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    
+	<div id="map"  style="width: 500px; height: 300px"></div>
+</body>
+</html>

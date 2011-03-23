@@ -1,0 +1,6 @@
+
+<div class="vcard">
+    {{#hasStreet}}<div>{{street}}</div>{{/hasStreet}}
+    <div>{{city}}{{#hasCity}}, {{/hasCity}}{{state}} {{zip}}</div>
+    {{#hasCountry}}<div>{{country}}</div>{{/hasCountry}}
+</div>
