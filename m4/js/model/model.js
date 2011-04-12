@@ -1,11 +1,16 @@
-(function () {
+/**
+ * Main application model
+ * @fileoverview
+ */
+define(['js/model/location.js'], function (Location) {
     
     /**
      * Create a blank core application backbone model
+     * @namespace
      */
     var Model = Backbone.Collection.extend({
         
-        model: __model.Location,
+        model: Location,
         
         initialize: function () {
             
@@ -16,6 +21,6 @@
     /*
      * Export into public namespace
      */
-    __model.Core = Model;
-        
-}());
+    return Model;
+    
+});

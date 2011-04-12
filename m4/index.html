@@ -2,22 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en" class="gecko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	
 	<title>MapQuest</title>
 	
     <link rel="stylesheet" href="css/main.css" />
     
-    <script src="http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js"></script>
-    <script type="text/javascript" src="http://localhost:8008/js/dev.js"></script>
     
-	<script type="text/javascript">
-        // start the show
-        $(document).ready(function(){
-            m4.bootstrap.initialize();
-        });
-    </script>
+    <script data-main="bootstrap.js" type="text/javascript" src="http://localhost:8008/js/dev.js"></script>
 </head>
 <body>
+    <div id="header">
+        <img src="img/logo.png" id="logo" />
+    </div>
     <div id="pane">
         
         <div id="summaryForm">
@@ -33,6 +28,6 @@
         
     </div>
     
-	<div id="map"  style="width: 500px; height: 300px"></div>
+	<div id="map" style="width: 500px; height: 300px"></div>
 </body>
 </html>

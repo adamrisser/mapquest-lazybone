@@ -1,8 +1,20 @@
 
 #pane {
-    float: left;
-    width: 350px;
-    padding: 10px;
-    border-right: 1px solid #000;
+    position: absolute;
+    top:  35px;
+    left: 15px;
+    
+    z-index: 1;
+    
+    width: 460px;
+    padding: 10px 10px 0px 10px;
+
+    background-color: #fff;
+    
+    border: 1px solid #777;
+    border-width: 0px 1px 1px 1px;
+    
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 

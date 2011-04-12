@@ -13,18 +13,18 @@
             "../js/bootstrap.js",
             "../js/post.js"
         ],
+        
+        
         "dev.js": [
-            "../js/m4.js",
-            "../js/pre.js",
-            "../html/result.html",
+            "../../lib/jquery/jquery-1.5.1.js",
             "../../lib/mustachejs/mustache.js",
             "../../lib/underscore.js",
-            "../../lib/jquery/jquery-1.5.1.min.js",
-            "../../lib/lazyload-2.0.0/lazyload.js",
             "../../lib/backbone.js",
-            "../js/util/html.js",
-            "../js/bootstrap.js",
-            "../js/post.js"
+            "../../lib/require/require.js",
+            
+            "../js/m4.js",
+            "../html/result.html"
         ]
+        
     }
 }

@@ -41,15 +41,6 @@
  * @description
  */
 
-(function (){
-    
-    //TODO: make these unglobal with a var
-    __window = window;
-    __document = window.document;
-    
-    __m = m4;
-    __util = m4.util;
-    __nodes = m4.nodes;
-    __model = m4.model;
-    __dotcom = m4.dotcom;
-    __widgets = m4.dotcom.widgets;
+(function () {
+      
+// ended in post.js, do not 'fix' this

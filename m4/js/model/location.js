@@ -1,7 +1,13 @@
-(function () {
+/**
+ * A model representation of a location. 
+ * Each location in the main application model is stored as a location model.
+ * @fileoverview
+ */
+define(function () {
     
     /**
-     * Create a blank core application backbone model
+     * A location backbone model
+     * @namespace
      */
     var Location = Backbone.Model.extend({
         
@@ -16,9 +22,6 @@
         
     });
     
-    /*
-     * Export into public namespace
-     */
-    __model.Location = Location;
-    
-}());
+    // Export into public namespace
+    return Location;
+});

@@ -1,30 +1,31 @@
-(function () {
+/**
+ * Results List
+ * 
+ * The results list is displayed on the summary pane after locations
+ * have been added to the model.
+ * @description
+ */
+define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (nodes, Html) {
     
-    /**
-     * Results List
-     * 
-     * The results list is displayed on the summary pane after locations
-     * have been added to the model.
-     * @description
-     */
+    var _model = m4.model,
     
-    var Result = Backbone.View.extend({
+    Result = Backbone.View.extend({
         
         /**
          * Parent element of view
          * @property
          */
-        el: __nodes.pane,
+        el: nodes.pane,
         
         /**
          * Initialize the view. Bind it to the model
          * @constructor
          */
-        initialize: function() {
+        initialize: function () {
             var self = this;
             
             // When a model gets added, it will render in the left pane
-            __model.core.bind("add", function (loc) { 
+            _model.core.bind("add", function (loc) { 
                 self.render(loc);
             });
         },
@@ -33,10 +34,10 @@
          * Render the view to the page
          * @method
          */
-        render: function(loc) {
+        render: function (loc) {
             var adr = loc.getAddress(),
             
-            html = __util.Html.get('result', {
+            html = Html.get('result', {
                 hasStreet:  !!adr.road,
                 hasCity:    !!adr.city,
                 hasState:   !!adr.state,
@@ -55,6 +56,6 @@
     });
     
     // Export into public namespace. 
-    __widgets.Result = Result;
-    
-}());
+    return new Result();
+
+});
