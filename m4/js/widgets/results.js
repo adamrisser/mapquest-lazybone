@@ -7,9 +7,7 @@
  */
 define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (nodes, Html) {
     
-    var _model = m4.model,
-    
-    Result = Backbone.View.extend({
+    var Result = Backbone.View.extend({
         
         /**
          * Parent element of view
@@ -25,7 +23,7 @@ define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (node
             var self = this;
             
             // When a model gets added, it will render in the left pane
-            _model.core.bind("add", function (loc) { 
+            m4.model.Core.activeTab.bind('add', function (loc) {
                 self.render(loc);
             });
         },
@@ -55,7 +53,5 @@ define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (node
         
     });
     
-    // Export into public namespace. 
     return new Result();
-
 });

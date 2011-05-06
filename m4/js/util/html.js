@@ -21,6 +21,20 @@ define({
      */
     get: function (key, view, partials) {
         return Mustache.to_html(m4._html[key], view, partials || null);
+    },
+    
+    /**
+     * Load and get HTML from a string
+     * @param  {Object} key key to store html string under
+     * @param  {Object} str html
+     * @param  {Object} view
+     * @param  {Object} partials
+     * @return {String}
+     * @method
+     */
+    load: function (key, str, view, partials) {
+        m4._html[key] = str;
+        return this.get(key, view, partials);
     }
     
 });

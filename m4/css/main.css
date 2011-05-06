@@ -5,14 +5,22 @@ body {
     overflow: hidden;
 }
 
-
 #header {
-    border-bottom: 1px solid #777;
     width: 100%;
-    height: 35px;
+    height: 34px;
+    border-bottom: 1px solid #777;
 }
 
 #logo {
-    margin-top: 2px;
     height: 30px;
+    margin-top: 2px;
+    margin-left: 23px;
+}
+
+#gallery, #add { 
+    float: right;
+    color: blue;
+    line-height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
 }

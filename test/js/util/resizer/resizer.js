@@ -1,7 +1,6 @@
-$(document).ready(function () {
+require(['file:///Users/arisser/Documents/mapquest/lazybone/m4/js/util/resizer.js'], function (resizer) {
     
-    var resizer = m4.util.resizer,
-        a = false,
+    var a = false,
         b = false,
         f1 = function () { a = true; },
         f2 = function () { b = true; },

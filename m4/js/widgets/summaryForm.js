@@ -14,33 +14,23 @@ define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], funct
      * @private
      */
     function _onSubmit (response) {
+        
         if (!response || response.length == 0) {
+            console.warn('No response on submit'); //$D
             return;
         }
         
         // load each location returned as a separate location model
         _.each(response, function (loc) {
-            m4.model.core.add(new Location(loc));
+            m4.model.Core.activeTab.addLocation(new Location(loc));
         });
     }
     
     /**
-     * Init a new Summary Form
-     * @constructor
+     * Summary form widget
+     * @namespace
      */
-    function SummaryForm () {
-        var self = this;
-        
-        nodes.summaryForm = $('#summaryForm'); 
-        nodes.summaryFormBtn = $('#summaryFormBtn');
-        nodes.summaryFormTin = $('#summaryFormTin');
-        
-        nodes.summaryFormBtn.bind('click', function (evt) {
-            self.submit();
-        });
-    }
-    
-    SummaryForm.prototype = {
+    SummaryForm = {
         
         /**
          * Submit the Summary Form. Load the service util if not present
@@ -58,10 +48,14 @@ define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], funct
                 }
             });
         }
-        
     };
     
+    // Handle submit button events
+    nodes.summaryFormBtn.bind('click', function () {
+        SummaryForm.submit();
+    });
+    
     // Export into public namespace.
-    return new SummaryForm();
+    return SummaryForm;
     
 });

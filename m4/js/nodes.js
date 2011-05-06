@@ -3,8 +3,16 @@
  * @namespace
  */
 define({
+    body: $('body'),
+    window: $(window),
+    
     map:  $('#map'),
     pane: $('#pane'),
-    body: $('body'),
-    window: $(window)
+    add: $('#add'),
+    gallery: $('#gallery'),
+    
+    summaryForm: $('#summaryForm'),
+    summaryFormBtn:  $('#summaryFormBtn'),
+    summaryFormTin:  $('#summaryFormTin')
+    
 });

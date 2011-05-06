@@ -1,11 +1,11 @@
 /**
  * Create an instance of a MQA tile map
- * The tilemap gets loaded under window.MQA
- * NOTE: do NOT use toolkit, its undefined and only an argument placeholder.  
+ * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js', 'js/nodes.js', 
-'js/util/resizer.js', 'css!css/map.css'], function (toolkit, nodes, resizer, css) {
+define(['js/nodes.js', 'js/util/resizer.js', 'css!css/map.css',
+'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+function (nodes, resizer) {
     
     /**
      * Resize the pane based off of the window height
@@ -20,46 +20,46 @@ define(['http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js', 'js/nodes.js
             width:  (w > 0 ? w : 0) + 'px'
         });
         
-        mqa.setSize(); // resize the map to its parent div
+        // resize the map to its parent div
+        mqa.setSize(); 
     }
     
     /**
+     * Default center location (Denver, CO)
+     * @private
+     */
+    var _center = {
+        lat:   39.743943,
+        lng: -105.020089
+    },
+    
+    /**
+     * Map builder widget
      * @namespace
      */
-    function MapBuilder () {
-        
-    }
-    
-    MapBuilder.prototype = {
+    MapBuilder = {
         
         /**
          * Build a MQA Tile  map
          * @method
          */
         build: function () {
-            var self = this,
             
-            // denver, co
-            center = {
-                lat:   39.743943,
-                lng: -105.020089
-            };
-        
-            self.mqa = new MQA.TileMap(nodes.map[0], 7, center, 'map');
+            var mqa = new MQA.TileMap(nodes.map[0], 7, _center, 'map');
             
             // resize once
-            _resize(self.mqa);
+            _resize(mqa);
             
             // resize map based off of window height/width
             resizer.subscribe('mapbuilder', function () {
-                _resize(self.mqa);
+                _resize(mqa);
             });
+            
+            return mqa;
         }
     };
     
-    /*
-     * Export into public namespace.
-     */
+    // Export into public namespace.
     return MapBuilder;
     
 });

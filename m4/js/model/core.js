@@ -1,8 +1,8 @@
 /**
- * Main application model
+ * Main application model. A collection of map models
  * @fileoverview
  */
-define(['js/model/location.js'], function (Location) {
+define(['js/model/tab.js'], function (Tab) {
     
     /**
      * Create a blank core application backbone model
@@ -10,17 +10,17 @@ define(['js/model/location.js'], function (Location) {
      */
     var Model = Backbone.Collection.extend({
         
-        model: Location,
+        model: Tab,
         
         initialize: function () {
-            
+            var tab = new Tab();
+            this.add(tab);
+            this.activeTab = tab; 
         }
         
     });
     
-    /*
-     * Export into public namespace
-     */
+    // Export into public namespace
     return Model;
     
 });
