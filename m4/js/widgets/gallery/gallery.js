@@ -4,7 +4,8 @@
  * @fileoverview
  */
 define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html', 
-'js/nodes.js', 'js/util/resizer.js'], function (html, gCss, htmlStr, nodes, resizer) {
+'js/nodes.js', 'js/util/resizer.js', 'js/util/staticmap.js'], 
+function (html, gCss, htmlStr, nodes, resizer, staticMap) {
     
     /**
      * Resize the pane based off of the window height
@@ -34,9 +35,16 @@ define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html',
      */
     _galleryNodes = null,
     
+    /**
+     * Core model to get maps from
+     * @type {model}
+     * @private
+     */
+    _model = null,
     
     /**
      * Gallery widget
+     * @namespace
      */
     Gallery = {
         
@@ -45,10 +53,16 @@ define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html',
          * @method
          */
         open: function () {
+            
+            var images = [];
+            
+            // get static map image info
+            _model.get('tabs').each(function (map) {
+                images.push(staticMap.get(map.get('mapState')));
+            });
+            
             _galleryNodes = $(html.load('gallery', htmlStr, {
-                src:    '',
-                width:  '100',
-                height: '100'
+                images: images,
             }));
             
             nodes.body.append(_galleryNodes);
@@ -73,9 +87,11 @@ define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html',
         
         /**
          * If on, off. If off, on.
+         * @param {model} coreModel 
          * @method
          */
-        toggle: function () {
+        toggle: function (coreModel) {
+            _model = coreModel;
             Gallery[_isOpen ? 'close' : 'open']();
             _isOpen = !_isOpen;
         },
@@ -86,7 +102,7 @@ define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html',
          */
         dispose: function () {
             resizer.unsubscribe('gallery');
-        },
+        }
         
     };
     

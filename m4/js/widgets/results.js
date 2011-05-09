@@ -23,7 +23,7 @@ define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (node
             var self = this;
             
             // When a model gets added, it will render in the left pane
-            m4.model.Core.activeTab.bind('add', function (loc) {
+            m4.model.Core.get('activeTab').bind('add', function (loc) {
                 self.render(loc);
             });
         },
@@ -33,7 +33,7 @@ define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (node
          * @method
          */
         render: function (loc) {
-            var adr = loc.getAddress(),
+            var adr = loc.get('address') || {},
             
             html = Html.get('result', {
                 hasStreet:  !!adr.road,

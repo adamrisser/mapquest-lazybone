@@ -1,7 +1,9 @@
 
 <div class="gallery">
     <div class="map">
-        <img src="{{src}}" width="{{width}}" height="{{height}}" />
+        {{#images}}
+            <img src="{{src}}" width="{{width}}" height="{{height}}" />
+        {{/images}}
         <span class="link">View</span> | <span class="link">Delete</span>
     </div>
 </div>

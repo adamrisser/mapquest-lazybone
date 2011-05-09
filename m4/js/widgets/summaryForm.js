@@ -9,24 +9,6 @@
 define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], function (nodes, Location) {
     
     /**
-     * Handle form submission. Instantiate core model if needed
-     * @param {Object} response
-     * @private
-     */
-    function _onSubmit (response) {
-        
-        if (!response || response.length == 0) {
-            console.warn('No response on submit'); //$D
-            return;
-        }
-        
-        // load each location returned as a separate location model
-        _.each(response, function (loc) {
-            m4.model.Core.activeTab.addLocation(new Location(loc));
-        });
-    }
-    
-    /**
      * Summary form widget
      * @namespace
      */
@@ -43,7 +25,9 @@ define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], funct
                 if (query) {
                     service.search({
                         query: query,
-                        callback: _onSubmit
+                        callback: function (response) {
+                            m4.model.Core.handleResponse(response);
+                        }
                     });
                 }
             });
@@ -55,7 +39,6 @@ define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], funct
         SummaryForm.submit();
     });
     
-    // Export into public namespace.
+    // Export
     return SummaryForm;
-    
 });

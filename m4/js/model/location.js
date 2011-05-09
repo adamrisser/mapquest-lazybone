@@ -12,12 +12,35 @@ define(function () {
     var Location = Backbone.Model.extend({
         
         /**
-         * Get location address
+         * Init the location
+         * @param {Object} loc
          * @method
-         * @return {Object} Address objects
          */
-        getAddress: function () {
-            return this.get('address');
+        initialize: function (loc) {
+            this.set({
+                /**
+                 * Location Name
+                 * @type {Object}
+                 */
+                name: loc.display_name,
+                
+                /**
+                 * Address
+                 * @type {Object}
+                 */
+                address: loc.address,
+                
+                /**
+                 * Address
+                 * @type {Object}
+                 */
+                latLng: {
+                    lat: loc.lat,
+                    lng: loc.lon  
+                }
+            }, { 
+                silent: true 
+            });
         }
         
     });
