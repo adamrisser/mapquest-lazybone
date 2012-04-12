@@ -3,9 +3,7 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['js/nodes.js', 'js/util/resizer.js', 'js/model/location.js',
-'js/model/tab.js', 'css!css/map.css',  
-'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+define(['nodes', 'resizer', 'location', 'tab', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
 function (nodes, resizer, LocationModel, TabModel) {
     
     /**

@@ -2,17 +2,22 @@
  * Main namespace
  * @namespace
  */
-define({
-    body: $('body'),
-    window: $(window),
+define(function () {
     
-    map:  $('#map'),
-    pane: $('#pane'),
-    add: $('#add'),
-    gallery: $('#gallery'),
-    
-    summaryForm: $('#summaryForm'),
-    summaryFormBtn:  $('#summaryFormBtn'),
-    summaryFormTin:  $('#summaryFormTin')
+    return {
+        
+        body: $('body'),
+        window: $(window),
+        
+        map:  $('#map'),
+        pane: $('#pane'),
+        add: $('#add'),
+        gallery: $('#gallery'),
+        
+        summaryForm: $('#summaryForm'),
+        summaryFormBtn:  $('#summaryFormBtn'),
+        summaryFormTin:  $('#summaryFormTin')
+        
+    };
     
 });

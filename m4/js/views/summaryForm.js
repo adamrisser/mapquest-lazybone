@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], function (nodes, Location) {
+define(['nodes', 'location', 'css!summaryformcss'], function (nodes, Location) {
     
     /**
      * Summary form widget
@@ -19,7 +19,7 @@ define(['js/nodes.js', 'js/model/location.js', 'css!css/summaryForm.css'], funct
          * @method
          */
         submit: function () {
-            require(['js/util/services.js', 'js/widgets/results.js'], function (service) {
+            require(['util/services', 'widgets/results'], function (service) {
                 var query = nodes.summaryFormTin.val();
                 
                 if (query) {

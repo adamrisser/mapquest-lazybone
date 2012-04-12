@@ -4,8 +4,7 @@
  *     - One map model can contain multiple locations and multiple routes
  * @fileoverview
  */
-define(['js/model/location.js', 'js/model/route.js', 'js/model/mapstate.js'], 
-function (Location, Route, MapState) {
+define(['location', 'route', 'mapstate'], function (Location, Route, MapState) {
     
     /**
      * Tab model.  One map state

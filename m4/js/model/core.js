@@ -2,7 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['js/model/tab.js', 'js/model/location.js'], function (Tab, LocationModel) {
+define(['tab', 'location'], function (Tab, LocationModel) {
     
     /**
      * Create a blank core application backbone model
