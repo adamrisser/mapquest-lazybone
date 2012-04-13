@@ -2,7 +2,9 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['tab', 'location'], function (Tab, LocationModel) {
+define(['tab'], function (Tab) {
+    
+    var _silent = { silent: true };
     
     /**
      * Create a blank core application backbone model
@@ -22,11 +24,7 @@ define(['tab', 'location'], function (Tab, LocationModel) {
              * Collection of tab models
              * @type {BackboneCollection}
              */
-            self.set({
-                tabs: new Backbone.Collection
-            }, {
-                silent: true
-            });
+            self.set({ tabs: new Backbone.Collection }, _silent);
             
             // add the first tab to the
             self.get('tabs').add(tab);
@@ -35,35 +33,7 @@ define(['tab', 'location'], function (Tab, LocationModel) {
              * The active tab is whichever tab has control of the map.
              * @type {TabModel}
              */ 
-            self.set({
-                activeTab: tab
-            }, {
-                silent: true
-            });
-            
-            /*
-            m4.map.bind('bestFit', function () {
-                self.setActiveState();
-            });
-            */
-        },
-        
-        /**
-         * Injest a response into the site
-         * @param {Object} response
-         * @method
-         */
-        handleResponse: function (response) {
-            var model = this.get('activeTab');
-            
-            // load each location returned as a separate location model
-            $(response).each(function (i, loc) {
-                console.info('test');
-                model.get('locations').add(new LocationModel(loc));
-            });
-            
-            // save the new mapState
-            this.setActiveState();
+            self.set({ activeTab: tab }, _silent);
         },
         
         /**

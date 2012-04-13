@@ -32,24 +32,29 @@ require.config({
         'route'    : 'js/model/route',
         'tab'      : 'js/model/tab',
         
-        // views
-        
+        // view
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'summaryform' : 'js/views/summaryform',
         'gallery'     : 'js/views/gallery/gallery',
+        'results'     : 'js/views/results',
         
         // utils 
-        'resizer' : 'js/util/resizer', 
-        
+        'resizer'   : 'js/util/resizer',
+        'services'  : 'js/util/services',
+        'html'      : 'js/util/html',
+        'staticmap' : 'js/util/staticmap',
+         
         // html
-        'gametmpl'  : 'html/gallery.html',
-        'boardtmpl' : 'html/result.html',
+        'galleryhtml' : 'html/gallery.html',
+        'resulthtml'  : 'html/result.html',
         
         // css
-        'panecss': 'css/pane',
-        'mapcss': 'css/map',
-        'summaryformcss': 'css/summaryform'
+        'panecss'       : 'css/pane',
+        'mapcss'        : 'css/map',
+        'summaryformcss': 'css/summaryform',
+        'resultscss'    : 'css/results',
+        'gallerycss'    : 'css/gallery'
         
     }
 });
@@ -58,5 +63,5 @@ require.config({
  * Get base libs and boot strap the application
  */
 require(['order!underscore', 'order!backbone', 'jquery', 'm4', 'bootstrap'], function (_, Backbone, $, m4, app) {
-    
+    //todo: meh.
 });

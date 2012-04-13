@@ -6,6 +6,10 @@
  */
 define(['location', 'route', 'mapstate'], function (Location, Route, MapState) {
     
+    var _Locs = Backbone.Collection.extend({
+        model: Location
+    });
+    
     /**
      * Tab model.  One map state
      * @namespace
@@ -21,8 +25,12 @@ define(['location', 'route', 'mapstate'], function (Location, Route, MapState) {
                 // State information about the tab's tilemap
                 mapState: new MapState(),
                 
-                // A Collection of location models
-                locations: new Backbone.Collection
+                /**
+                 * Collection of location models
+                 * @type {Collection}
+                 */ 
+                locations: new _Locs()
+                
             }, { 
                 silent: true 
             });

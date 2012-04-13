@@ -129,8 +129,10 @@
       if (!(calls = this._callbacks)) return this;
       all = calls['all'];
       (events = events.split(/\s+/)).push(null);
+
       // Save references to the current heads & tails.
       while (event = events.shift()) {
+        console.info(event);
         if (all) events.push({next: all.next, tail: all.tail, event: event});
         if (!(node = calls[event])) continue;
         events.push({next: node.next, tail: node.tail});
@@ -249,6 +251,7 @@
         if (!_.isEqual(now[attr], val)) delete escaped[attr];
         options.unset ? delete now[attr] : now[attr] = val;
         if (this._changing && !_.isEqual(this._changed[attr], val)) {
+          console.info('change:' + attr);
           this.trigger('change:' + attr, this, val, options);
           this._moreChanges = true;
         }

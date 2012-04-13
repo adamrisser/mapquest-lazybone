@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (nodes, Html) {
+define(['nodes', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, tmpl) {
     
     var Result = Backbone.View.extend({
         
@@ -20,35 +20,25 @@ define(['js/nodes.js', 'js/util/html.js', 'css!css/results.css'], function (node
          * @constructor
          */
         initialize: function () {
-            var self = this;
+            _.bindAll(this, 'render');
             
             // When a model gets added, it will render in the left pane
-            m4.model.Core.get('activeTab').bind('add', function (loc) {
-                self.render(loc);
-            });
+            m4.model.Core.bind('change:activeMapState', this.render)
         },
         
         /**
          * Render the view to the page
          * @method
          */
-        render: function (loc) {
-            var adr = loc.get('address') || {},
+        render: function (tab) {
             
-            html = Html.get('result', {
-                hasStreet:  !!adr.road,
-                hasCity:    !!adr.city,
-                hasState:   !!adr.state,
-                hasZip:     !!adr.postcode,
-                hasCountry: !!adr.country,
-                street:  adr.road,
-                city:    adr.city,
-                state:   adr.state,
-                zip:     adr.postcode,
-                country: adr.country
-            });
+            $('.vcard').remove();
             
-            this.el.append(html);
+            var html = $(tmpl({
+                addresses: tab.get('locations').pluck('address')
+            }));
+            
+            this.$el.append(html);
         }
         
     });

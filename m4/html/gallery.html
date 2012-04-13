@@ -1,9 +1,9 @@
 
 <div class="gallery">
     <div class="map">
-        {{#images}}
-            <img src="{{src}}" width="{{width}}" height="{{height}}" />
-        {{/images}}
+        <% _.each(images, function (img) { %>
+            <img src="<%= img.src %>" width="<%= img.width %>" height="<%= img.height %>" />
+        <% }); %>
         <span class="link">View</span> | <span class="link">Delete</span>
     </div>
 </div>

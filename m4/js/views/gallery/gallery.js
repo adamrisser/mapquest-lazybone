@@ -3,8 +3,7 @@
  * Allow user to manage multiple maps  
  * @fileoverview
  */
-define(['js/util/html.js', 'css!css/gallery.css', 'text!html/gallery.html', 
-'js/nodes.js', 'js/util/resizer.js', 'js/util/staticmap.js'], 
+define(['html', 'css!gallerycss', 'tmpl!galleryhtml', 'nodes', 'resizer', 'staticmap'], 
 function (html, gCss, htmlStr, nodes, resizer, staticMap) {
     
     /**
@@ -61,9 +60,7 @@ function (html, gCss, htmlStr, nodes, resizer, staticMap) {
                 images.push(staticMap.get(map.get('mapState')));
             });
             
-            _galleryNodes = $(html.load('gallery', htmlStr, {
-                images: images,
-            }));
+            _galleryNodes = $(htmlStr({ images: images })); 
             
             nodes.body.append(_galleryNodes);
             

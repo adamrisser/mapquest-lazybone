@@ -19,20 +19,10 @@ define(['nodes', 'pane', 'map', 'summaryform', 'resizer', 'core'], function (nod
         }
     });
     
-    // Set up the add map event on the link.
-    // TODO: Onclick for now, will eventually be a gesture also
-    nodes.add.bind('click', function () {
-        
-        // add map to model
-        // display new tab
-        // hide old map collection 
-        
-    });
-    
     // Set up the gallery event on the link.
     // TODO: onclick for now, will eventually be a gesture also
     nodes.gallery.bind('click', function () {
-        require(['/gallery'], function (gallery) {
+        require(['gallery'], function (gallery) {
             gallery.toggle(m4.model.Core);
         });
     });

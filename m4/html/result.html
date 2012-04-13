@@ -1,6 +1,18 @@
 
-<div class="vcard">
-    {{#hasStreet}}<div>{{street}}</div>{{/hasStreet}}
-    <div>{{city}}{{#hasCity}}, {{/hasCity}}{{state}} {{zip}}</div>
-    {{#hasCountry}}<div>{{country}}</div>{{/hasCountry}}
-</div>
+<% _.each(addresses, function (adr) { %>
+    <div class="vcard">    
+        <% if (adr.road) { %>
+            <div><%= adr.road %></div>
+        <% } %>
+        
+        <div>
+            <%= adr.city %>
+            <% if (adr.city) { %>, <% } %>
+            <%= adr.state %> <%= adr.postcode %>
+        </div>
+        
+        <% if (adr.country) { %>
+            <div><%= adr.country %></div>
+        <% } %>
+    </div>
+<% }); %>

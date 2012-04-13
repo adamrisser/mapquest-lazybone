@@ -17,6 +17,7 @@ define(function () {
          * @method
          */
         initialize: function (loc) {
+            
             this.set({
                 /**
                  * Location Name
@@ -38,7 +39,8 @@ define(function () {
                     lat: loc.lat,
                     lng: loc.lon  
                 }
-            }, { 
+                
+            }, {
                 silent: true 
             });
         }
