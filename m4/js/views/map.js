@@ -3,8 +3,8 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['nodes', 'resizer', 'location', 'tab', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
-function (nodes, resizer, LocationModel, TabModel) {
+define(['nodes', 'resizer', 'location', 'tab', 'core', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+function (nodes, resizer, LocationModel, TabModel, coreModel) {
     
     /**
      * Resize the pane based off of the window height
@@ -57,18 +57,12 @@ function (nodes, resizer, LocationModel, TabModel) {
                 _resize(mqa);
             });
             
-            self.bind('addLocation', function (loc) {
-                debugger;
-                console.info('test test test test');
-            });
-            
-            m4.model.Core.bind('change:activeMapState', function (tab) {
+            coreModel.bind('change:activeMapState', function (tab) {
                 
                 // add a simple poi for each location
                 tab.get('locations').each(function (loc) {
                     mqa.addShape(new MQA.Poi(loc.get('latLng')));
                 });
-                
                 
                 self.bestFit();
             });

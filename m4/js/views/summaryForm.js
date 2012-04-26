@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['nodes', 'location', 'css!summaryformcss'], function (nodes, Location) {
+define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Location, coreModel) {
     
     var _SEARCH_URL = 'http://open.mapquestapi.com/nominatim/v1/search/?addressdetails=1&format=json&q=',
     
@@ -58,10 +58,7 @@ define(['nodes', 'location', 'css!summaryformcss'], function (nodes, Location) {
                 query = nodes.summaryFormTin.val();
             
             if (query) {
-                require(['services', 'results'], function (service) {
-                    
-                    // got a query and js to back it? make the request
-                    // and process results into the model
+                require(['results'], function (service) {
                     $.when(
                         self.fetch(query)
                     ).pipe(
@@ -91,12 +88,10 @@ define(['nodes', 'location', 'css!summaryformcss'], function (nodes, Location) {
          * @method
          */
         handleResponse: function (models) {
-            var model = m4.model.Core;
-            
-            model.get('activeTab').get('locations').reset(models);
+            coreModel.get('activeTab').get('locations').reset(models);
             
             // save the new mapState
-            model.setActiveState();
+            coreModel.setActiveState();
         }
         
     });

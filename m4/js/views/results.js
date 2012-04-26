@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['nodes', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, tmpl) {
+define(['nodes', 'core', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, coreModel, tmpl) {
     
     var Result = Backbone.View.extend({
         
@@ -23,7 +23,7 @@ define(['nodes', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, tmpl) {
             _.bindAll(this, 'render');
             
             // When a model gets added, it will render in the left pane
-            m4.model.Core.bind('change:activeMapState', this.render)
+            coreModel.bind('change:activeMapState', this.render)
         },
         
         /**

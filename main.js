@@ -1,6 +1,7 @@
 
 /**
- * Set up base paths for ease of use in require
+ * Set up base paths for ease of use in require.
+ * This is the new js-profile-winston.js
  */
 require.config({
     
@@ -36,14 +37,11 @@ require.config({
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'summaryform' : 'js/views/summaryform',
-        'gallery'     : 'js/views/gallery/gallery',
         'results'     : 'js/views/results',
         
         // utils 
         'resizer'   : 'js/util/resizer',
-        'services'  : 'js/util/services',
         'html'      : 'js/util/html',
-        'staticmap' : 'js/util/staticmap',
          
         // html
         'galleryhtml' : 'html/gallery.html',
@@ -55,7 +53,6 @@ require.config({
         'summaryformcss': 'css/summaryform',
         'resultscss'    : 'css/results',
         'gallerycss'    : 'css/gallery'
-        
     }
 });
 

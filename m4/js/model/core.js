@@ -2,7 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['tab'], function (Tab) {
+define(['tab', 'map'], function (Tab, map) {
     
     var _silent = { silent: true };
     
@@ -10,7 +10,16 @@ define(['tab'], function (Tab) {
      * Create a blank core application backbone model
      * @namespace
      */
-    var Model = Backbone.Model.extend({
+    var Core = Backbone.Model.extend({
+        
+        defaults: {
+            
+            /**
+             * Collection of tab models
+             * @type {BackboneCollection}
+             */
+            tabs: new Backbone.Collection
+        },
         
         /**
          * Init the core model
@@ -19,12 +28,6 @@ define(['tab'], function (Tab) {
         initialize: function () {
             var self = this,
                 tab = new Tab();
-            
-            /**
-             * Collection of tab models
-             * @type {BackboneCollection}
-             */
-            self.set({ tabs: new Backbone.Collection }, _silent);
             
             // add the first tab to the
             self.get('tabs').add(tab);
@@ -42,13 +45,13 @@ define(['tab'], function (Tab) {
          */
         setActiveState: function () {
             var tab = this.get('activeTab');
-            tab.setState(m4.map.mqa);
+            tab.setState(map.mqa);
             this.trigger('change:activeMapState', tab);
         }
         
     });
     
     // Export into public namespace
-    return Model;
+    return new Core();
     
 });

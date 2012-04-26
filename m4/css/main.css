@@ -16,11 +16,3 @@ body {
     margin-top: 2px;
     margin-left: 23px;
 }
-
-#gallery, #add { 
-    float: right;
-    color: blue;
-    line-height: 30px;
-    margin-right: 10px;
-    cursor: pointer;
-}
