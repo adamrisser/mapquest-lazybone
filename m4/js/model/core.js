@@ -45,7 +45,7 @@ define(['tab', 'map'], function (Tab, map) {
          */
         setActiveState: function () {
             var tab = this.get('activeTab');
-            tab.setState(map.mqa);
+            tab.setState(m4.map.mqa);
             this.trigger('change:activeMapState', tab);
         }
         
