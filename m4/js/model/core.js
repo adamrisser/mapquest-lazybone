@@ -2,9 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['tab', 'map'], function (Tab, map) {
-    
-    var _silent = { silent: true };
+define(['map'], function (map) {
     
     /**
      * Create a blank core application backbone model
@@ -15,17 +13,19 @@ define(['tab', 'map'], function (Tab, map) {
         defaults: {
             
             /**
-             * The active tab is whichever tab has control of the map.
-             * @type {TabModel}
-             */ 
-            activeTab: null,
+             * Location representing the last search a user a user made
+             * @type {Backbone.Model}
+             */
+            location: null,
             
             /**
-             * Collection of tab models
-             * @type {BackboneCollection}
+             * An easy way to tell the state of the model
+             * - map
+             * - route
+             * - search
+             * @type {String}
              */
-            tabs: new Backbone.Collection
-            
+            state: null,
         },
         
         /**
@@ -33,23 +33,28 @@ define(['tab', 'map'], function (Tab, map) {
          * @method
          */
         initialize: function () {
-            var self = this,
-                tab = new Tab();
+            var self = this;
             
-            // add the first tab to the
-            self.get('tabs').add(tab);
+            _.bindAll(self, 'setState');
             
-            self.set({ activeTab: tab }, _silent);
+            self.bind('change:location', self.setState);
         },
         
         /**
-         * Set the active tab's map state
+         * Set the model's state
          * @method
          */
-        setActiveState: function () {
-            var tab = this.get('activeTab');
-            tab.setState(m4.map.mqa);
-            this.trigger('change:activeMapState', tab);
+        setState: function () {
+            var loc = this.get('location'), state;
+            
+            if (loc.get('unresolvedLocations').length > 0) {
+                state = 'search';
+            }
+            else {
+                state = 'map';
+            }
+            
+            this.set({ state: state });
         }
         
     });

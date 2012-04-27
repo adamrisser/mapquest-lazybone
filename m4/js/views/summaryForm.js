@@ -67,15 +67,14 @@ define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Loc
          * @method
          */
         submit: function () {
-            var self = this,
-                query = nodes.summaryFormTin.val();
+            var self = this, query = nodes.summaryFormTin.val();
             
             if (query) {
                 require(['results'], function (service) {
                     $.when(
                         self.fetch(query)
                     ).pipe(
-                        self.convertToLocs
+                        self.convertToLoc
                     ).done(
                         self.handleResponse
                     );
@@ -85,28 +84,23 @@ define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Loc
         
         /**
          * Convert reponse object into models
-         * @param {Object} response
+         * @param  {Object} response
+         * @return {Backbone.Model}
          * @method
-         * @return {Array<Model>}
          */
-        convertToLocs: function (response) {
+        convertToLoc: function (response) {
             if (response && response[0]) {
-                return _(response[0].unresolvedLocations).map(function (loc) {
-                    return new Location(loc);
-                });
+                return new Location(response[0]);
             }
         },
         
         /**
          * Injest a response into the site
-         * @param {Array<Model>} models
+         * @param {{Backbone.Model}} loc
          * @method
          */
-        handleResponse: function (models) {
-            coreModel.get('activeTab').get('locations').reset(models);
-            
-            // save the new mapState
-            coreModel.setActiveState();
+        handleResponse: function (loc) {
+            coreModel.set({ location: loc });
         }
         
     });
