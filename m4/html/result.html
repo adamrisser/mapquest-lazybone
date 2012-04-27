@@ -2,20 +2,5 @@
 <% locs.each(function (loc) { 
     var adr = loc.get('address');
 %>
-    <div class="vcard">
-        
-        <% if (loc.get('name')) { %>
-            <div><%= loc.get('name') %></div>
-        <% } %>
-            
-        <% if (adr.street) { %>
-            <div><%= adr.street %></div>
-        <% } %>
-        
-        <div>
-            <%= adr.locality %>
-            <% if (adr.locality) { %>, <% } %>
-            <%= adr.region %> <%= adr.postalCode %>
-        </div>
-    </div>
+    
 <% }); %>

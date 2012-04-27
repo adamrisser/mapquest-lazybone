@@ -1,5 +1,8 @@
 
 #map {
-    float: left;
-    background: #777
+    position: absolute;
+    left: 400px;
+    
+    background: #777;
+    
 }

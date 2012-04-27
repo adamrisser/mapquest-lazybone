@@ -7,23 +7,6 @@ define(['nodes', 'resizer', 'location', 'tab', 'core', 'css!mapcss', 'http://ope
 function (nodes, resizer, LocationModel, TabModel, coreModel) {
     
     /**
-     * Resize the pane based off of the window height
-     * @private
-     */
-    function _resize (mqa) {
-        var h = window.innerHeight || 0,
-            w = window.outerWidth;
-        
-        nodes.map.css({
-            height: h + 'px',
-            width:  (w > 0 ? w : 0) + 'px'
-        });
-        
-        // resize the map to its parent div
-        mqa.setSize(); 
-    }
-    
-    /**
      * Map builder widget
      * @namespace
      */
@@ -37,6 +20,27 @@ function (nodes, resizer, LocationModel, TabModel, coreModel) {
         mqa: null,
         
         /**
+         * Resize the pane based off of the window height
+         * @param {MQA} mqa tile map instace
+         * @private
+         */
+         _resize: function () {
+            var pane = nodes.pane.width(),
+                h = window.innerHeight || 0,
+                w = window.outerWidth - pane;
+            
+            // resize the map parent
+            nodes.map.css({
+                left: pane + 'px',
+                width: (w > 0 ? w : 0) + 'px',
+                height: h + 'px'
+            });
+            
+            // resize the map to its parent div
+            this.mqa.setSize(); 
+        },
+        
+        /**
          * Build a MQA Tile map
          * @param {Object} config {
          *     center {lat/lng}
@@ -45,29 +49,34 @@ function (nodes, resizer, LocationModel, TabModel, coreModel) {
          * @method
          */
         initialize: function (config) {
+            var self = this;
             
-            var self = this,
-                mqa = new MQA.TileMap(nodes.map[0], config.zoom, config.center, 'map');
+            self.mqa = new MQA.TileMap(nodes.map[0], config.zoom, config.center, 'map');
             
-            // resize once
-            _resize(mqa);
+            MQA.withModule('largezoom', function() {
+                self.mqa.addControl(
+                    new MQA.LargeZoom(),
+                    new MQA.MapCornerPlacement(MQA.MapCorner.TOP_RIGHT, new MQA.Size(5,5))
+                );
+            });
+            
+            _.bindAll(self, '_resize');
+            
+            // resize once, effectively initializing the map size
+            self._resize();
             
             // resize map based off of window height/width
-            resizer.subscribe('mapbuilder', function () {
-                _resize(mqa);
-            });
+            resizer.subscribe('mapbuilder', this._resize);
             
             coreModel.bind('change:activeMapState', function (tab) {
                 
                 // add a simple poi for each location
                 tab.get('locations').each(function (loc) {
-                    mqa.addShape(new MQA.Poi(loc.get('latLng')));
+                    self.mqa.addShape(new MQA.Poi(loc.get('latLng')));
                 });
                 
                 self.bestFit();
             });
-            
-            this.mqa = mqa;
         },
         
         /**

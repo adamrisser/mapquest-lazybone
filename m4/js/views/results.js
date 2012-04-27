@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['nodes', 'core', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, coreModel, tmpl) {
+define(['nodes', 'core', 'tmpl!resulthtml', 'tmpl!locationhtml', 'css!resultscss'], function (nodes, coreModel, tmpl, locationTemplate) {
     
     var Result = Backbone.View.extend({
         
@@ -31,13 +31,22 @@ define(['nodes', 'core', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, 
          * @method
          */
         render: function (tab) {
-            $('.vcard').remove();
             
-            var html = $(tmpl({
-                locs: tab.get('locations')
-            }));
+            // build the results list html string
+            var results = tab.get('locations').map(function (loc) {
+                
+                // create the location object html
+                return locationTemplate({
+                    adr: loc.get('address'), 
+                    name: loc.get('name')
+                });
+                
+            }).join('');
             
-            this.$el.append(html);
+            // remove prevous results and add new results to the dom
+            this.$el
+                .empty()
+                .append(results);
         }
         
     });

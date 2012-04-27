@@ -1,11 +1,10 @@
 
 #summaryForm {
     width: 100%;
-    margin-bottom: 50px;
 }
 
 #summaryForm input {
-    width: 337px;
+    width: 400px;
     
     border: 1px solid #cdcdcd;
     font-size: 16px;

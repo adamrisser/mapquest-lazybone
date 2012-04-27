@@ -46,6 +46,7 @@ require.config({
         // html
         'galleryhtml' : 'html/gallery.html',
         'resulthtml'  : 'html/result.html',
+        'locationhtml'  : 'html/location.html',
         
         // css
         'panecss'       : 'css/pane',
