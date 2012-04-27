@@ -31,11 +31,10 @@ define(['nodes', 'core', 'tmpl!resulthtml', 'css!resultscss'], function (nodes, 
          * @method
          */
         render: function (tab) {
-            
             $('.vcard').remove();
             
             var html = $(tmpl({
-                addresses: tab.get('locations').pluck('address')
+                locs: tab.get('locations')
             }));
             
             this.$el.append(html);

@@ -15,10 +15,17 @@ define(['tab', 'map'], function (Tab, map) {
         defaults: {
             
             /**
+             * The active tab is whichever tab has control of the map.
+             * @type {TabModel}
+             */ 
+            activeTab: null,
+            
+            /**
              * Collection of tab models
              * @type {BackboneCollection}
              */
             tabs: new Backbone.Collection
+            
         },
         
         /**
@@ -32,10 +39,6 @@ define(['tab', 'map'], function (Tab, map) {
             // add the first tab to the
             self.get('tabs').add(tab);
             
-            /**
-             * The active tab is whichever tab has control of the map.
-             * @type {TabModel}
-             */ 
             self.set({ activeTab: tab }, _silent);
         },
         

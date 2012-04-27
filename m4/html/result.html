@@ -1,18 +1,21 @@
 
-<% _.each(addresses, function (adr) { %>
-    <div class="vcard">    
-        <% if (adr.road) { %>
-            <div><%= adr.road %></div>
+<% locs.each(function (loc) { 
+    var adr = loc.get('address');
+%>
+    <div class="vcard">
+        
+        <% if (loc.get('name')) { %>
+            <div><%= loc.get('name') %></div>
+        <% } %>
+            
+        <% if (adr.street) { %>
+            <div><%= adr.street %></div>
         <% } %>
         
         <div>
-            <%= adr.city %>
-            <% if (adr.city) { %>, <% } %>
-            <%= adr.state %> <%= adr.postcode %>
+            <%= adr.locality %>
+            <% if (adr.locality) { %>, <% } %>
+            <%= adr.region %> <%= adr.postalCode %>
         </div>
-        
-        <% if (adr.country) { %>
-            <div><%= adr.country %></div>
-        <% } %>
     </div>
 <% }); %>

@@ -8,7 +8,12 @@
  */
 define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Location, coreModel) {
     
-    var _SEARCH_URL = 'http://open.mapquestapi.com/nominatim/v1/search/?addressdetails=1&format=json&q=',
+    /**
+     * Search controller url
+     * @type {String}
+     * @private
+     */
+    var _SEARCH_URL = 'http://www.mapquest.com/_svc/searchio?',
     
     /**
      * Summary form widget
@@ -43,9 +48,17 @@ define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Loc
          * @param {Object} config query
          */
         fetch: function (query) {
+            
+            var ll = m4.map.mqa.getCenter();
+
             return $.ajax({
-                dataType: 'json',
-                url: _SEARCH_URL + query
+                url: _SEARCH_URL,
+                data: {
+                    query0: query,
+                    mapSearchArea: '(' + ll.lat + ', ' + ll.lng + ', 27734002, 1247, 756, 1.0, 1.0)',
+                    key: 'mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5',
+                },
+                dataType: 'json'
             });
         },
         
@@ -77,9 +90,11 @@ define(['nodes', 'location', 'core', 'css!summaryformcss'], function (nodes, Loc
          * @return {Array<Model>}
          */
         convertToLocs: function (response) {
-            return _(response).map(function (loc) {
-                return new Location(loc);
-            });
+            if (response && response[0]) {
+                return _(response[0].unresolvedLocations).map(function (loc) {
+                    return new Location(loc);
+                });
+            }
         },
         
         /**

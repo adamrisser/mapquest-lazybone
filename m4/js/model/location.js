@@ -17,32 +17,7 @@ define(function () {
          * @method
          */
         initialize: function (loc) {
-            
-            this.set({
-                /**
-                 * Location Name
-                 * @type {Object}
-                 */
-                name: loc.display_name,
-                
-                /**
-                 * Address
-                 * @type {Object}
-                 */
-                address: loc.address,
-                
-                /**
-                 * Address
-                 * @type {Object}
-                 */
-                latLng: {
-                    lat: loc.lat,
-                    lng: loc.lon  
-                }
-                
-            }, {
-                silent: true 
-            });
+            // no-op
         }
         
     });
