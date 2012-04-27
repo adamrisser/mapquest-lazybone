@@ -1,0 +1,13 @@
+
+
+<div class="vcard">    
+    <% if (name) { %>
+        <div class="name"><%= name %></div>
+    <% } %>
+        
+    <div class="address">
+        <% if (adr.street) { %> <span class="street"><%= adr.street %></span> <% } %>
+        <%= adr.locality %><% if (adr.locality) { %>, <% } %>
+        <%= adr.region %> <%= adr.postalCode %>
+    </div>
+</div>
