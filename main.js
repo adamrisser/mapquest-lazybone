@@ -34,10 +34,14 @@ require.config({
         'tab'      : 'js/model/tab',
         
         // view
+        'directory'   : 'js/views/directory',
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'summaryform' : 'js/views/summaryform',
         'results'     : 'js/views/results',
+
+        // router
+        'router'      : 'js/routers/router',
         
         // utils 
         'resizer'   : 'js/util/resizer',

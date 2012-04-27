@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['nodes', 'css!panecss'], function (nodes) {
+define(['nodes', 'css!panecss', 'directory'], function (nodes) {
      
     /**
      * Pane widget
