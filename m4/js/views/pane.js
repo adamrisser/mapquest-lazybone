@@ -8,7 +8,7 @@
  * @fileoverview
  */
 define(['nodes', 'css!panecss', 'directory'], function (nodes) {
-     
+    
     /**
      * Pane widget
      * @namespace

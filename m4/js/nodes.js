@@ -2,7 +2,7 @@
  * Main namespace
  * @namespace
  */
-define(function () {
+define(['jquery'], function ($) {
     
     return {
         
@@ -15,8 +15,8 @@ define(function () {
         gallery: $('#gallery'),
         
         summaryForm: $('#summaryForm'),
-        summaryFormBtn:  $('#summaryFormBtn'),
-        summaryFormTin:  $('#summaryFormTin')
+        summaryFormBtn: $('#summaryFormBtn'),
+        summaryFormTin: $('#summaryFormTin')
         
     };
     

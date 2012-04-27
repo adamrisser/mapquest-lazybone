@@ -12,9 +12,9 @@ define(['backbone', 'router'], function (Backbone, router) {
 			"click a": "open"
 		},
 
-		open: function(event) {
+		open: function (event) {
 			var tgt = event.target,
-				listing = tgt.id
+				listing = tgt.id,
 				idx = listing.lastIndexOf('#');
 
 			event.preventDefault();

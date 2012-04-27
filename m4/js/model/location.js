@@ -3,7 +3,7 @@
  * Each location in the main application model is stored as a location model.
  * @fileoverview
  */
-define(function () {
+define(['backbone'], function (Backbone) {
     
     /**
      * Collection of locations. Used to store unresolved locations for

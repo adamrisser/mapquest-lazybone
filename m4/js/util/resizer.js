@@ -4,7 +4,7 @@
  * @fileoverview
  * @namespace
  */
-define(function () {
+define(['underscore'], function (_) {
     
     var Resizer = {
     
@@ -32,7 +32,7 @@ define(function () {
         
         /**
          * Remove a listener
-         * @param {String}   name     name to unregister callback
+         * @param {String} name name to unregister callback
          * @method
          */
         unsubscribe: function (name) {
