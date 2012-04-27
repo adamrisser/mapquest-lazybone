@@ -51,7 +51,12 @@ function (nodes, resizer, LocationModel, TabModel, coreModel) {
         initialize: function (config) {
             var self = this;
             
-            self.mqa = new MQA.TileMap(nodes.map[0], config.zoom, config.center, 'map');
+            self.mqa = new MQA.TileMap(
+                nodes.map[0],
+                config.zoom,
+                config.center,
+                'map'
+            );
             
             MQA.withModule('largezoom', function() {
                 self.mqa.addControl(
