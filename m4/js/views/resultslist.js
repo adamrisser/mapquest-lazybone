@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes, coreModel, locationTemplate) {
+define(['core', 'tmpl!locationhtml', 'css!resultscss'], function (coreModel, locationTemplate) {
     
     var ResultList = Backbone.View.extend({
         
@@ -13,7 +13,7 @@ define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes
          * Parent element of view
          * @property
          */
-        el: nodes.pane,
+        el: '#pane',
         
         /**
          * Delegated events
