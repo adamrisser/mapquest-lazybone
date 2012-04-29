@@ -2,8 +2,8 @@
  * Backbone routers are used for routing the apps URL's when using hash tags(#).
  * Route are mapped to a single function, which then acts upon the app.
  * 
- * The router intepret anything after "#" tag in the url. All links in the 
- * application should target "#/action" or "#action". (Appending a forward 
+ * The router intepret anything after '#' tag in the url. All links in the 
+ * application should target '#/action' or '#action'. (Appending a forward 
  * slash after the hashtag looks a bit nicer e.g. http://www.mapquest.com/#/explore/parks)
  * 
  * http://documentcloud.github.com/backbone/#Router
@@ -19,12 +19,14 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
     var Router = Backbone.Router.extend({
 
         routes: {
-            ""                  : "index", 
-            "/signin"           : "signIn",
-            "/directions"       : "directions",
-            "/directions/type"  : "directions",
-            "/explore/:what"    : "explore",
-            "/build"            : "build"
+            ''                  : 'index', 
+            '/signin'           : 'signIn',
+            '/map/:query'       : 'map',
+            '/search/:query'    : 'search',
+            '/directions'       : 'directions',
+            '/directions/type'  : 'directions',
+            '/explore/:what'    : 'explore',
+            '/build'            : 'build'
         },
         
         /**
@@ -40,7 +42,7 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * @method
          */
         index: function() {
-            coreModel.set({ state: 'index' });
+            console.log('index');
         },
 
         signIn: function() {
@@ -51,8 +53,26 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * Set the app into directions mode, showing A to B boxes, etc
          * @method
          */
-        directions: function() {
-            coreModel.set({ state: 'directions' });
+        directions: function (type) {
+            console.log('directions');
+        },
+
+        /**
+         * Set the app into search result mode
+         * @param {String} query search query
+         * @method
+         */
+        search: function (query) {
+            console.log('search');
+        },
+        
+        /**
+         * Set the app into map result mode
+         * @param {String} query search query
+         * @method
+         */
+        map: function (query) {
+            console.log('map');
         },
 
         explore: function(what) {
@@ -65,6 +85,6 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
 
     });
 
-    return Router;
+    return new Router();
 
 });

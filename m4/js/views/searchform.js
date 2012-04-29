@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], function (Location, coreModel, template) {
+define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], function (router, Location, coreModel, template) {
     
     /**
      * Search controller url
@@ -46,8 +46,24 @@ define(['location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], functio
          * @method
          */
         initialize: function () {
-            _.bindAll(this, 'handleResponse', 'fetch');
-            this.render();
+            var self = this;
+            
+            _.bindAll(self, 'handleResponse', 'fetch', 'handleRouting');
+            
+            router.bind('route:map',        self.handleRouting);
+            router.bind('route:search',     self.handleRouting);
+            
+            self.render();
+        },
+        
+        /**
+         * Handle a new page load
+         * @param {String} query search query
+         * @method
+         */
+        handleRouting: function (query) {
+            $('#searchFormTin').val(query.replace('+', ' '));
+            this.submit();
         },
         
         /**
@@ -107,7 +123,6 @@ define(['location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], functio
                     location: new Location(response[0]) 
                 });
             }
-            
         }
         
     });

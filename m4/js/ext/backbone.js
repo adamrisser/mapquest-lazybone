@@ -768,6 +768,7 @@
         var args = this._extractParameters(route, fragment);
         callback && callback.apply(this, args);
         this.trigger.apply(this, ['route:' + name].concat(args));
+        console.info('route:' + name);
         Backbone.history.trigger('route', this, name, args);
       }, this));
       return this;

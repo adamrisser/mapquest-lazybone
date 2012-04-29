@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
+define(['core', 'directions', 'router', 'css!panecss'], function (coreModel, Directions, router) {
     
     /**
      * Pane widget
@@ -26,9 +26,16 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
          * @constructor
          */
         initialize: function () {
-            _.bindAll(this, 'handleStateChange');
+            var self = this;
             
-            coreModel.bind('change:state', this.handleStateChange);
+            _.bindAll(self, 'handleStateChange', 'handleIndex', 'handleIndex', 
+                'handleSearchResult', 'handleMapResult', 'handleDirections');
+            
+            //TODO: see if this router can be removed
+            router.bind('route:index',      self.handleIndex);
+            router.bind('route:directions', self.handleDirections);
+            
+            coreModel.bind('change:state', self.handleStateChange);
         },
         
         /**
@@ -40,36 +47,77 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
         handleStateChange: function (core, state) {
             var self = this;
             
-            self.$el.empty();
-            
             switch (state) {
                 case 'directions':
-                    require(['directions'], function (Directions) {
-                        self.push(new Directions());    
-                    });
-                break;
+                    self.handleDirections();
+                    break;
                 case 'map':
-                    require(['mapresult'], function (MapResult) {
-                        self.push(new MapResult());
-                        
-                        //TODO: probably needs to be removed and be handled by the map
-                        m4.views.map.mqa.bestFit();
-                    });
-                break;
+                    self.handleMapResult();
+                    break;
                 case 'search':
-                    require(['searchresults'], function (SearchResults) {
-                        self.push(new SearchResults());
-                        
-                        //TODO: probably needs to be removed and be handled by the map
-                        m4.views.map.mqa.bestFit();
-                    });
-                break;
+                    self.handleSearchResult();
+                    break;
                 case 'index':
-                    require(['directory'], function (Directory) {
-                        self.push(new Directory());    
-                    });
+                    self.handleIndex();
                 break;
             }
+        },
+        
+        /**
+         * Handle routes to the index page
+         * @method
+         */
+        handleIndex: function () {
+            var self = this;
+            
+            require(['directory'], function (Directory) {
+                self.push(new Directory());    
+            });
+        },
+        
+        /**
+         * Handle routes to the
+         * @method
+         */
+        handleMapResult: function () {
+            var self = this;
+            
+            require(['mapresult'], function (MapResult) {
+                self.$el.empty();
+                self.push(new MapResult());
+                
+                //TODO: probably needs to be removed and be handled by the map
+                m4.views.map.mqa.bestFit();
+            });
+        },
+        
+        /**
+         * Handle routes to the
+         * @method
+         */
+        handleSearchResult: function () {
+            var self = this;
+            
+            require(['searchresults'], function (SearchResults) {
+                self.$el.empty();
+                self.push(new SearchResults());
+                
+                //TODO: probably needs to be removed and be handled by the map
+                m4.views.map.mqa.bestFit();
+            });
+        },
+        
+        /**
+         * Handle routes to the
+         * @method
+         */
+        handleDirections: function () {
+            var self = this;
+            
+            require(['directions'], function (Directions) {
+                self.$el.empty();
+                self.push(new Directions());    
+            });
         },
         
         /**

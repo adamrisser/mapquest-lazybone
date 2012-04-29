@@ -5,7 +5,8 @@
  * have been added to the model.
  * @description
  */
-define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'], function (coreModel, template, locationTemplate) {
+define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'], 
+    function (coreModel, template, locationTemplate) {
     
     var MapResults = Backbone.View.extend({
         
@@ -29,12 +30,13 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'], fu
          * @method
          */
         render: function () {
-            var loc = coreModel.get('location'),
-                html = this.handleLoc(loc);
+            var self = this,
+                loc = coreModel.get('location'),
+                html = self.handleLoc(loc);
             
-            this.$el.append(html);
-            
-            return this;
+            self.$el.append(html);
+
+            return self;
         },
         
         /**

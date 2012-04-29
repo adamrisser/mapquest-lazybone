@@ -2,7 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['map'], function (map) {
+define(['map', 'router'], function (map, router) {
     
     /**
      * Create a blank core application backbone model
@@ -26,7 +26,7 @@ define(['map'], function (map) {
              * - search
              * @type {String}
              */
-            state: null
+            state: 'index'
         },
         
         /**
@@ -46,7 +46,7 @@ define(['map'], function (map) {
          * @method
          */
         setState: function () {
-            var loc = this.get('location'), state;
+            var loc = this.get('location'), state, query;
             
             if (loc.get('unresolvedLocations').length > 0) {
                 state = 'search';
@@ -54,6 +54,12 @@ define(['map'], function (map) {
             else {
                 state = 'map';
             }
+            
+            // set the route
+            query = $('#searchFormTin').val().replace(/\s/g, '+');
+            router.navigate('#/' + state + '/' + query, true);
+            
+            console.info('setState: #/' + state + '/' + query);
             
             this.set({ state: state });
         }

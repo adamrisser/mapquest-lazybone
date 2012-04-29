@@ -5,7 +5,7 @@
 require(['require', 'config'], function (require) {
     
     require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router'], 
-        function (_, Backbone, $, Pane, Map, SearchForm, resizer, Router) {
+        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router) {
         
         /**
          * Main global namespace
@@ -17,7 +17,7 @@ require(['require', 'config'], function (require) {
              * Backbone router. Handles state changes in the URL
              * @type {Backbone.Router}
              */
-            router: new Router(),
+            router: router,
             
             views: {
                 
