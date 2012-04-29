@@ -25,14 +25,14 @@ define(['nodes', 'location', 'core', 'css!searchformcss'], function (nodes, Loca
          * Parent element
          * @type {HTMLElement}
          */
-        el: '#summaryForm',
+        el: '#searchForm',
         
         /**
          * Delegated events
          * @type {Object}
          */
         events: {
-            'click #summaryFormBtn' : 'submit'
+            'click #searchFormBtn' : 'submit'
         },
         
         /**
@@ -68,7 +68,7 @@ define(['nodes', 'location', 'core', 'css!searchformcss'], function (nodes, Loca
          */
         submit: function () {
             var self = this, 
-                query = nodes.summaryFormTin.val();
+                query = nodes.searchFormTin.val();
             
             if (query) {
                 $.when(

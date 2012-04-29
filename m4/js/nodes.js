@@ -14,9 +14,9 @@ define(['jquery'], function ($) {
         add: $('#add'),
         gallery: $('#gallery'),
         
-        summaryForm: $('#summaryForm'),
-        summaryFormBtn: $('#summaryFormBtn'),
-        summaryFormTin: $('#summaryFormTin')
+        searchForm: $('#searchForm'),
+        searchFormBtn: $('#searchFormBtn'),
+        searchFormTin: $('#searchFormTin')
         
     };
     

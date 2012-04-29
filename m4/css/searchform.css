@@ -1,9 +1,9 @@
 
-#summaryForm {
+#searchForm {
     width: 100%;
 }
 
-#summaryForm input {
+#searchForm input {
     width: 400px;
     
     border: 1px solid #cdcdcd;
@@ -11,11 +11,11 @@
     padding: 5px;
 }
 
-#summaryForm div {
+#searchForm div {
     float: left;
 }
 
-#summaryForm input[type=submit] {
+#searchForm input[type=submit] {
     height: 30px;
     width: 100px;
     
