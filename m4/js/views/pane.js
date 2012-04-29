@@ -33,15 +33,18 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
         
         /**
          * Handle a core model state change
-         * @param {String} state state string
+         * @param {Backbone.Model} core  core model reference
+         * @param {String}         state state string
          * @method
          */
-        handleStateChange: function (state) {
+        handleStateChange: function (core, state) {
             var self = this;
             
             switch (state) {
                 case 'index':
-                    // no-op
+                    require(['directory'], function (Directory) {
+                        self.push(new Directory());    
+                    });
                 break;
                 case 'directions':
                     require(['directions'], function (Directions) {
@@ -49,7 +52,6 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
                     });
                 break;
             }
-            
         },
         
         /**
@@ -59,7 +61,14 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
         open: function () {
             this.$el.show();
         },
-
+        
+        /**
+         * Add html into the pane from a backbone view. 
+         * Note: The backbone view must support returning itself from 
+         *       its own view method!
+         * @param {Backbone.View} view  backbone view
+         * @method
+         */
         push: function(view) {
             this.$el.append(view.render().el);
         },

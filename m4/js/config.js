@@ -48,6 +48,7 @@ require.config({
         // html
         'searchformhtml': 'html/searchform.html',
         'directionshtml': 'html/directions.html',
+        'directoryhtml' : 'html/directory.html',
         'galleryhtml'   : 'html/gallery.html',
         'resulthtml'    : 'html/result.html',
         'locationhtml'  : 'html/location.html',
