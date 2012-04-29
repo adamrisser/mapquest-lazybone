@@ -4,8 +4,8 @@
  */
 require(['require', 'config'], function (require) {
     
-    require(['order!underscore', 'order!backbone', 'jquery', 'nodes', 'pane', 'map', 'summaryform', 'resizer'], 
-        function (_, Backbone, $, nodes, Pane, Map, summaryForm, resizer) {
+    require(['order!underscore', 'order!backbone', 'jquery', 'nodes', 'pane', 'map', 'summaryform', 'resizer', 'router'], 
+        function (_, Backbone, $, nodes, Pane, Map, summaryForm, resizer, router) {
         
         // initialize the main window event listener for the resizer
         nodes.window.resize(resizer.resize);
@@ -27,7 +27,7 @@ require(['require', 'config'], function (require) {
             
         };
         
-        Backbone.history.start({ pushState: true });
+        Backbone.history.start();
             
     });
     
