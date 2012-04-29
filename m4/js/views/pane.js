@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['nodes', 'css!panecss', 'directory'], function (nodes) {
+define(['nodes', 'css!panecss'], function (nodes) {
     
     /**
      * Pane widget
@@ -21,6 +21,10 @@ define(['nodes', 'css!panecss', 'directory'], function (nodes) {
          */
         open: function () {
             nodes.pane.show();
+        },
+
+        push: function(view) {
+            nodes.pane.append(view.render().el);
         },
         
         /**

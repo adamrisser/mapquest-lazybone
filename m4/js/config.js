@@ -33,6 +33,7 @@ require.config({
         
         // view
         'directory'   : 'js/views/directory',
+        'directions'  : 'js/views/directions',
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'summaryform' : 'js/views/summaryform',
@@ -46,6 +47,7 @@ require.config({
         'html'      : 'js/util/html',
          
         // html
+        'directionshtml' : 'html/directions.html',
         'galleryhtml' : 'html/gallery.html',
         'resulthtml'  : 'html/result.html',
         'locationhtml'  : 'html/location.html',

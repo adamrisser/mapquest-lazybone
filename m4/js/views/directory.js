@@ -1,30 +1,20 @@
-define(['backbone', 'router'], function (Backbone, router) {
+define(['backbone'], function (Backbone) {
 
-	/**
-	 * Our directory listing.
-	 * @type {Backbone.View}
-	 */
-	var Directory = Backbone.View.extend({
+    /**
+     * Our directory listing.
+     * @type {Backbone.View}
+     */
+    var Directory = Backbone.View.extend({
 
-		el: '#directory',
+        el: '#directory',
 
-		events: {
-			"click a": "open"
-		},
+        /**
+         * Nothing todo.    
+         * @return {Directory} *this*
+         */
+        render: function() { }
 
-		open: function (event) {
-			var tgt = event.target,
-				listing = tgt.id,
-				idx = listing.lastIndexOf('#');
+    });
 
-			event.preventDefault();
-
-			listing = listing.substring(idx + 1);
-
-			router.navigate('directions', { trigger: true, replace: true });
-		}
-
-	});
-
-	return new Directory;
+    return new Directory;
 });
