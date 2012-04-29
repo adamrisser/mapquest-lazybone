@@ -20,7 +20,7 @@ define(['backbone', 'pane', 'directions'], function(Backbone, pane, Directions) 
         },
 
         directions: function(type) {
-            pane.push(new Directions());
+            m4.views.pane.push(new Directions());
         },
 
         explore: function(what) {

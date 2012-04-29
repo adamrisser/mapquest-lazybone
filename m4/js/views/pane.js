@@ -7,24 +7,30 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['nodes', 'css!panecss'], function (nodes) {
+define(['css!panecss'], function () {
     
     /**
      * Pane widget
-     * @namespace
+     * @type {Backbone.View}
      */
-    Pane = {
+    var Pane = Backbone.View.extend({
+        
+        /**
+         * Parent element
+         * @property
+         */
+        el: '#pane',
         
         /**
          * Open the pane if it is closed
          * @method
          */
         open: function () {
-            nodes.pane.show();
+            this.$el.show();
         },
 
         push: function(view) {
-            nodes.pane.append(view.render().el);
+            this.$el.append(view.render().el);
         },
         
         /**
@@ -32,10 +38,10 @@ define(['nodes', 'css!panecss'], function (nodes) {
          * @method
          */
         close: function () {
-            nodes.pane.hide();
+            this.$el.hide();
         }
         
-    };
+    });
     
     /*
      * Export

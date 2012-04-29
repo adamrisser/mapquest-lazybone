@@ -22,7 +22,6 @@ require.config({
         'mustache'   : 'js/ext/mustache',
         
         // bootstrap files
-        'nodes'     : 'js/nodes', 
         'bootstrap' : 'js/bootstrap',
         
         // models

@@ -4,11 +4,11 @@
  */
 require(['require', 'config'], function (require) {
     
-    require(['order!underscore', 'order!backbone', 'jquery', 'nodes', 'pane', 'map', 'searchform', 'resizer', 'router'], 
-        function (_, Backbone, $, nodes, Pane, Map, SearchForm, resizer, router) {
+    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router'], 
+        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router) {
         
         // initialize the main window event listener for the resizer
-        nodes.window.resize(resizer.resize);
+        $(window).resize(resizer.resize);
         
         /**
          * Main global namespace
@@ -17,6 +17,14 @@ require(['require', 'config'], function (require) {
         m4 = {
             
             views: {
+                
+                /**
+                 * Main info pane that accompanies the map. Used to show
+                 * information about searches, directions etc.
+                 * @type {Backbone.View}
+                 * @property 
+                 */
+                pane: new Pane(),
                 
                 /**
                  * Main entry form for the site
@@ -42,7 +50,7 @@ require(['require', 'config'], function (require) {
         };
         
         Backbone.history.start();
-            
+        
     });
     
 });
