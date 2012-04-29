@@ -28,6 +28,14 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         },
         
         /**
+         * Initialize the router
+         * @constructor
+         */
+        initialize: function () {
+            
+        },
+        
+        /**
          * Initial state of the app. The non-route route
          * @method
          */

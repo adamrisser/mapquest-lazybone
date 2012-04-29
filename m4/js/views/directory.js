@@ -7,13 +7,21 @@ define(['backbone', 'tmpl!directoryhtml'], function (Backbone, template) {
     var Directory = Backbone.View.extend({
         
         /**
-         * Parent element
+         * Directory is a list
+         * @type {String}
          * @property
          */
-        el: '#directory',
+        tagName: 'ul',
+        
+        /**
+         * Id of the UL that is the root of the directory
+         * @type {String}
+         */
+        id: 'directory',
 
         /**
          * Underscore template
+         * @param {Object} obj parameters to pass in when creating the template
          * @method
          */
         template: template,
@@ -24,6 +32,7 @@ define(['backbone', 'tmpl!directoryhtml'], function (Backbone, template) {
          */
         render: function() {
             this.$el.append(this.template());
+
             return this; 
         }
 

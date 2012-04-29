@@ -36,7 +36,8 @@ require.config({
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'searchform'  : 'js/views/searchform',
-        'resultslist' : 'js/views/resultslist',
+        'mapresult'   : 'js/views/mapresult',
+        'searchresults' : 'js/views/searchresults',
         
         // router
         'router'      : 'js/routers/router',
@@ -46,12 +47,14 @@ require.config({
         'html'      : 'js/util/html',
          
         // html
-        'searchformhtml': 'html/searchform.html',
-        'directionshtml': 'html/directions.html',
-        'directoryhtml' : 'html/directory.html',
-        'galleryhtml'   : 'html/gallery.html',
-        'resulthtml'    : 'html/result.html',
-        'locationhtml'  : 'html/location.html',
+        'searchresultshtml' : 'html/searchresults.html',
+        'mapresulthtml'  : 'html/mapresult.html', 
+        'searchformhtml' : 'html/searchform.html',
+        'directionshtml' : 'html/directions.html',
+        'directoryhtml'  : 'html/directory.html',
+        'galleryhtml'    : 'html/gallery.html',
+        'resulthtml'     : 'html/result.html',
+        'locationhtml'   : 'html/location.html',
         
         // css
         'panecss'       : 'css/pane',

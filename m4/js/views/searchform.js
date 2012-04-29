@@ -84,48 +84,30 @@ define(['location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], functio
          * @method
          */
         submit: function () {
-            var self = this, 
-                query = $('#searchFormTin').val();
+            var query = $('#searchFormTin').val();
             
             if (query) {
                 $.when(
-                    self.fetch(query)
-                ).pipe(
-                    self.convertToLoc
+                    this.fetch(query)
+                // is 
                 ).done(
-                    self.handleResponse
+                    this.handleResponse
                 );
             }
         },
         
         /**
-         * Convert reponse object into models
-         * @param  {Object} response
-         * @return {Backbone.Model}
-         * @method
-         */
-        convertToLoc: function (response) {
-            if (response && response[0]) {
-                return new Location(response[0]);
-            }
-        },
-        
-        /**
          * Injest a response into the site
-         * @param {{Backbone.Model}} loc
+         * @param {Object} response ajax response
          * @method
          */
-        handleResponse: function (loc) {
-            require(['resultslist'], function (ResultsList) {
-                
-                //TODO: re-create each time? 
-                //      move to namespace and check their first?
-                //      this is probably a problem
-                //      move to pane.js?
-                var list = new ResultsList();
-                
-                coreModel.set({ location: loc });
-            });
+        handleResponse: function (response) {
+            if (response && response[0]) {
+                coreModel.set({
+                    location: new Location(response[0]) 
+                });
+            }
+            
         }
         
     });

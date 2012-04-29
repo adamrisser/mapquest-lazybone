@@ -40,26 +40,36 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
         handleStateChange: function (core, state) {
             var self = this;
             
+            self.$el.empty();
+            
             switch (state) {
-                case 'index':
-                    require(['directory'], function (Directory) {
-                        self.push(new Directory());    
-                    });
-                break;
                 case 'directions':
                     require(['directions'], function (Directions) {
                         self.push(new Directions());    
                     });
                 break;
+                case 'map':
+                    require(['mapresult'], function (MapResult) {
+                        self.push(new MapResult());
+                        
+                        //TODO: probably needs to be removed and be handled by the map
+                        m4.views.map.mqa.bestFit();
+                    });
+                break;
+                case 'search':
+                    require(['searchresults'], function (SearchResults) {
+                        self.push(new SearchResults());
+                        
+                        //TODO: probably needs to be removed and be handled by the map
+                        m4.views.map.mqa.bestFit();
+                    });
+                break;
+                case 'index':
+                    require(['directory'], function (Directory) {
+                        self.push(new Directory());    
+                    });
+                break;
             }
-        },
-        
-        /**
-         * Open the pane if it is closed
-         * @method
-         */
-        open: function () {
-            this.$el.show();
         },
         
         /**
@@ -71,6 +81,14 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
          */
         push: function(view) {
             this.$el.append(view.render().el);
+        },
+        
+        /**
+         * Open the pane if it is closed
+         * @method
+         */
+        open: function () {
+            this.$el.show();
         },
         
         /**
