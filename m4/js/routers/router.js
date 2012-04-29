@@ -26,9 +26,13 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
             "/explore/:what"    : "explore",
             "/build"            : "build"
         },
-
+        
+        /**
+         * Initial state of the app. The non-route route
+         * @method
+         */
         index: function() {
-            console.log('index');
+            coreModel.set({ state: 'index' });
         },
 
         signIn: function() {

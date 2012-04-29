@@ -33,11 +33,23 @@ define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
         
         /**
          * Handle a core model state change
-         * @param {String} state  state string
+         * @param {String} state state string
          * @method
          */
         handleStateChange: function (state) {
-            this.push(new Directions());
+            var self = this;
+            
+            switch (state) {
+                case 'index':
+                    // no-op
+                break;
+                case 'directions':
+                    require(['directions'], function (Directions) {
+                        self.push(new Directions());    
+                    });
+                break;
+            }
+            
         },
         
         /**

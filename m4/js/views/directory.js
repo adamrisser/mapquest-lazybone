@@ -16,5 +16,5 @@ define(['backbone'], function (Backbone) {
 
     });
 
-    return new Directory;
+    return Directory;
 });

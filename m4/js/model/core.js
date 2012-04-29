@@ -20,6 +20,7 @@ define(['map'], function (map) {
             
             /**
              * An easy way to tell the state of the model
+             * - index
              * - map
              * - directions
              * - search

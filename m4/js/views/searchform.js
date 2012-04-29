@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['location', 'core', 'css!searchformcss'], function (Location, coreModel) {
+define(['location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], function (Location, coreModel, template) {
     
     /**
      * Search controller url
@@ -36,11 +36,28 @@ define(['location', 'core', 'css!searchformcss'], function (Location, coreModel)
         },
         
         /**
+         * Underscore template
+         * @method
+         */
+        template: template,
+        
+        /**
          * init the summary form
          * @method
          */
         initialize: function () {
             _.bindAll(this, 'handleResponse', 'fetch');
+            this.render();
+        },
+        
+        /**
+         * Render the summary form
+         * @method
+         */
+        render: function () {
+            this.$el.append(this.template());
+            
+            return this;
         },
         
         /**
