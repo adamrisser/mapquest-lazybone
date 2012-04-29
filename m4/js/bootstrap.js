@@ -5,16 +5,19 @@
 require(['require', 'config'], function (require) {
     
     require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router'], 
-        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router) {
-        
-        // initialize the main window event listener for the resizer
-        $(window).resize(resizer.resize);
+        function (_, Backbone, $, Pane, Map, SearchForm, resizer, Router) {
         
         /**
          * Main global namespace
          * @namespace
          */
         m4 = {
+            
+            /**
+             * Backbone router. Handles state changes in the URL
+             * @type {Backbone.Router}
+             */
+            router: new Router(),
             
             views: {
                 
@@ -48,6 +51,9 @@ require(['require', 'config'], function (require) {
             },
             
         };
+        
+        // initialize the main window event listener for the resizer
+        $(window).resize(resizer.resize);
         
         Backbone.history.start();
         
