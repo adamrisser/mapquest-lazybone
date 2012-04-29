@@ -7,7 +7,7 @@
  */
 define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes, coreModel, locationTemplate) {
     
-    var Result = Backbone.View.extend({
+    var ResultList = Backbone.View.extend({
         
         /**
          * Parent element of view
@@ -106,5 +106,5 @@ define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes
         
     });
     
-    return new Result();
+    return ResultList;
 });

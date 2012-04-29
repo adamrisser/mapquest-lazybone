@@ -37,7 +37,7 @@ require.config({
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'searchform'  : 'js/views/searchform',
-        'results'     : 'js/views/results',
+        'resultslist' : 'js/views/resultslist',
         
         // router
         'router'      : 'js/routers/router',
