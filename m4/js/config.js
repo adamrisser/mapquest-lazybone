@@ -36,7 +36,7 @@ require.config({
         'directions'  : 'js/views/directions',
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
-        'summaryform' : 'js/views/summaryform',
+        'searchform'  : 'js/views/searchform',
         'results'     : 'js/views/results',
         
         // router
@@ -47,15 +47,15 @@ require.config({
         'html'      : 'js/util/html',
          
         // html
-        'directionshtml' : 'html/directions.html',
-        'galleryhtml' : 'html/gallery.html',
-        'resulthtml'  : 'html/result.html',
+        'directionshtml': 'html/directions.html',
+        'galleryhtml'   : 'html/gallery.html',
+        'resulthtml'    : 'html/result.html',
         'locationhtml'  : 'html/location.html',
         
         // css
         'panecss'       : 'css/pane',
         'mapcss'        : 'css/map',
-        'summaryformcss': 'css/summaryform',
+        'searchformcss' : 'css/searchform',
         'resultscss'    : 'css/results',
         'gallerycss'    : 'css/gallery'
         

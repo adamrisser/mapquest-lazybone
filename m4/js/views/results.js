@@ -61,7 +61,7 @@ define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes
             self.$el.empty().append(html);
             
             //TODO: probably needs to be removed
-            m4.map.mqa.bestFit();
+            m4.views.map.mqa.bestFit();
         },
         
         /**
@@ -95,7 +95,7 @@ define(['nodes', 'core', 'tmpl!locationhtml', 'css!resultscss'], function (nodes
             
             //TODO: probably need a POI manager, this is out of place here
             // add POI
-            m4.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
+            m4.views.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
                     
             // create the location object html
             return locationTemplate({
