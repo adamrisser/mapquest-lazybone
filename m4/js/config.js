@@ -32,13 +32,16 @@ require.config({
         
         // view
         'directory'   : 'js/views/directory',
-        'directions'  : 'js/views/directions',
         'pane'        : 'js/views/pane', 
         'map'         : 'js/views/map', 
         'searchform'  : 'js/views/searchform',
         'mapresult'   : 'js/views/mapresult',
         'searchresults' : 'js/views/searchresults',
         
+        // view -> directions
+        'directions'            : 'js/views/directions/directions',
+        'directions_input'      : 'js/views/directions/input',
+
         // router
         'router'      : 'js/routers/router',
         
@@ -61,7 +64,11 @@ require.config({
         'mapcss'        : 'css/map',
         'searchformcss' : 'css/searchform',
         'resultscss'    : 'css/results',
-        'gallerycss'    : 'css/gallery'
+        'gallerycss'    : 'css/gallery',
+
+        // css -> directions
+        'directionscss'         : 'css/directions/directions',
+        'directions_inputcss'   : 'css/directions/input'
         
     }
     
