@@ -10,13 +10,7 @@ define(['jquery'], function ($) {
         window: $(window),
         
         map:  $('#map'),
-        pane: $('#pane'),
-        add: $('#add'),
-        gallery: $('#gallery'),
-        
-        searchForm: $('#searchForm'),
-        searchFormBtn: $('#searchFormBtn'),
-        searchFormTin: $('#searchFormTin')
+        pane: $('#pane')
         
     };
     

@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['nodes', 'location', 'core', 'css!searchformcss'], function (nodes, Location, coreModel) {
+define(['location', 'core', 'css!searchformcss'], function (Location, coreModel) {
     
     /**
      * Search controller url
@@ -68,7 +68,7 @@ define(['nodes', 'location', 'core', 'css!searchformcss'], function (nodes, Loca
          */
         submit: function () {
             var self = this, 
-                query = nodes.searchFormTin.val();
+                query = $('#searchFormTin').val();
             
             if (query) {
                 $.when(
