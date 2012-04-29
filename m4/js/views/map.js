@@ -3,8 +3,8 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['resizer', 'location', 'core', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
-function (resizer, LocationModel, coreModel) {
+define(['resizer', 'location', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+function (resizer, LocationModel) {
     
     /**
      * Map builder widget
@@ -75,15 +75,6 @@ function (resizer, LocationModel, coreModel) {
             // resize map based off of window height/width
             resizer.subscribe('mapbuilder', this._resize);
             
-            coreModel.bind('change:activeMapState', function (tab) {
-                
-                // add a simple poi for each location
-                tab.get('locations').each(function (loc) {
-                    self.mqa.addShape(new MQA.Poi(loc.get('latLng')));
-                });
-                
-                self.bestFit();
-            });
         },
         
         /**

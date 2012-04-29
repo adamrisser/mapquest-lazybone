@@ -1,4 +1,4 @@
-define(['backbone', 'pane', 'directions'], function(Backbone, pane, Directions) {
+define(['backbone', 'core'], function(Backbone, coreModel) {
 
     var Router = Backbone.Router.extend({
 
@@ -20,7 +20,7 @@ define(['backbone', 'pane', 'directions'], function(Backbone, pane, Directions) 
         },
 
         directions: function(type) {
-            m4.views.pane.push(new Directions());
+            coreModel.set({ state: 'directions' })
         },
 
         explore: function(what) {

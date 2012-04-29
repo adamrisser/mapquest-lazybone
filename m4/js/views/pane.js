@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['css!panecss'], function () {
+define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
     
     /**
      * Pane widget
@@ -20,6 +20,25 @@ define(['css!panecss'], function () {
          * @property
          */
         el: '#pane',
+        
+        /**
+         * Initialize the Pane view
+         * @constructor
+         */
+        initialize: function () {
+            _.bindAll(this, 'handleStateChange');
+            
+            coreModel.bind('change:state', this.handleStateChange);
+        },
+        
+        /**
+         * Handle a core model state change
+         * @param {String} state  state string
+         * @method
+         */
+        handleStateChange: function (state) {
+            this.push(new Directions());
+        },
         
         /**
          * Open the pane if it is closed

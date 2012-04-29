@@ -21,11 +21,11 @@ define(['map'], function (map) {
             /**
              * An easy way to tell the state of the model
              * - map
-             * - route
+             * - directions
              * - search
              * @type {String}
              */
-            state: null,
+            state: null
         },
         
         /**
