@@ -3,14 +3,16 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['nodes', 'resizer', 'location', 'core', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
-function (nodes, resizer, LocationModel, coreModel) {
+define(['resizer', 'location', 'core', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+function (resizer, LocationModel, coreModel) {
     
     /**
      * Map builder widget
      * @namespace
      */
     var Map = Backbone.View.extend({
+        
+        el: '#map',
         
         /**
          * Tilemap instance
@@ -25,12 +27,12 @@ function (nodes, resizer, LocationModel, coreModel) {
          * @private
          */
          _resize: function () {
-            var pane = nodes.pane.width(),
+            var pane = $('pane').width(),
                 h = window.innerHeight || 0,
                 w = window.outerWidth - pane;
             
             // resize the map parent
-            nodes.map.css({
+            this.$el.css({
                 left: pane + 'px',
                 width: (w > 0 ? w : 0) + 'px',
                 height: h + 'px'
@@ -52,7 +54,7 @@ function (nodes, resizer, LocationModel, coreModel) {
             var self = this;
             
             self.mqa = new MQA.TileMap(
-                nodes.map[0],
+                self.el,
                 config.zoom,
                 config.center,
                 'map'
@@ -95,7 +97,7 @@ function (nodes, resizer, LocationModel, coreModel) {
         
     });
     
-    // Export into public namespace.
+    // Export
     return Map;
     
 });

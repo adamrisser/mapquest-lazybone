@@ -9,7 +9,6 @@ define(['jquery'], function ($) {
         body: $('body'),
         window: $(window),
         
-        map:  $('#map'),
         pane: $('#pane')
         
     };
