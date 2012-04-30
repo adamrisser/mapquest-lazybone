@@ -1,0 +1,11 @@
+
+From root:
+
+  python -m SimpleHttpServer
+
+Test run at 
+
+  http://localhost:8000/test/index.html?test=[testName]
+
+Example:
+  http://localhost:8000/test/index.html?test=resizer
