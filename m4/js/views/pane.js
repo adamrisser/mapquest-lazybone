@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['core', 'directions', 'router', 'css!panecss'], function (coreModel, Directions, router) {
+define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
     
     /**
      * Pane widget
@@ -28,14 +28,12 @@ define(['core', 'directions', 'router', 'css!panecss'], function (coreModel, Dir
         initialize: function () {
             var self = this;
             
-            _.bindAll(self, 'handleStateChange', 'handleIndex', 'handleIndex', 
-                'handleSearchResult', 'handleMapResult', 'handleDirections');
-            
-            //TODO: see if this router can be removed
-            router.bind('route:index',      self.handleIndex);
-            router.bind('route:directions', self.handleDirections);
+            _.bindAll(self, 'handleStateChange');
             
             coreModel.bind('change:state', self.handleStateChange);
+            
+            // handle the state once, because it get set first
+            self.handleStateChange(coreModel, coreModel.get('state'));
         },
         
         /**
@@ -45,79 +43,26 @@ define(['core', 'directions', 'router', 'css!panecss'], function (coreModel, Dir
          * @method
          */
         handleStateChange: function (core, state) {
-            var self = this;
+            var self = this, app,
             
-            switch (state) {
-                case 'directions':
-                    self.handleDirections();
-                    break;
-                case 'map':
-                    self.handleMapResult();
-                    break;
-                case 'search':
-                    self.handleSearchResult();
-                    break;
-                case 'index':
-                    self.handleIndex();
-                break;
+            appHash = {
+                'directions': 'directions',
+                'map'       : 'mapresult',
+                'search'    : 'searchresults',
+                'index'     : 'directory',
+            };
+            
+            // does the state have a valid app?
+            if (app = appHash[state]) {
+                
+                // clear previous
+                self.$el.empty();
+                
+                // load the new app
+                require([app], function (App) {
+                    self.push(new App());    
+                });
             }
-        },
-        
-        /**
-         * Handle routes to the index page
-         * @method
-         */
-        handleIndex: function () {
-            var self = this;
-            
-            require(['directory'], function (Directory) {
-                self.push(new Directory());    
-            });
-        },
-        
-        /**
-         * Handle routes to the
-         * @method
-         */
-        handleMapResult: function () {
-            var self = this;
-            
-            require(['mapresult'], function (MapResult) {
-                self.$el.empty();
-                self.push(new MapResult());
-                
-                //TODO: probably needs to be removed and be handled by the map
-                m4.views.map.mqa.bestFit();
-            });
-        },
-        
-        /**
-         * Handle routes to the
-         * @method
-         */
-        handleSearchResult: function () {
-            var self = this;
-            
-            require(['searchresults'], function (SearchResults) {
-                self.$el.empty();
-                self.push(new SearchResults());
-                
-                //TODO: probably needs to be removed and be handled by the map
-                m4.views.map.mqa.bestFit();
-            });
-        },
-        
-        /**
-         * Handle routes to the
-         * @method
-         */
-        handleDirections: function () {
-            var self = this;
-            
-            require(['directions'], function (Directions) {
-                self.$el.empty();
-                self.push(new Directions());    
-            });
         },
         
         /**

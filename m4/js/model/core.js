@@ -2,7 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['map', 'router'], function (map, router) {
+define(['map'], function (map) {
     
     /**
      * Create a blank core application backbone model
@@ -54,14 +54,6 @@ define(['map', 'router'], function (map, router) {
             else {
                 state = 'map';
             }
-            
-            // set the route
-            query = $('#searchFormTin').val().replace(/\s/g, '+');
-            router.navigate('#/' + state + '/' + query, {
-                trigger: false
-            });
-            
-            console.info('setState: #/' + state + '/' + query);
             
             this.set({ state: state });
         }

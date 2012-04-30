@@ -6,7 +6,8 @@
  * placed into the model.
  * @description
  */
-define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'], function (router, Location, coreModel, template) {
+define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'css!searchformcss'], 
+    function (router, Location, coreModel, router, template) {
     
     /**
      * Search controller url
@@ -32,7 +33,7 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
          * @type {Object}
          */
         events: {
-            'click #searchFormBtn' : 'handleRouting'
+            'click #searchFormBtn' : 'submit'
         },
         
         /**
@@ -62,21 +63,16 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
          */
         render: function () {
             this.$el.append(this.template());
-            
             return this;
         },
         
         /**
          * Handle a new page load.
-         * @param {String} query search query
+         * @param {String|Backbone.View} query search query or *this* 
          * @method
          */
         handleRouting: function (query) {
-            
-            if (_.isString(query)) {
-                $('#searchFormTin').val(query.replace('+', ' '));    
-            }
-            
+            $('#searchFormTin').val(query.replace('+', ' '));
             this.submit();
         },
         
@@ -92,7 +88,8 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
                     this.fetch(query)
                 // is 
                 ).done(
-                    this.handleResponse
+                    this.handleResponse,
+                    this.setRoute
                 );
             }
         },
@@ -102,7 +99,6 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
          * @param {Object} config query
          */
         fetch: function (query) {
-            
             var ll = m4.views.map.mqa.getCenter();
 
             return $.ajax({
@@ -122,11 +118,22 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
          * @method
          */
         handleResponse: function (response) {
-            if (response && response[0]) {
-                coreModel.set({
-                    location: new Location(response[0]) 
-                });
-            }
+            coreModel.set({
+                location: new Location(response[0]) 
+            });
+        },
+        
+        /**
+         * Record the route in history
+         * @method
+         */
+        setRoute: function () {
+            var query = $('#searchFormTin').val().replace(/\s/g, '+'),
+                state = coreModel.get('state');
+            
+            router.navigate('#/' + state + '/' + query, {
+                trigger: false // dont fire another route event
+            });
         }
         
     });
