@@ -27,9 +27,11 @@ function (resizer, LocationModel) {
          * @private
          */
          _resize: function () {
-            var pane = $('pane').width(),
+            var pane = $('#pane').width(),
                 h = window.innerHeight || 0,
                 w = window.outerWidth - pane;
+            
+            console.info(w);
             
             // resize the map parent
             this.$el.css({
