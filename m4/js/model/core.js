@@ -57,7 +57,9 @@ define(['map', 'router'], function (map, router) {
             
             // set the route
             query = $('#searchFormTin').val().replace(/\s/g, '+');
-            router.navigate('#/' + state + '/' + query, true);
+            router.navigate('#/' + state + '/' + query, {
+                trigger: false
+            });
             
             console.info('setState: #/' + state + '/' + query);
             

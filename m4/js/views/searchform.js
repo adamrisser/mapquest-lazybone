@@ -32,7 +32,7 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
          * @type {Object}
          */
         events: {
-            'click #searchFormBtn' : 'submit'
+            'click #searchFormBtn' : 'handleRouting'
         },
         
         /**
@@ -48,22 +48,12 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
         initialize: function () {
             var self = this;
             
-            _.bindAll(self, 'handleResponse', 'fetch', 'handleRouting');
+            _.bindAll(self, 'handleRouting');
             
-            router.bind('route:map',        self.handleRouting);
-            router.bind('route:search',     self.handleRouting);
+            router.bind('route:map',    self.handleRouting);
+            router.bind('route:search', self.handleRouting);
             
             self.render();
-        },
-        
-        /**
-         * Handle a new page load
-         * @param {String} query search query
-         * @method
-         */
-        handleRouting: function (query) {
-            $('#searchFormTin').val(query.replace('+', ' '));
-            this.submit();
         },
         
         /**
@@ -74,6 +64,37 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
             this.$el.append(this.template());
             
             return this;
+        },
+        
+        /**
+         * Handle a new page load.
+         * @param {String} query search query
+         * @method
+         */
+        handleRouting: function (query) {
+            
+            if (_.isString(query)) {
+                $('#searchFormTin').val(query.replace('+', ' '));    
+            }
+            
+            this.submit();
+        },
+        
+        /**
+         * Submit the Summary Form. Load the service util if not present
+         * @method
+         */
+        submit: function () {
+            var query = $('#searchFormTin').val();
+            
+            if (query) {
+                $.when(
+                    this.fetch(query)
+                // is 
+                ).done(
+                    this.handleResponse
+                );
+            }
         },
         
         /**
@@ -93,23 +114,6 @@ define(['router', 'location', 'core', 'tmpl!searchformhtml', 'css!searchformcss'
                 },
                 dataType: 'json'
             });
-        },
-        
-        /**
-         * Submit the Summary Form. Load the service util if not present
-         * @method
-         */
-        submit: function () {
-            var query = $('#searchFormTin').val();
-            
-            if (query) {
-                $.when(
-                    this.fetch(query)
-                // is 
-                ).done(
-                    this.handleResponse
-                );
-            }
         },
         
         /**

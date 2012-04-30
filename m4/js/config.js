@@ -33,10 +33,13 @@ require.config({
         // view
         'directory'   : 'js/views/directory',
         'pane'        : 'js/views/pane', 
-        'map'         : 'js/views/map', 
         'searchform'  : 'js/views/searchform',
         'mapresult'   : 'js/views/mapresult',
         'searchresults' : 'js/views/searchresults',
+        
+        // view -> map
+        'map'        : 'js/views/map/map',
+        'poimanager' : 'js/views/map/poimanager', 
         
         // view -> directions
         'directions'            : 'js/views/directions/directions',

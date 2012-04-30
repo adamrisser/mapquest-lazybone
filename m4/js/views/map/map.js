@@ -31,8 +31,6 @@ function (resizer, LocationModel) {
                 h = window.innerHeight || 0,
                 w = window.outerWidth - pane;
             
-            console.info(w);
-            
             // resize the map parent
             this.$el.css({
                 left: pane + 'px',
