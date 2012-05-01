@@ -19,7 +19,6 @@ require.config({
         'underscore' : 'js/ext/underscore',
         'backbone'   : 'js/ext/backbone',
         'jquery'     : 'js/ext/jquery',
-        'mustache'   : 'js/ext/mustache',
         
         // bootstrap files
         'bootstrap' : 'js/bootstrap',
@@ -42,8 +41,8 @@ require.config({
         'poimanager' : 'js/views/map/poimanager', 
         
         // view -> directions
-        'directions'            : 'js/views/directions/directions',
-        'directions_input'      : 'js/views/directions/input',
+        'directions'       : 'js/views/directions/directions',
+        'directions_input' : 'js/views/directions/input',
 
         // router
         'router'      : 'js/routers/router',
@@ -51,7 +50,11 @@ require.config({
         // utils 
         'resizer'   : 'js/util/resizer',
         'html'      : 'js/util/html',
-         
+        
+        // twitter bootstrap
+        'twitter'   : 'js/ext/bootstrap/js/bootstrap',
+        'twittercss': 'js/ext/bootstrap/css/bootstrap',
+        
         // html
         'searchresultshtml' : 'html/searchresults.html',
         'mapresulthtml'  : 'html/mapresult.html', 
@@ -68,9 +71,7 @@ require.config({
         'searchformcss' : 'css/searchform',
         'resultscss'    : 'css/results',
         'gallerycss'    : 'css/gallery',
-        
-        // css -> twitter bootstrap
-        'twittercss': 'css/bootstrap/css/bootstrap',
+        'navbarcss'     : 'css/navbar',
         
         // css -> directions
         'directionscss'         : 'css/directions/directions',

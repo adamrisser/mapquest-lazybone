@@ -16,13 +16,13 @@ define(['vibemodel'], function (VibeModel) {
      * Large vibe icon
      * @type {MQA.Icon}
      */
-    _largeIcon = new MQA.Icon('http://content.mqcdn.com/vibe/2-5-42/images/s1_big_pin_selected.png', 25, 40);
+    _largeIcon = new MQA.Icon('http://content.mqcdn.com/vibe/2-5-42/images/s1_big_pin_selected.png', 25, 40),
     
     /**
      * Neighborhood vibe URL
      * @type {String}
      */
-    var _API_URL = 'http://mqvibe-api.mapquest.com/places/search',
+    _API_URL = 'http://mqvibe-api.mapquest.com/places/search',
     
     /**
      * An individual neighborhood object.

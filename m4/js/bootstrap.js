@@ -4,7 +4,7 @@
  */
 require(['require', 'config'], function (require) {
     
-    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router'], 
+    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router', 'css!navbarcss', 'twitter', 'css!twittercss'], 
         function (_, Backbone, $, Pane, Map, SearchForm, resizer, router) {
         
         /**
@@ -48,12 +48,16 @@ require(['require', 'config'], function (require) {
                         lng: -105.020089
                     }
                 })
-            },
+            }
             
         };
         
         // initialize the main window event listener for the resizer
         $(window).resize(resizer.resize);
+        
+        //TODO: move to a navbar view
+        $('a[rel=tooltip]').tooltip();
+        $('a[rel=popover]').popover();
         
         Backbone.history.start();
         
