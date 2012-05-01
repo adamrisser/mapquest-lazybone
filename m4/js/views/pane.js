@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['core', 'directions', 'css!panecss'], function (coreModel, Directions) {
+define(['core', 'css!panecss'], function (coreModel) {
     
     /**
      * Pane widget
