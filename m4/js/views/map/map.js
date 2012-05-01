@@ -3,7 +3,7 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['resizer', 'location', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v6.1.0/mqa.toolkit.js'], 
+define(['resizer', 'location', 'css!mapcss', 'http://open.mapquestapi.com/sdk/js/v7.0.0/mqa.toolkit.js'], 
 function (resizer, LocationModel) {
     
     /**
@@ -27,8 +27,9 @@ function (resizer, LocationModel) {
          * @private
          */
          _resize: function () {
-            var pane = $('#pane').width(),
-                h = window.innerHeight || 0,
+             //TODO: fix the padding 20 and height 80
+            var pane = $('#pane').width() + 20,
+                h = window.innerHeight - 80 || 0,
                 w = window.outerWidth - pane;
             
             // resize the map parent

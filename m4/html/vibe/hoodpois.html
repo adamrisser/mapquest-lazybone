@@ -1,0 +1,25 @@
+
+<div class="vibetoppois">    
+    
+    <div class="head">Top Restaurants</div>
+    <ol>
+        <% pois.each(function (poi) {
+             poi = poi.attributes 
+        %>
+            <li>
+                <div class="vcard">    
+                    <% if (poi.name) { %>
+                        <div class="name"><%= poi.name %></div>
+                    <% } %>
+                        
+                    <div class="address">
+                        <% if (poi.street) { %> <span class="street"><%= poi.street %></span> <% } %>
+                        <%= poi.city %><% if (poi.city) { %>, <% } %>
+                        <%= poi.state_code %> <%= poi.postal_code %>
+                    </div>
+                </div>
+            </li>
+        <% }) %>
+    </ol>
+    
+</div>

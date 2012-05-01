@@ -68,10 +68,25 @@ require.config({
         'searchformcss' : 'css/searchform',
         'resultscss'    : 'css/results',
         'gallerycss'    : 'css/gallery',
-
+        
+        // css -> twitter bootstrap
+        'twittercss': 'css/bootstrap/css/bootstrap',
+        
         // css -> directions
         'directionscss'         : 'css/directions/directions',
-        'directions_inputcss'   : 'css/directions/input'
+        'directions_inputcss'   : 'css/directions/input',
+        
+        // apps - vibe
+        'vibe'            : 'js/apps/vibe/vibe',
+        'hood'            : 'js/apps/vibe/hood',
+        'vibepois'        : 'js/apps/vibe/vibepois',
+        'vibeutil'        : 'js/apps/vibe/vibeutil',
+        'vibemodel'       : 'js/apps/vibe/vibemodel',
+        'hoodsummary'     : 'js/apps/vibe/hoodsummary',
+        'hoodsummaryhtml' : 'html/vibe/hoodsummary.html',
+        'hoodpoishtml'    : 'html/vibe/hoodpois.html',
+        'hoodsummarycss'  : 'css/vibe/hoodsummary'
+        
         
     }
     

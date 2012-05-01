@@ -1,0 +1,65 @@
+
+<div class="vibe">
+    <div class="scores">
+        <div class="head">
+            <div class="vibescore">
+                <span><%= vibe_score %></span>
+            </div>
+            
+            <div class="name">
+                <a href="http://mqvibe.mapquest.com/<%= url %>"><%= city %></a>
+                <div class="hoodlabel"><%= rank_label %></div>
+            </div>
+        </div>
+        
+        <% if (description) { %>
+            <div class="desc">
+                <%= description %> &hellip;<a href="<%= description_source_url %>">Excerpted from Wikipedia</a>
+            </div>
+        <% } %>
+        
+        <div class="subscores">
+            <div class ="score">
+                <div class="label">Popularity</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= popularity_rank*10 %>%;"></div>
+                 </div>
+            </div>
+            
+            <div class="score">
+                <div class="label">Going out</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= going_out_rank*10 %>%"></div>
+                </div>
+            </div>
+            
+            <div class="score">
+                <div class="label">Residential</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= residentiality_rank*10 %>%"></div>
+                </div>
+            </div>
+            
+            <div class="score">
+                <div class="label">Burbiness</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= national_chains_rank*10 %>%"></div>
+                </div>
+            </div>
+            
+            <div class="score">
+                <div class="label">Edginess</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= edginess_rank*10 %>%"></div>
+                </div>
+            </div>
+            
+            <div class="score">
+                <div class="label">Walkability</div>
+                <div class="progress progress-success progress-striped">
+                    <div class="bar" style="width: <%= walkability_rank*10 %>%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+.vibe .name a, .vibe .name {
+    color: #000;
+    font: 30px Helvetica,Arial,Courier;
+    letter-spacing: 1px;
+    text-decoration: none;
+    float: left;
+}
+
+.vibe .name {
+    position: relative;
+    top: 22px;
+}
+
+.vibe .desc {
+    padding: 0 10px 13px 0px;
+    clear: both;
+}
+
+.vibe .head {
+    position: relative;
+    top: -10px;
+}
+
+.scores .title {
+    margin: 10px 0 0 20px;
+    width: 66px;
+    color: #000;
+}
+
+/* big score at top */ 
+.scores .vibescore {
+    float: right;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: transparent url("http://content.mqcdn.com/vibe/2-5-42/images/s1_sprite2.png") no-repeat 2px -82px;
+    width: 133px;
+    height: 93px;
+    text-align: left;
+}
+
+.scores .vibescore span {
+    position: relative;
+    top:  23px;
+    left: 25px;
+    font: bold 56px adelle, Helvetica;
+    text-shadow: 2px -2px 0 rgb(198, 101, 55);
+    color: #fff;
+}
+
+.score .label {
+    color: #000;
+    font-size: 12px;
+    float: left;
+    padding-right: 10px;
+    width: 70px;
+    line-height: 12px;
+}
+
+.vibe .progress {
+    height: 14px;
+}
+
+.score {
+    position: relative;
+    margin: 6px 0 6px 0px;
+    color: #fff;
+    clear: both;
+}
+
+.scores .hoodlabel {
+    position: relative;
+    font-size: 16px;
+    margin-left: 20px;
+    color: #000;
+}
+
+/*
+ * top pois
+ */
+
+.vibetoppois .head {
+    font-size: 20px;
+}
+
+ol {
+    margin: 0;
+    padding: 0 18px;
+}
+
+ol li {
+    margin-bottom: 10px;
+}
+
+
+.vcard {
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 15px;
+}
+
+.address {
+    font-size: 12px;
+}
+
+

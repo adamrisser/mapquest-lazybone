@@ -79,6 +79,17 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
 
         explore: function(what) {
             console.log('explore/' + what);
+            
+            // instantiate the vibe app
+            if (what === 'neighborhoods') {
+                require(['vibe'], function (Vibe) {
+                    var vibeApp = new Vibe({
+                        //placeId: 533882 //winston salem
+                        placeId: 380454
+                    });
+                });
+            }
+            
         },
 
         build: function() {
