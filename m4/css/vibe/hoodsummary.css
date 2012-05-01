@@ -12,13 +12,16 @@
 }
 
 .vibe .desc {
-    padding: 0 10px 13px 0px;
+    background-color: #EEEEEE;
     clear: both;
+    margin: 0;
+    padding: 20px;
 }
 
 .vibe .head {
-    position: relative;
-    top: -10px;
+    background: none repeat scroll 0 0 #DEDEDE;
+    overflow: auto;
+    padding: 0 20px;
 }
 
 .scores .title {
