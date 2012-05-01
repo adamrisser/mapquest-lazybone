@@ -19,15 +19,26 @@
 }
 
 .vibe .head {
-    background: none repeat scroll 0 0 #DEDEDE;
+    background: none repeat scroll 0 0 #fff;
     overflow: auto;
-    padding: 0 20px;
+    padding: 0 20px 10px 20px;
 }
 
 .scores .title {
     margin: 10px 0 0 20px;
     width: 66px;
     color: #000;
+}
+
+.subscores {
+    background-color: #777;
+    color: #fff;
+    padding: 5px 20px;
+}
+
+.subscores i {
+    float: right;
+    margin-left: 4px;
 }
 
 /* big score at top */ 
@@ -51,8 +62,8 @@
     color: #fff;
 }
 
-.score .label {
-    color: #000;
+.score .lbl {
+    color: #fff;
     font-size: 12px;
     float: left;
     padding-right: 10px;
@@ -62,6 +73,7 @@
 
 .vibe .progress {
     height: 14px;
+    margin-bottom: 14px;
 }
 
 .score {

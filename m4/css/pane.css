@@ -9,11 +9,12 @@
     
     width: 375px;
     padding: 10px 10px 0 10px;
-
+    
     background-color: #fff;
     
     border-right: 1px solid #aaa;
     border-width: 0 1px 1px 1px;
+    overflow: auto;
 }
 
 #directory {

@@ -65,7 +65,7 @@ define(['vibeutil'], function (util) {
                     place_id: this.model.get('placeId'), 
                     include_categories: 1,
                     include_children: 1,
-                    description_limit: 200
+                    description_limit: 141
                 },
                 dataType: 'jsonp',
             });

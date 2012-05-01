@@ -57,7 +57,6 @@ require(['require', 'config'], function (require) {
         
         //TODO: move to a navbar view
         $('a[rel=tooltip]').tooltip();
-        $('a[rel=popover]').popover();
         
         Backbone.history.start();
         

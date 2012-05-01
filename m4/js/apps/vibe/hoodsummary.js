@@ -4,7 +4,8 @@
  * The summary of a neighborhood that lives in the summary pane.
  * @description
  */
-define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 'css!twittercss'], function (summaryTmpl, poisTmpl) {
+define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 
+    'twitter', 'css!twittercss'], function (summaryTmpl, poisTmpl) {
     
     var HoodSummary = Backbone.View.extend({
         
@@ -13,6 +14,10 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 'css!
          * @property
          */
         el: '#pane',
+        
+        events: {
+            'mouseover i': 'popover'
+        },
         
         /**
          * Summary underscore template
@@ -50,6 +55,8 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 'css!
             this.$el.empty()
                 .append(this.summaryTmpl(hood.properties));
             
+            //$('i').popover();
+            
             return this;
         },
         
@@ -65,6 +72,10 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 'css!
             
             return this;
         },
+        
+        popover: function (evt) {
+            $(evt.currentTarget).popover('show');
+        }
         
     });
     

@@ -14,48 +14,59 @@
         
         <% if (description) { %>
             <div class="desc">
-                <%= description %> &hellip;<a href="<%= description_source_url %>">Excerpted from Wikipedia</a>
+                <%= description %> <a href="<%= description_source_url %>">Excerpted from Wikipedia</a>
             </div>
         <% } %>
         
         <div class="subscores">
             <div class ="score">
-                <div class="label">Popularity</div>
+                <div class="lbl">Popularity</div>
+                <i class="icon-question-sign" rel="popover" data-original-title="What is the Popularity score?" data-content="Popularity is a measure of how many visitors come to this neighborhood compared with other neighborhoods in this state."></i>
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= popularity_rank*10 %>%;"></div>
                  </div>
+                 
             </div>
             
             <div class="score">
-                <div class="label">Going out</div>
+                <div class="lbl">Going out</div>
+                <i class="icon-question-sign" rel="popover" data-original-title="What is the Going Out score?" data-content="Going Out is a measure of the variety, quantity, and quality of bars, restaurants, nightclubs, and other entertainment venues in the neighborhood, compared with other neighborhoods in the same state."></i>
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= going_out_rank*10 %>%"></div>
                 </div>
             </div>
             
             <div class="score">
-                <div class="label">Residential</div>
+                <div class="lbl">Residential</div>
+                
+                <i class="icon-question-sign" rel="popover" 
+                    data-original-title="What is Residential score?" 
+                    data-content="The Residential score is a comparison of the number of homes in the neighborhood with the number of businesses, compared with other neighborhoods in the same state."></i>
+                    
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= residentiality_rank*10 %>%"></div>
                 </div>
             </div>
             
             <div class="score">
-                <div class="label">Burbiness</div>
+                <div class="lbl">Burbiness</div>
+                <i class="icon-question-sign" rel="popover" data-original-title="What is the Burbiness score?" data-content="Burbiness is a measure of how commercialized the neighborhood is with national chains, compared with other neighborhoods in the same state."></i>
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= national_chains_rank*10 %>%"></div>
                 </div>
             </div>
             
             <div class="score">
-                <div class="label">Edginess</div>
+                <div class="lbl">Edginess</div>
+                <i class="icon-question-sign" rel="popover" data-original-title="What is the Edginess score?" data-content="Edginess is a measure of how likely you are to meet the more questionable or colorful aspects of urban society in that neighborhood, compared with other neighborhoods in the same state."></i>
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= edginess_rank*10 %>%"></div>
                 </div>
             </div>
             
             <div class="score">
-                <div class="label">Walkability</div>
+                <div class="lbl">Walkability</div>
+                <i class="icon-question-sign" rel="popover" data-original-title="What is Walkability?" data-content="Walkability is a guide to how easy it is to access common daily amenities in the neighborhood without needing to drive anywhere or drive very far to a single spot."></i>
                 <div class="progress progress-success progress-striped">
                     <div class="bar" style="width: <%= walkability_rank*10 %>%"></div>
                 </div>
