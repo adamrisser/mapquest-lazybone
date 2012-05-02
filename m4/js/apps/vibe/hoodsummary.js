@@ -75,6 +75,14 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss',
         
         popover: function (evt) {
             $(evt.currentTarget).popover('show');
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            this.unbind();
         }
         
     });

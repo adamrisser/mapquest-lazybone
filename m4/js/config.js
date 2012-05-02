@@ -31,6 +31,7 @@ require.config({
         
         // view
         'directory'     : 'js/views/directory',
+        'base'          : 'js/views/base',
         'pane'          : 'js/views/pane', 
         'searchform'    : 'js/views/searchform',
         'navbar'        : 'js/views/navbar',

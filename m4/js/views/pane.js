@@ -22,50 +22,6 @@ define(['core', 'css!panecss'], function (coreModel) {
         el: '#pane',
         
         /**
-         * Initialize the Pane view
-         * @constructor
-         */
-        initialize: function () {
-            var self = this;
-            
-            _.bindAll(self, 'handleStateChange');
-            
-            coreModel.bind('change:state', self.handleStateChange);
-            
-            // handle the state once, because it get set first
-            self.handleStateChange(coreModel, coreModel.get('state'));
-        },
-        
-        /**
-         * Handle a core model state change
-         * @param {Backbone.Model} core  core model reference
-         * @param {String}         state state string
-         * @method
-         */
-        handleStateChange: function (core, state) {
-            var self = this, app,
-            
-            appHash = {
-                'directions': 'directions',
-                'map'       : 'mapresult',
-                'search'    : 'searchresults',
-                'index'     : 'directory',
-            };
-            
-            // does the state have a valid app?
-            if (app = appHash[state]) {
-                
-                // clear previous
-                self.$el.empty();
-                
-                // load the new app
-                require([app], function (App) {
-                    self.push(new App());    
-                });
-            }
-        },
-        
-        /**
          * Add html into the pane from a backbone view. 
          * Note: The backbone view must support returning itself from 
          *       its own view method!

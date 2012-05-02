@@ -114,6 +114,14 @@ define(['vibemodel'], function (VibeModel) {
                 
                 self.map.bestFit();
             });
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            this.unbind();
         }
         
     });

@@ -101,6 +101,14 @@ define(['vibeutil'], function (util) {
                 self.map.bestFit();
                 
             });
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            this.unbind();
         }
         
     });

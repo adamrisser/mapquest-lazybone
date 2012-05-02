@@ -20,34 +20,56 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
 
         routes: {
             ''                  : 'index', 
+            '/build'            : 'build',
             '/signin'           : 'signIn',
             '/map/:query'       : 'map',
             '/search/:query'    : 'search',
             '/directions'       : 'directions',
             '/directions/type'  : 'directions',
-            '/explore/:what'    : 'explore',
-            '/build'            : 'build'
+            '/explore/:what/:placeId' : 'explore'
         },
         
         /**
-         * Initialize the router
-         * @constructor
+         * Currently active app
+         * @type {Backbone.View} 
          */
-        initialize: function () {
-            
-        },
+        activeApp: null,
         
         /**
-         * Initial state of the app. The non-route route
+         * Handle the explore route
          * @method
          */
-        index: function() {
-            console.log('index');
-            coreModel.set({ state: 'index' });
+        explore: function () {
+            this.load('vibe', 'explore', arguments);
         },
-
-        signIn: function() {
-            console.log('signing in');
+        
+        /**
+         * Handle the index route (starting state)
+         * @method
+         */
+        index: function () {
+            this.load('directory', 'index', arguments);
+        },
+        
+        /**
+         * Load an app
+         * @method
+         */
+        load: function (app, loader, varargs) {
+            var self = this;
+            
+            console.info('loading ' + app);
+            
+            // clean up the current app
+            if (self.activeApp) {
+                self.activeApp.dispose();
+            }
+            
+            // load the new app
+            require([app], function (App) {
+                self.activeApp = new App(Array.prototype.slice.call(varargs));
+            });
+            
         },
         
         /**
@@ -57,43 +79,6 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         directions: function (type) {
             console.log('directions');
             coreModel.set({ state: 'directions' });
-        },
-
-        /**
-         * Set the app into search result mode
-         * @param {String} query search query
-         * @method
-         */
-        search: function (query) {
-            console.log('search');
-        },
-        
-        /**
-         * Set the app into map result mode
-         * @param {String} query search query
-         * @method
-         */
-        map: function (query) {
-            console.log('map');
-        },
-
-        explore: function(what) {
-            console.log('explore/' + what);
-            
-            // instantiate the vibe app
-            if (what === 'neighborhoods') {
-                require(['vibe'], function (Vibe) {
-                    var vibeApp = new Vibe({
-                        //placeId: 533882 //winston salem
-                        placeId: 380454
-                    });
-                });
-            }
-            
-        },
-
-        build: function() {
-            console.log('opening mapbuilder');
         }
 
     });

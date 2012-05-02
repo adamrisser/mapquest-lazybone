@@ -6,45 +6,67 @@
  * vibe model for the other vibe views to bind on.
  * @description
  */
-define(['vibemodel', 'vibepois', 'hood', 'hoodsummary'], function (VibeModel, VibePois, VibeHood, HoodSummary) {
-    
-    /**
-     * Neighborhood vibe URL
-     * @type {String}
-     */
-    var _API_URL = 'http://mqvibe-api.mapquest.com/places/search',
+define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (router, Base, VibePois, VibeHood, HoodSummary, VibeModel) {
     
     /**
      * An individual neighborhood object.
      */
-    VibeController = Backbone.View.extend({
+    var VibeController = Backbone.View.extend({
+        
+        /**
+         * Parent
+         * @type {String}
+         * @property
+         */
+        el: '#pane',
         
         /**
          * Vibe model
          * @type {Backbone.Model}
+         * @property
          */
-        model: new VibeModel(),
+        model: null,
         
         /**
          * Initialize this hood.
-         * @param {Object} config
-         * @param {Number} config.placeId neighborhood to render 
+         * @param {Array}  routeFragments route fragments that initialized the app
          * @constructor        
          */
-        initialize: function (config) {
-            var self = this,
-                model = self.model;
+        initialize: function (routeFragments) {
+            var self = this, 
+                model = self.model = new VibeModel();
             
             // init the vibe views
-            new VibeHood(model),
-            new VibePois(model);
-            new HoodSummary(model);
+            self.summary = new HoodSummary(model);
+            self.hood    = new VibeHood(model),
+            self.pois    = new VibePois(model);
             
             // this basically starts the show
-            model.set('placeId', config.placeId);
+            model.set('placeId', routeFragments[1]);
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            var self = this;
+            
+            self.model = null;
+            
+            self.hood.dispose();
+            self.pois.dispose();
+            self.summary.dispose();
+            
+            self.hood = null;
+            self.pois = null;
+            self.summary = null;
+            
+            self.unbind();
+            self.$el.empty();
         }
         
-    });
+    }, Base.prototype);
     
     return VibeController;
 });
