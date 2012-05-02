@@ -3,7 +3,8 @@ define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backb
 	var Input = Backbone.View.extend({
 
 		events: {
-			'click .remove': 'remove'
+			'blur input': 'resolve',
+			'click .icon-remove': 'remove'
 		},
 
 		tagName: 'li',
@@ -12,7 +13,11 @@ define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backb
 		 * Our input template.
 		 * @type {String}
 		 */
-		template: '<input type="text"/><span class="remove"></span>',
+		template: '<input type="text"/><i class="icon-remove"></i>',
+
+		initialize: function(options) {
+
+		},
 
 		/**
 		 * Our view render method. Adds the input elements.
@@ -24,6 +29,29 @@ define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backb
 			this.$el.html(html);
 
 			return this;
+		},
+
+		resolve: function() { 
+            return this.promise || (this.promise = $.ajax({
+                url: 'http://open.mapquestapi.com/nominatim/v1/search',
+                data: {
+                    format: 'json',
+                    q: this.$el.find('input').val()
+                },
+                cache: true,
+                dataType: 'jsonp',
+                jsonp: 'json_callback',
+                context: this,
+                success: this.setResult
+            }));
+		},
+
+		setResult: function(data) {
+			this.result = data;
+		},
+
+		getResult: function() {
+			return this.result;
 		},
 
 		remove: function(event) {

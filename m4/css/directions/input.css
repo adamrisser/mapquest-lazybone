@@ -1,7 +1,5 @@
 /** input.css **/
-#directions .remove {
-    display: inline-block;  
-    width: 15px;
-    height: 15px;
+#directions .icon-remove {
     cursor: pointer;
+    vertical-align: baseline;
 }
