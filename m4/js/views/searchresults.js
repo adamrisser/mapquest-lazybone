@@ -10,6 +10,12 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
     var SearchResultsList = Backbone.View.extend({
         
         /**
+         * Parent element
+         * @property
+         */
+        el: '#pane',
+        
+        /**
          * Underscore template
          * @method
          */
@@ -20,7 +26,7 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
          * @constructor
          */
         initialize: function () {
-            _.bindAll(this, 'handleLoc');
+            this.render();
         },
         
         /**
@@ -29,7 +35,6 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
          * @method
          */
         render: function (location) {
-            
             var html = this.template({
                 locs: coreModel.get('location').get('unresolvedLocations'), 
                 locTemplate: this.handleLoc
@@ -39,7 +44,6 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
             
             return this;
         },
-        
         
         /**
          * Handle a new location model coming into the results view
@@ -59,6 +63,15 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
                 adr: adr, 
                 name: loc.get('name')
             });
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            //this.$el.empty();
+            this.unbind();
         }
         
     });

@@ -11,6 +11,12 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'],
     var MapResults = Backbone.View.extend({
         
         /**
+         * Parent element
+         * @property
+         */
+        el: '#pane',
+        
+        /**
          * Underscore template
          * @method
          */
@@ -21,7 +27,7 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'],
          * @constructor
          */
         initialize: function () {
-            _.bindAll(this, 'handleLoc');
+            this.render();
         },
         
         /**
@@ -57,6 +63,15 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'css!resultscss'],
                 adr: adr, 
                 name: loc.get('name')
             });
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            //this.$el.empty();
+            this.unbind();
         }
         
     });

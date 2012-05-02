@@ -76,6 +76,22 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * Set the app into directions mode, showing A to B boxes, etc
          * @method
          */
+        search: function (type) {
+            this.load('searchresults', 'search', arguments);
+        },
+        
+        /**
+         * Set the app into directions mode, showing A to B boxes, etc
+         * @method
+         */
+        map: function (type) {
+            this.load('mapresult', 'map', arguments);
+        },
+        
+        /**
+         * Set the app into directions mode, showing A to B boxes, etc
+         * @method
+         */
         directions: function (type) {
             console.log('directions');
             coreModel.set({ state: 'directions' });
