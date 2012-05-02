@@ -30,10 +30,11 @@ require.config({
         'route'    : 'js/model/route',
         
         // view
-        'directory'   : 'js/views/directory',
-        'pane'        : 'js/views/pane', 
-        'searchform'  : 'js/views/searchform',
-        'mapresult'   : 'js/views/mapresult',
+        'directory'     : 'js/views/directory',
+        'pane'          : 'js/views/pane', 
+        'searchform'    : 'js/views/searchform',
+        'navbar'        : 'js/views/navbar',
+        'mapresult'     : 'js/views/mapresult',
         'searchresults' : 'js/views/searchresults',
         
         // view -> map
@@ -64,6 +65,7 @@ require.config({
         'galleryhtml'    : 'html/gallery.html',
         'resulthtml'     : 'html/result.html',
         'locationhtml'   : 'html/location.html',
+        'navbarhtml'     : 'html/navbar.html',
         
         // css
         'panecss'       : 'css/pane',

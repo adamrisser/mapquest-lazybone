@@ -4,8 +4,8 @@
  */
 require(['require', 'config'], function (require) {
     
-    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router', 'css!navbarcss', 'twitter', 'css!twittercss'], 
-        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router) {
+    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router', 'navbar'], 
+        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router, NavBar) {
         
         /**
          * Main global namespace
@@ -28,6 +28,13 @@ require(['require', 'config'], function (require) {
                  * @property 
                  */
                 pane: new Pane(),
+                
+                /**
+                 * Top navigation for the site
+                 * @type {Backbone.View}
+                 * @property
+                 */
+                navBar: new NavBar(),
                 
                 /**
                  * Main entry form for the site
@@ -54,9 +61,6 @@ require(['require', 'config'], function (require) {
         
         // initialize the main window event listener for the resizer
         $(window).resize(resizer.resize);
-        
-        //TODO: move to a navbar view
-        $('a[rel=tooltip]').tooltip();
         
         Backbone.history.start();
         

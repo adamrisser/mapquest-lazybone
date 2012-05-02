@@ -20,4 +20,6 @@ body {
     float: left;
     height: 30px;
     margin-right: 50px;
+    position: relative;
+    z-index: 1;
 }
