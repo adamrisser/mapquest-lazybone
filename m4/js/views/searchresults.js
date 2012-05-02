@@ -70,7 +70,7 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'css!resultscss']
          * @method
          */
         dispose: function () {
-            //this.$el.empty();
+            this.$el.empty();
             this.unbind();
         }
         

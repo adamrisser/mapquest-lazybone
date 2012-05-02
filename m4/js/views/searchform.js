@@ -132,7 +132,7 @@ define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'css!sear
                 state = coreModel.get('state');
             
             router.navigate('#/' + state + '/' + query, {
-                trigger: false // dont fire another route event
+                trigger: true
             });
         }
         
