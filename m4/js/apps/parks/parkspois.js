@@ -110,7 +110,6 @@ define(['vibemodel'], function (VibeModel) {
             
             // add to the map and best fit
             self.map.mqa.addShapeCollection(sc);
-            
             self.map.bestFit();
         },
         
@@ -120,6 +119,7 @@ define(['vibemodel'], function (VibeModel) {
          */
         dispose: function () {
             this.map.mqa.removeShapeCollection('parkpois');
+            this.model.get('pois').unbind('reset', self.render);
             this.unbind();
         }
         

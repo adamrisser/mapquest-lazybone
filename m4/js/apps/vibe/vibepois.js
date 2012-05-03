@@ -96,24 +96,20 @@ define(['vibemodel'], function (VibeModel) {
          * @return {Backbone.View} this
          */
         render: function (pois) {
-            var self = this;
+            var self = this,
+                sc = new MQA.ShapeCollection();
+                
+            sc.collectionName = 'vibepois';
             
-            MQA.withModule('shapes', function () {
-                
-                var sc = new MQA.ShapeCollection();
-                sc.collectionName = 'vibepois';
-                
-                pois.each(function (place) {
-                    var mqaPoi = new MQA.Poi(place.get('latLng'));
-                    mqaPoi.setIcon(_largeIcon);
-                    sc.add(mqaPoi);
-                });
-                
-                // add to the map and best fit
-                self.map.mqa.addShapeCollection(sc);
-                
-                self.map.bestFit();
+            pois.each(function (place) {
+                var mqaPoi = new MQA.Poi(place.get('latLng'));
+                mqaPoi.setIcon(_largeIcon);
+                sc.add(mqaPoi);
             });
+            
+            // add to the map and best fit
+            self.map.mqa.addShapeCollection(sc);
+            self.map.bestFit();
         },
         
         /**
@@ -122,6 +118,10 @@ define(['vibemodel'], function (VibeModel) {
          */
         dispose: function () {
             this.map.mqa.removeShapeCollection('vibepois');
+            
+            this.model.get('pois').unbind('reset', this.render);
+            this.model.bind('change:placeId', this.handlePlaceId);
+            
             this.unbind();
         }
         
