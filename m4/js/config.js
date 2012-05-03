@@ -88,11 +88,15 @@ require.config({
         'hoodpoishtml'    : 'html/vibe/hoodpois.html',
         'hoodsummarycss'  : 'css/vibe/hoodsummary',
         
-        // apps - vibe
-        'parks'      : 'js/apps/parks/parks',
-        'parksmodel' : 'js/apps/parks/parksmodel',
-        'parkspois'  : 'js/apps/parks/parkspois',
-        'parksgeom'  : 'js/apps/parks/parksgeom'
+        // apps - parks
+        'parks'           : 'js/apps/parks/parks',
+        'parksmodel'      : 'js/apps/parks/parksmodel',
+        'parkspois'       : 'js/apps/parks/parkspois',
+        'parksgeom'       : 'js/apps/parks/parksgeom',
+        'parkssummary'    : 'js/apps/parks/parkssummary',
+        'parkssummaryhtml' : 'html/parks/parkssummary.html',
+        'parkspoishtml'    : 'html/parks/parkspois.html',
+        'parksummarycss'  : 'css/vibe/parksummary',
         
         
         

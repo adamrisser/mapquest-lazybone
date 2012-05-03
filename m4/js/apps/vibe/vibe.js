@@ -42,7 +42,7 @@ define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], funct
             self.pois    = new VibePois(model);
             
             // this basically starts the show
-            model.set('placeId', routeFragments[1]);
+            model.set('placeId', routeFragments[0]);
         },
         
         /**

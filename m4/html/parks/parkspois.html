@@ -1,0 +1,20 @@
+
+<div class="parkspois">    
+    
+    <div class="head">Top places to visit in Yellowstone</div>
+    
+    <ol>
+        <% pois.each(function (poi) {
+             poi = poi.get('properties');
+        %>
+            <li>
+                <div class="vcard">    
+                    <% if (poi.NAME) { %>
+                        <div class="name"><%= poi.NAME %></div>
+                    <% } %>
+                </div>
+            </li>
+        <% }) %>
+    </ol>
+    
+</div>

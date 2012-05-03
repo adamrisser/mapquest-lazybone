@@ -121,6 +121,7 @@ define(['vibemodel'], function (VibeModel) {
          * @method
          */
         dispose: function () {
+            this.map.mqa.removeShapeCollection('parkpois');
             this.unbind();
         }
         

@@ -1,18 +1,12 @@
 
-.navbar {
-    position: relative;
-    z-index: 2;
+.nav-pills li a {
+    background-color: #eee;
 }
 
-.navbar-inner {
-    border-radius: 0 !important;
-    min-height: 14px !important;
+.nav-pills .active a {
+    background-color: #8CC63F;
 }
 
-.navbar-inner * {
-    line-height: inherit !important;
-}
-
-.navbar .nav > li > a {
-    padding: 6px 10px !important;
+.nav-pills .active a:hover {
+    background-color: #5BB75B;
 }

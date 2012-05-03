@@ -6,7 +6,7 @@
  * vibe model for the other vibe views to bind on.
  * @description
  */
-define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom'], function (router, Base, ParksModel, ParksPois, ParksGeom) {
+define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'], function (router, Base, ParksModel, ParksPois, ParksGeom, ParksSummary) {
     
     /**
      * Parkquest controller
@@ -38,6 +38,8 @@ define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom'], function (rou
             
             self.pois = new ParksPois(model);
             self.geom = new ParksGeom(model);
+            
+            self.summary = new ParksSummary(model);
         },
         
         /**
@@ -49,11 +51,21 @@ define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom'], function (rou
             
             self.model = null;
             
+            self.pois.dispose();
+            self.geom.dispose();
+            self.summary.dispose();
+            
+            self.pois = null;
+            self.geom = null;
+            self.summary = null;
+            
             self.unbind();
             self.$el.empty();
         }
         
     }, Base.prototype);
     
+    // export
     return ParksController;
+    
 });
