@@ -6,7 +6,7 @@
  * placed into the model.
  * @description
  */
-define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'css!searchformcss'], 
+define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!searchformcss'], 
     function (router, Location, coreModel, router, template) {
     
     /**

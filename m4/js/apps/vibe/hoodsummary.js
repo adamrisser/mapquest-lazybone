@@ -4,8 +4,7 @@
  * The summary of a neighborhood that lives in the summary pane.
  * @description
  */
-define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'css!hoodsummarycss', 
-    'twitter', 'css!twittercss'], function (summaryTmpl, poisTmpl) {
+define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'less!hoodsummarycss', 'twitter', 'css!twittercss'], function (summaryTmpl, poisTmpl) {
     
     var HoodSummary = Backbone.View.extend({
         

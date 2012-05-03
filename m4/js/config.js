@@ -14,11 +14,13 @@ require.config({
         'text'  : 'js/plugins/text',
         'css'   : 'js/plugins/css',
         'tmpl'  : 'js/plugins/tmpl',
+        'less'  : 'js/plugins/less',
         
         // ext
         'underscore' : 'js/ext/underscore',
         'backbone'   : 'js/ext/backbone',
         'jquery'     : 'js/ext/jquery',
+        'lessmin'    : 'js/ext/less-1.3.0.min',
         
         // bootstrap files
         'bootstrap' : 'js/bootstrap',
@@ -96,9 +98,7 @@ require.config({
         'parkssummary'    : 'js/apps/parks/parkssummary',
         'parkssummaryhtml' : 'html/parks/parkssummary.html',
         'parkspoishtml'    : 'html/parks/parkspois.html',
-        'parksummarycss'  : 'css/vibe/parksummary',
-        
-        
+        'parksummarycss'  : 'css/vibe/parksummary'
         
     }
     

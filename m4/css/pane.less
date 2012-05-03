@@ -17,28 +17,30 @@
     overflow: auto;
 }
 
+
+
 #directory {
     font-size: 2.0em;
+    
+    li {
+        list-style-type: none;
+    }
+    
+    a, 
+    a:visited {
+        color: #52224e;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #8bc63f;
+    }
+    
 }
 
 #directory > li {
     margin-top: 10px;
 }
-
-#directory li {
-    list-style-type: none;
-}
-
-#directory a, 
-#directory a:visited {
-    color: #52224e;
-    text-decoration: none;
-}
-
-#directory a:hover {
-    color: #8bc63f;
-}
-
 
 #directory, .subdir {
     padding: 0 0 0 15px;
