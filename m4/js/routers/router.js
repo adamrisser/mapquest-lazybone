@@ -36,22 +36,6 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         activeApp: null,
         
         /**
-         * Handle the explore route
-         * @method
-         */
-        explore: function () {
-            this.load('vibe', arguments);
-        },
-        
-        /**
-         * Handle the index route (starting state)
-         * @method
-         */
-        index: function () {
-            this.load('directory', arguments);
-        },
-        
-        /**
          * Load an app
          * @method
          */
@@ -70,6 +54,22 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
                 self.activeApp = new App(Array.prototype.slice.call(varargs));
             });
             
+        },
+        
+        /**
+         * Handle the index route (starting state)
+         * @method
+         */
+        index: function () {
+            this.load('directory', arguments);
+        },
+        
+        /**
+         * Handle the explore route
+         * @method
+         */
+        explore: function () {
+            this.load('vibe', arguments);
         },
         
         /**
