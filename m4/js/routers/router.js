@@ -26,7 +26,8 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
             '/search/:query'    : 'search',
             '/directions'       : 'directions',
             '/directions/type'  : 'directions',
-            '/explore/:what/:placeId' : 'explore'
+            '/explore/nationalparks' : 'parks',
+            '/explore/neighborhoods/:placeId' : 'vibe'
         },
         
         /**
@@ -65,11 +66,19 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         },
         
         /**
-         * Handle the explore route
+         * Handle the vibe route
          * @method
          */
-        explore: function () {
+        vibe: function () {
             this.load('vibe', arguments);
+        },
+        
+        /**
+         * Handle the parkquest route
+         * @method
+         */
+        parks: function () {
+            this.load('parks', arguments);
         },
         
         /**
