@@ -28,7 +28,7 @@ require.config({
         'location' : 'js/model/location',
         'mapstate' : 'js/model/mapstate',
         'route'    : 'js/model/route',
-        
+
         // view
         'directory'     : 'js/views/directory',
         'base'          : 'js/views/base',
@@ -41,10 +41,6 @@ require.config({
         // view -> map
         'map'        : 'js/views/map/map',
         'poimanager' : 'js/views/map/poimanager', 
-        
-        // view -> directions
-        'directions'       : 'js/views/directions/directions',
-        'directions_input' : 'js/views/directions/input',
 
         // router
         'router'      : 'js/routers/router',
@@ -77,6 +73,7 @@ require.config({
         'navbarcss'     : 'css/navbar',
         
         // css -> directions
+        'directions'            : 'js/apps/directions',
         'directionscss'         : 'css/directions/directions',
         'directions_inputcss'   : 'css/directions/input',
         

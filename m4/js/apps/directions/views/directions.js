@@ -1,5 +1,12 @@
-define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.html', 'css!directionscss'], 
-    function (_, Backbone, Input, template) {
+define(['underscore', 'backbone', 
+    'directions/views/input', 
+    'directions/models/query', 
+    'directions/models/locationcollection',
+    'directions/models/location', 
+    'directions/services/route', 
+    'text!/m4/html/directions.html', 
+    'css!directionscss'], 
+    function (_, Backbone, Input, Query, LocationCollection, Location, route, template) {
 
     var Directions = Backbone.View.extend({
         
@@ -14,6 +21,8 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
          * @type {Object}
          */ 
         events: {
+            "click #addStop": "addStop",
+            "click .routeType": "setRouteType",
             "click #getDirections": "getDirections"
         },
 
@@ -22,6 +31,7 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
          * @return {void} 
          */
         initialize: function() {
+            this.model = new Query({'stops': new LocationCollection});
             this.html = _.template(template);
             this.render();
         },
@@ -77,6 +87,18 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
                     map.addRoute(stops);
                 });
             });
+        },
+
+        /**
+         * Adds another stop to the route.
+         * @param {Object} event object
+         */
+        addStop: function(event) {
+
+        },
+
+        setRouteType: function(event) {
+
         },
         
         /**

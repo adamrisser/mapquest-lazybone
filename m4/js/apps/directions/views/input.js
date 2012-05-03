@@ -16,7 +16,9 @@ define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backb
 		template: '<input type="text"/><i class="icon-remove"></i>',
 
 		initialize: function(options) {
+			_.bind(this.resolve, this);
 
+			// this.model.on('change:stops', this.resolve);
 		},
 
 		/**
@@ -31,27 +33,8 @@ define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backb
 			return this;
 		},
 
-		resolve: function() { 
-            return this.promise || (this.promise = $.ajax({
-                url: 'http://open.mapquestapi.com/nominatim/v1/search',
-                data: {
-                    format: 'json',
-                    q: this.$el.find('input').val()
-                },
-                cache: true,
-                dataType: 'jsonp',
-                jsonp: 'json_callback',
-                context: this,
-                success: this.setResult
-            }));
-		},
-
-		setResult: function(data) {
-			this.result = data;
-		},
-
-		getResult: function() {
-			return this.result;
+		resolve: function() {
+			console.log('showing ambiguities...');
 		},
 
 		remove: function(event) {
