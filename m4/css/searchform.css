@@ -7,3 +7,9 @@
 #searchForm input {
     width: 400px;
 }
+
+#searchForm .btn-success {
+    background-color: #8CC63F;
+    background-image: none;
+}
+

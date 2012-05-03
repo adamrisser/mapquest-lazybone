@@ -13,7 +13,15 @@ define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'css!navbarcss'], functi
          * Parent
          * @property
          */
-        el: 'body',
+        el: '#nav',
+        
+        /**
+         * Delegated events off of parent
+         * @type {Object}
+         */
+        events: {
+            'click li': 'setActive'
+        },
         
         /**
          * Underscore template
@@ -27,9 +35,6 @@ define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'css!navbarcss'], functi
          */
         initialize: function () {
             this.render();
-            
-            // init the tooltips
-            $('a[rel=tooltip]').tooltip();
         },
         
         /**
@@ -40,6 +45,16 @@ define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'css!navbarcss'], functi
         render: function () {
             this.$el.prepend(template());
             return this;
+        },
+        
+        /**
+         * Set active tab state
+         * @param {Object} evt event object
+         * @method
+         */
+        setActive: function (evt) {
+            this.$el.find('li').removeClass('active');
+            $(evt.currentTarget).addClass('active');
         }
         
     });
