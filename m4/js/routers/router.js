@@ -95,6 +95,7 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         directions: function (type) {
             console.log('directions');
             coreModel.set({ state: 'directions' });
+            this.load('directions', arguments);
         }
 
     });

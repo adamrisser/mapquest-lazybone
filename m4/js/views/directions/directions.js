@@ -2,7 +2,13 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
     function (_, Backbone, Input, template) {
 
     var Directions = Backbone.View.extend({
-
+        
+        /**
+         * Parent element
+         * @property
+         */
+        el: '#pane',
+        
         /**
          * Our events
          * @type {Object}
@@ -17,6 +23,7 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
          */
         initialize: function() {
             this.html = _.template(template);
+            this.render();
         },
 
         /**
@@ -70,6 +77,15 @@ define(['underscore', 'backbone', 'directions_input', 'text!/m4/html/directions.
                     map.addRoute(stops);
                 });
             });
+        },
+        
+        /**
+         * Clean up the view
+         * @method
+         */
+        dispose: function () {
+            this.$el.empty();
+            this.unbind();
         }
 
     });
