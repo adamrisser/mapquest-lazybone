@@ -82,9 +82,13 @@ define(['vibeutil'], function (util) {
             var self = this;
             
             MQA.withModule('shapes', function () {
-                var overlay = new MQA.PolygonOverlay(),
+                
+                var sc = new MQA.ShapeCollection(),
+                    overlay = new MQA.PolygonOverlay(),
                     style   = util.getVibeScoreParams(hood.properties.vibe_score),
                     shapePoints = util.flattenPoints(hood.geometry);
+                
+                sc.collectionName = 'vibeoverlay';
                 
                 overlay.setShapePoints(shapePoints);
                 
@@ -96,8 +100,10 @@ define(['vibeutil'], function (util) {
                     fillColorAlpha: style.opacity
                 });
                 
+                sc.add(overlay);
+                
                 // add to the map and best fit
-                self.map.mqa.addShape(overlay);
+                self.map.mqa.addShapeCollection(sc);
                 self.map.bestFit();
                 
             });
@@ -108,6 +114,7 @@ define(['vibeutil'], function (util) {
          * @method
          */
         dispose: function () {
+            this.map.mqa.removeShapeCollection('vibeoverlay');
             this.unbind();
         }
         

@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'css!directions_inputcss'], function (_, Backbone) {
+define(['underscore', 'backbone', 'less!directions_inputcss'], function (_, Backbone) {
 
 	var Input = Backbone.View.extend({
 

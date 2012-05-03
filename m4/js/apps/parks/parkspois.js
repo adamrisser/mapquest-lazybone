@@ -10,7 +10,7 @@ define(['vibemodel'], function (VibeModel) {
      * Small vibe icon
      * @type {MQA.Icon}
      */
-    var _icon = new MQA.Icon("http://149.174.182.23:5285/media/images/park_point.png", 22, 36),
+    var _icon = new MQA.Icon('http://content.mqcdn.com/mapbuilder-190/cdn/dotcom3/images/icons/collection/v2/themes/recreation/1.png', 30, 30),
     
     /**
      * Parkquest api url
@@ -91,29 +91,27 @@ define(['vibemodel'], function (VibeModel) {
          * @param  {Backbone.Collection} pois poi collection
          */
         render: function (pois) {
-            var self = this;
+            var self = this,
+                sc = new MQA.ShapeCollection();
             
-            MQA.withModule('shapes', function () {
-                var sc = new MQA.ShapeCollection();
-                    sc.collectionName = 'parkpois';
+            sc.collectionName = 'parkpois';
+            
+            // add pois to the shape collection
+            pois.each(function (place) {
+                var coords = place.get('geometry').coordinates,
+                    poi = new MQA.Poi(new MQA.LatLng(coords[1], coords[0]));
                 
-                // add pois to the shape collection
-                pois.each(function (place) {
-                    var coords = place.get('geometry').coordinates,
-                        poi = new MQA.Poi(new MQA.LatLng(coords[1], coords[0]));
-                    
-                    poi.setIconOffset({x: -11, y: -36});
-                    poi.setShadow(null);
-                    poi.setIcon(_icon);
-                    
-                    sc.add(poi);
-                });
+                poi.setIconOffset({x: -11, y: -36});
+                poi.setShadow(null);
+                poi.setIcon(_icon);
                 
-                // add to the map and best fit
-                self.map.mqa.addShapeCollection(sc);
-                
-                self.map.bestFit();
+                sc.add(poi);
             });
+            
+            // add to the map and best fit
+            self.map.mqa.addShapeCollection(sc);
+            
+            self.map.bestFit();
         },
         
         /**

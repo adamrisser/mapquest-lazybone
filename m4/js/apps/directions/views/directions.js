@@ -5,7 +5,7 @@ define(['underscore', 'backbone',
     'directions/models/location', 
     'directions/services/route', 
     'text!/m4/html/directions.html', 
-    'css!directionscss'], 
+    'less!directionscss'], 
     function (_, Backbone, Input, Query, LocationCollection, Location, route, template) {
 
     var Directions = Backbone.View.extend({
