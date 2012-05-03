@@ -40,7 +40,7 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * @method
          */
         explore: function () {
-            this.load('vibe', 'explore', arguments);
+            this.load('vibe', arguments);
         },
         
         /**
@@ -48,14 +48,14 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * @method
          */
         index: function () {
-            this.load('directory', 'index', arguments);
+            this.load('directory', arguments);
         },
         
         /**
          * Load an app
          * @method
          */
-        load: function (app, loader, varargs) {
+        load: function (app, varargs) {
             var self = this;
             
             console.info('loading ' + app);
@@ -77,7 +77,7 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * @method
          */
         search: function (type) {
-            this.load('searchresults', 'search', arguments);
+            this.load('searchresults', arguments);
         },
         
         /**
@@ -85,7 +85,7 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * @method
          */
         map: function (type) {
-            this.load('mapresult', 'map', arguments);
+            this.load('mapresult', arguments);
         },
         
         /**
