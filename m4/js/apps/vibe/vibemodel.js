@@ -37,6 +37,23 @@ define(['map'], function (map) {
              */
             pois: new PoiCollection()
             
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            this.off();
+            
+            var pois = this.get('pois');
+            
+            pois.each(function (poi) {
+                poi.off();
+            });
+            
+            pois.off();
+            this.destroy();
         }
         
     });

@@ -120,7 +120,8 @@ define(['vibemodel'], function (VibeModel) {
         dispose: function () {
             this.map.mqa.removeShapeCollection('parkpois');
             this.model.get('pois').unbind('reset', self.render);
-            this.unbind();
+            this.off();
+            this.undelegateEvents();
         }
         
     });

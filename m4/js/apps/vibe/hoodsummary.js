@@ -40,8 +40,8 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'less!hoodsummarycss', 'twi
         initialize: function (model) {
             _.bindAll(this, 'renderSummary', 'renderTopPois');
             
-            model.bind('change:hood', this.renderSummary);
-            model.get('pois').bind('reset', this.renderTopPois);
+            model.on('change:hood', this.renderSummary);
+            model.get('pois').on('reset', this.renderTopPois);
         },
         
         /**
@@ -53,8 +53,6 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'less!hoodsummarycss', 'twi
         renderSummary: function (core, hood) {
             this.$el.empty()
                 .append(this.summaryTmpl(hood.properties));
-            
-            //$('i').popover();
             
             return this;
         },
@@ -81,7 +79,8 @@ define(['tmpl!hoodsummaryhtml', 'tmpl!hoodpoishtml', 'less!hoodsummarycss', 'twi
          * @method
          */
         dispose: function () {
-            this.unbind();
+            this.off();
+            this.undelegateEvents();
         }
         
     });

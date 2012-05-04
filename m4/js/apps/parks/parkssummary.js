@@ -79,7 +79,8 @@ define(['tmpl!parkssummaryhtml', 'tmpl!parkspoishtml'], function (summaryTmpl, p
          * @method
          */
         dispose: function () {
-            this.unbind();
+            this.off();
+            this.undelegateEvents();
         }
         
     });

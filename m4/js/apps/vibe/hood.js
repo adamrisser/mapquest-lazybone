@@ -24,8 +24,8 @@ define(['vibeutil'], function (util) {
             
             _.bindAll(self, 'render', 'save', 'handlePlaceId');
             
-            model.bind('change:hood', this.render);
-            model.bind('change:placeId', this.handlePlaceId);
+            model.on('change:hood', this.render);
+            model.on('change:placeId', this.handlePlaceId);
         },
         
         /**
@@ -115,7 +115,7 @@ define(['vibeutil'], function (util) {
          */
         dispose: function () {
             this.map.mqa.removeShapeCollection('vibeoverlay');
-            this.unbind();
+            this.off();
         }
         
     });

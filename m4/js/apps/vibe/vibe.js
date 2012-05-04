@@ -52,17 +52,17 @@ define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], funct
         dispose: function () {
             var self = this;
             
-            self.model = null;
-            
+            self.model.dispose();
             self.hood.dispose();
             self.pois.dispose();
             self.summary.dispose();
             
+            self.model = null;
             self.hood = null;
             self.pois = null;
             self.summary = null;
             
-            self.unbind();
+            self.off();
             self.$el.empty();
         }
         

@@ -67,7 +67,8 @@ define(['vibeutil'], function (util) {
          */
         dispose: function () {
             this.map.mqa.removeShapeCollection('parksoverlay');
-            this.unbind();
+            this.off();
+            this.undelegateEvents();
         }
         
     });

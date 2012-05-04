@@ -49,12 +49,12 @@ define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'
         dispose: function () {
             var self = this;
             
-            self.model = null;
-            
+            self.model.dispose();
             self.pois.dispose();
             self.geom.dispose();
             self.summary.dispose();
             
+            self.model = null;
             self.pois = null;
             self.geom = null;
             self.summary = null;

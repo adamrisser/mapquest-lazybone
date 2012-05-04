@@ -113,16 +113,14 @@ define(['vibemodel'], function (VibeModel) {
         },
         
         /**
-         * Clean up the view
+         * Clean up the view. The controller will clean up the model
          * @method
          */
         dispose: function () {
             this.map.mqa.removeShapeCollection('vibepois');
-            
-            this.model.get('pois').unbind('reset', this.render);
-            this.model.bind('change:placeId', this.handlePlaceId);
-            
-            this.unbind();
+            this.model.get('pois').unbind('reset', self.render);
+            this.off();
+            this.undelegateEvents();
         }
         
     });
