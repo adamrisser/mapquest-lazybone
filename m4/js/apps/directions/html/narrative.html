@@ -1,0 +1,14 @@
+<ol>
+<% _.each(legs, function(leg) { %>
+	
+	<% _.each(leg.maneuvers, function(maneuver) { %>
+
+		<li>
+			<img src="<%= maneuver.iconUrl %>"/>
+			<div class="narrative"><%= maneuver.narrative %></div>
+		</li>
+	
+	<%})%>
+
+<%})%>
+</ol>

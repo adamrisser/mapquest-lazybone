@@ -3,7 +3,7 @@
  * The tilemap gets loaded under window.MQA  
  * @fileoverview
  */
-define(['resizer', 'location', 'less!mapcss', 'http://www.mapquestapi.com/sdk/js/v7.0.0/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'], 
+define(['resizer', 'location', 'less!mapcss', 'http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'], 
     function (resizer, LocationModel) {
     
     /**

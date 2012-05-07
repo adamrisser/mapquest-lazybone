@@ -1,29 +1,30 @@
 define(['underscore', 'backbone', 
-    'directions/views/input', 
     'directions/models/query', 
     'directions/models/locationcollection',
-    'directions/models/location', 
-    'directions/services/route', 
-    'text!/m4/html/directions.html', 
+    'directions/models/location',
+    'directions/views/form', 
     'less!directionscss'], 
-    function (_, Backbone, Input, Query, LocationCollection, Location, route, template) {
+    function (_, Backbone, Query, LocationCollection, Location, Form) {
 
     var Directions = Backbone.View.extend({
+
+        /**
+         * Id of our element.
+         * @type {String}
+         */
+        id: 'directions',
         
         /**
-         * Parent element
-         * @property
+         * Backbone tagname attribute.
+         * @type {String}
          */
-        el: '#pane',
-        
+        tagName: 'div',
+
         /**
          * Our events
          * @type {Object}
          */ 
         events: {
-            "click #addStop": "addStop",
-            "click .routeType": "setRouteType",
-            "click #getDirections": "getDirections"
         },
 
         /**
@@ -31,8 +32,6 @@ define(['underscore', 'backbone',
          * @return {void} 
          */
         initialize: function() {
-            this.model = new Query({'stops': new LocationCollection});
-            this.html = _.template(template);
             this.render();
         },
 
@@ -41,64 +40,13 @@ define(['underscore', 'backbone',
          * @return {Directions} *this*
          */
         render: function() {
-            var a = new Input(),
-                b = new Input(),
-                list;
+            var query = new Query(),
+                form = new Form({model: query});
 
-            this.inputs = [];
-            this.inputs.push(a);
-            this.inputs.push(b);
-
-            this.el.innerHTML = this.html();
-            list = this.$el.find('ol');
-
-            _.each(this.inputs, function(input, idx) {
-                list.append(input.render().el);
-            });
+            this.$el.append(form.render().el);
+            $('#pane').append(this.el);
 
             return this;
-        },
-
-        /**
-         * Run our route
-         * @return {Directions} *this*
-         */
-        getDirections: function(event) {
-            var self = this,
-                map = m4.views.map.mqa,
-                bounds = map.getBounds(),
-                promises = [],
-                stops = [],
-                result;
-
-            event.preventDefault();
-
-            _.each(this.inputs, function(input) {
-                promises.push(input.resolve());
-            });
-            
-            $.when(promises).done(function() { 
-                MQA.withModule('directions', function() {
-                    _.each(self.inputs, function(input) {
-                        result = input.getResult()[0];
-                        stops.push({ latLng: { lat: result.lat, lng: result.lon }});
-                    });
-
-                    map.addRoute(stops);
-                });
-            });
-        },
-
-        /**
-         * Adds another stop to the route.
-         * @param {Object} event object
-         */
-        addStop: function(event) {
-
-        },
-
-        setRouteType: function(event) {
-
         },
         
         /**

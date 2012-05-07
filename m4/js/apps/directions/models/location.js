@@ -1,6 +1,6 @@
 define(['backbone'], function (Backbone) {
 
-	Backbone.View.extend({
+	var Stop = Backbone.Model.extend({
 
 		default: {
 
@@ -16,10 +16,12 @@ define(['backbone'], function (Backbone) {
 			 * The geocoded/search results
 			 * @type {Array}
 			 */
-			stops: []
+			results: null
 
 		}
 
 	});
+
+	return Stop;
 
 });
