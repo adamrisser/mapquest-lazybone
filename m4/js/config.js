@@ -69,7 +69,8 @@ require.config({
         'navbar'        : 'js/apps/core/views/navbar',
         'mapresult'     : 'js/apps/core/views/mapresult',
         'searchresults' : 'js/apps/core/views/searchresults',
-        'coremodel'     : 'js/model/core',
+        'coremodel'     : 'js/apps/core/models/core',
+        
         'location'      : 'js/model/location',
         'mapstate'      : 'js/model/mapstate',
         'route'         : 'js/model/route',
