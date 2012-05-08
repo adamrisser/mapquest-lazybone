@@ -25,10 +25,6 @@ require.config({
         // bootstrap files
         'bootstrap' : 'js/bootstrap',
         
-        // view -> map
-        'map'        : 'js/views/map/map',
-        'poimanager' : 'js/views/map/poimanager', 
-
         // router
         'router'    : 'js/routers/router',
         
@@ -64,18 +60,23 @@ require.config({
         'directionscss'         : 'css/directions/directions',
         'directions_inputcss'   : 'css/directions/input',
         
+        //TODO: shorten and remove, add to define statements
         // apps -> core
         'core'          : 'js/apps/core/views/core',
-        'directory'     : 'js/views/directory',
-        'pane'          : 'js/views/pane', 
-        'searchform'    : 'js/views/searchform',
-        'navbar'        : 'js/views/navbar',
-        'mapresult'     : 'js/views/mapresult',
-        'searchresults' : 'js/views/searchresults',
+        'directory'     : 'js/apps/core/views/directory',
+        'pane'          : 'js/apps/core/views/pane', 
+        'searchform'    : 'js/apps/core/views/searchform',
+        'navbar'        : 'js/apps/core/views/navbar',
+        'mapresult'     : 'js/apps/core/views/mapresult',
+        'searchresults' : 'js/apps/core/views/searchresults',
         'coremodel'     : 'js/model/core',
         'location'      : 'js/model/location',
         'mapstate'      : 'js/model/mapstate',
         'route'         : 'js/model/route',
+        
+        // apps -> core -> map
+        'map'        : 'js/apps/core/views/map/map',
+        'poimanager' : 'js/apps/core/views/map/poimanager',
         
         // apps - vibe
         'vibe'            : 'js/apps/vibe/vibe',
