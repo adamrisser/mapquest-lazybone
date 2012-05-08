@@ -34,14 +34,14 @@ define([
         
         /**
          * Initialize this hood.
-         * @param {Array}        routeFragments route fragments that initialized the app
-         * @param {BackboneView} coreApp        core winston application
+         * @param {Array}         frags route fragments that initialized the app
+         * @param {Backbone.View} core  core winston application
          * @constructor        
          */
-        initialize: function (routeFragments, coreApp) {
+        initialize: function (frags, core) {
             var self = this,
                 model = self.model = new VibeModel(),
-                map = coreApp.map;
+                map = core.map;
             
             // init the vibe views
             self.summary = new HoodSummary(model);
@@ -49,7 +49,7 @@ define([
             self.pois    = new VibePois(model, map);
             
             // this basically starts the show
-            model.set('placeId', routeFragments[0]);
+            model.set('placeId', frags[0]);
         },
         
         /**
