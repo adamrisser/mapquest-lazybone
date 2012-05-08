@@ -19,7 +19,7 @@ define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'less!navbarcss'], funct
          * @type {Object}
          */
         events: {
-            'click li': 'setActive'
+            'click a': 'setActive'
         },
         
         /**
