@@ -2,7 +2,7 @@
  * Vibe 'neighborhood of the day' app
  * @fileoverview
  */
-define(['map'], function (map) {
+define([], function () {
     
     /**
      * Collection of pois from the vibe api

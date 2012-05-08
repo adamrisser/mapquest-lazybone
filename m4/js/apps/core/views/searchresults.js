@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['coremodel', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'], function (coreModel, template, locationTemplate) {
+define(['tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'], function (template, locationTemplate) {
     
     var SearchResultsList = Backbone.View.extend({
         
