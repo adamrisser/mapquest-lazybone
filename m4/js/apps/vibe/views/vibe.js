@@ -6,7 +6,12 @@
  * vibe model for the other vibe views to bind on.
  * @fileOverview
  */
-define(['vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (VibePois, VibeHood, HoodSummary, VibeModel) {
+define([
+    'vibe/views/pois', 
+    'vibe/views/geom', 
+    'vibe/views/summary', 
+    'vibe/models/vibe'
+], function (VibePois, VibeHood, HoodSummary, VibeModel) {
     
     /**
      * An individual neighborhood object.

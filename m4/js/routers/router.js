@@ -83,7 +83,7 @@ define(['backbone'], function (Backbone) {
          * @method
          */
         vibe: function () {
-            this.load('vibe', arguments);
+            this.load('vibe/views/vibe', arguments);
         },
         
         /**

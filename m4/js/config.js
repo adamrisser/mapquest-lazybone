@@ -74,15 +74,16 @@ require.config({
         'directions_inputcss'   : 'css/directions/input',
         
         // apps - vibe
-        'vibe'            : 'js/apps/vibe/vibe',
-        'hood'            : 'js/apps/vibe/hood',
-        'vibepois'        : 'js/apps/vibe/vibepois',
-        'vibeutil'        : 'js/apps/vibe/vibeutil',
-        'vibemodel'       : 'js/apps/vibe/vibemodel',
-        'hoodsummary'     : 'js/apps/vibe/hoodsummary',
-        'hoodsummaryhtml' : 'html/vibe/hoodsummary',
-        'hoodpoishtml'    : 'html/vibe/hoodpois',
-        'hoodsummarycss'  : 'css/vibe/hoodsummary',
+        'vibe'            : 'js/apps/vibe/',
+        //'vibe'            : 'js/apps/vibe/vibe',
+        //'hood'            : 'js/apps/vibe/hood',
+        //'vibepois'        : 'js/apps/vibe/vibepois',
+        //'vibeutil'        : 'js/apps/vibe/vibeutil',
+        //'vibemodel'       : 'js/apps/vibe/vibemodel',
+        //'hoodsummary'     : 'js/apps/vibe/hoodsummary',
+        //'hoodsummaryhtml' : 'html/vibe/hoodsummary',
+        //'hoodpoishtml'    : 'html/vibe/hoodpois',
+        //'hoodsummarycss'  : 'css/vibe/hoodsummary',
         
         // apps - parks
         'parks' : 'js/apps/parks/'
