@@ -52,8 +52,14 @@ define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'less!navbarcss'], funct
          * @method
          */
         setActive: function (evt) {
-            this.$el.find('li').removeClass('active');
-            $(evt.currentTarget).addClass('active');
+            // this.$el.find('li').removeClass('active');
+            // $(evt.currentTarget).addClass('active');
+
+            var tgt = $(evt.target).parent('li'),
+                tgtPos = (tgt.offset().left + tgt.width()/2) - 5,
+                curr = this.$el.find('.selected');
+
+             $("ul .icon").animate({"left": tgtPos + "px"}, "medium", function() { curr.removeClass('selected'); tgt.addClass('selected'); $('ul.subdir').slideDown('slow'); });            
         }
         
     });
