@@ -5,7 +5,7 @@ define(['underscore', 'backbone',
     'directions/models/location',
     'directions/services/route',
     'text!directions/html/form.html', 
-    'less!directionscss'], 
+    'less!directions/css/directions'], 
     function (_, Backbone, Input, Narrative, LocationCollection, Location, route, template) {
 
     var Form = Backbone.View.extend({

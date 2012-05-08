@@ -1,7 +1,7 @@
 define(['underscore', 
     'backbone', 
     'directions/services/route', 
-    'less!directions_inputcss'], function (_, Backbone, route) {
+    'less!directions/css/input'], function (_, Backbone, route) {
 
     var Input = Backbone.View.extend({
 
