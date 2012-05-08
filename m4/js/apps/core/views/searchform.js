@@ -6,7 +6,11 @@
  * placed into the model.
  * @description
  */
-define(['location', 'tmpl!searchformhtml', 'less!searchformcss'], function (Location, template) {
+define([
+    'location', 
+    'tmpl!core/html/searchform', 
+    'less!core/css/searchform'
+], function (Location, template) {
     
     /**
      * Search controller url

@@ -6,9 +6,9 @@
  * @description
  */
 define([
-    'tmpl!mapresulthtml', 
-    'tmpl!locationhtml', 
-    'less!resultscss'
+    'tmpl!core/html/mapresult',
+    'tmpl!core/html/location', 
+    'less!core/css/results'
 ], function (template, locationTemplate) {
     
     var MapResults = Backbone.View.extend({

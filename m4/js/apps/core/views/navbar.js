@@ -4,7 +4,12 @@
  * 
  * @description
  */
-define(['tmpl!navbarhtml', 'twitter', 'css!twittercss', 'less!navbarcss'], function (template) {
+define([
+    'tmpl!core/html/navbar',
+    'twitter',
+    'css!twittercss',
+    'less!core/css/navbar'
+], function (template) {
     
     var NavBar = Backbone.View.extend({
         

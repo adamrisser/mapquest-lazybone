@@ -36,56 +36,23 @@ require.config({
         'twitter'   : 'js/ext/bootstrap/js/bootstrap',
         'twittercss': 'js/ext/bootstrap/css/bootstrap',
         
-        // html
-        'searchresultshtml' : 'html/searchresults',
-        'mapresulthtml'  : 'html/mapresult', 
-        'searchformhtml' : 'html/searchform',
-        'directionshtml' : 'html/directions',
-        'directoryhtml'  : 'html/directory',
-        'galleryhtml'    : 'html/gallery',
-        'resulthtml'     : 'html/result',
-        'locationhtml'   : 'html/location',
-        'navbarhtml'     : 'html/navbar',
-        
-        // css
-        'panecss'       : 'css/pane',
-        'mapcss'        : 'css/map',
-        'searchformcss' : 'css/searchform',
-        'resultscss'    : 'css/results',
-        'gallerycss'    : 'css/gallery',
-        'navbarcss'     : 'css/navbar',
-        
-        //TODO: shorten and remove, add to define statements
-        // apps -> core
-        'core'          : 'js/apps/core',
-        
         //TODO: move into their own applications
         'mapresult'     : 'js/apps/core/views/mapresult',
         'searchresults' : 'js/apps/core/views/searchresults',
         
         //TODO: move into core/models?
-        'location'      : 'js/model/location',
-        'mapstate'      : 'js/model/mapstate',
-        'route'         : 'js/model/route',
+        'location' : 'js/model/location',
+        'mapstate' : 'js/model/mapstate',
+        'route'    : 'js/model/route',
         
         // apps -> directions
         'directions'            : 'js/apps/directions',
         'directionscss'         : 'css/directions/directions',
         'directions_inputcss'   : 'css/directions/input',
         
-        // apps - vibe
-        'vibe'            : 'js/apps/vibe/',
-        //'vibe'            : 'js/apps/vibe/vibe',
-        //'hood'            : 'js/apps/vibe/hood',
-        //'vibepois'        : 'js/apps/vibe/vibepois',
-        //'vibeutil'        : 'js/apps/vibe/vibeutil',
-        //'vibemodel'       : 'js/apps/vibe/vibemodel',
-        //'hoodsummary'     : 'js/apps/vibe/hoodsummary',
-        //'hoodsummaryhtml' : 'html/vibe/hoodsummary',
-        //'hoodpoishtml'    : 'html/vibe/hoodpois',
-        //'hoodsummarycss'  : 'css/vibe/hoodsummary',
-        
-        // apps - parks
+        // app shortcuts
+        'core'  : 'js/apps/core/',
+        'vibe'  : 'js/apps/vibe/',
         'parks' : 'js/apps/parks/'
     }
     
