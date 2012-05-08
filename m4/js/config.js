@@ -36,10 +36,6 @@ require.config({
         'twitter'   : 'js/ext/bootstrap/js/bootstrap',
         'twittercss': 'js/ext/bootstrap/css/bootstrap',
         
-        //TODO: move into their own applications
-        'mapresult'     : 'js/apps/core/views/mapresult',
-        //'searchresults' : 'js/apps/core/views/searchresults',
-        
         //TODO: move into core/models?
         'location' : 'js/model/location',
         'mapstate' : 'js/model/mapstate',
@@ -54,7 +50,9 @@ require.config({
         'core'  : 'js/apps/core/',
         'vibe'  : 'js/apps/vibe/',
         'parks' : 'js/apps/parks/',
-        'searchresults' : 'js/apps/searchresults/',
+        'mapresult' : 'js/apps/mapresult/',
+        'searchresults' : 'js/apps/searchresults/'
+        
     }
     
 });

@@ -6,9 +6,9 @@
  * @description
  */
 define([
-    'tmpl!core/html/mapresult',
+    'tmpl!mapresult/html/result',
     'tmpl!core/html/location', 
-    'less!core/css/results'
+    'less!searchresults/css/results'
 ], function (template, locationTemplate) {
     
     var MapResults = Backbone.View.extend({
@@ -34,26 +34,41 @@ define([
         initialize: function (frags, core) {
             var self = this;
             
-            _.bindAll(self, 'handleLoc', 'render');
+            self.map = core.map;
+            self.sc = new MQA.ShapeCollection();
+            self.sc.collectionName = 'mappoi';
             
+            _.bindAll(self, 'handleLoc', 'render');
             core.model.on('change:location', self.render);
             
-            self.map = core.map;
+            // render any results that were inserted before the change:location
+            // event was bound onto
+            self.render(core.model)
         },
         
         /**
          * Render the view to the page
-         * @param  {Backbone.Model} core  core model
+         * @param  {Backbone.Model} model core model
          * @return {Backbone.View}  this
          * @method
          */
-        render: function (core) {
-            var loc = core.get('location'),
-                html = this.handleLoc(loc);
+        render: function (model) {
+            var self = this;
             
-            this.$el.empty().append(html);
-
-            return this;
+            // only render map results
+            if (model.get('state') === 'map') {
+                var loc = model.get('location'),
+                    html = self.handleLoc(loc);
+                
+                self.$el.empty().append(html);
+                
+                //TODO: move this logic into own view
+                // add to the map and best fit
+                self.map.mqa.addShapeCollection(self.sc);
+                self.map.bestFit();
+            }
+            
+            return self;
         },
         
         /**
@@ -67,7 +82,7 @@ define([
             
             //TODO: probably need a POI manager, this is out of place here
             // add POI
-            this.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
+            this.sc.add(new MQA.Poi(adr.latLng)); 
                     
             // create the location object html
             return locationTemplate({
@@ -81,6 +96,10 @@ define([
          * @method
          */
         dispose: function () {
+            var mqa = this.map.mqa;
+            mqa.getShapeCollection('mappoi').removeAll();
+            mqa.removeShapeCollection('mappoi');
+            
             this.$el.empty();
             this.off();
         }

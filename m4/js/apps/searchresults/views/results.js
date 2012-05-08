@@ -68,7 +68,7 @@ define([
                 
                 //TODO: move this logic into own view
                 // add to the map and best fit
-                self.map.mqa.addShapeCollection(sc);
+                self.map.mqa.addShapeCollection(self.sc);
                 self.map.bestFit();
             }
             
@@ -100,6 +100,10 @@ define([
          * @method
          */
         dispose: function () {
+            var mqa = this.map.mqa;
+            mqa.getShapeCollection('searchpois').removeAll();
+            mqa.removeShapeCollection('searchpois');
+            
             this.$el.empty();
             this.off();
         }

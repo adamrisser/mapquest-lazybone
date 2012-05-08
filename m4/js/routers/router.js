@@ -107,7 +107,7 @@ define(['backbone'], function (Backbone) {
          * @method
          */
         map: function () {
-            this.load('mapresult', arguments);
+            this.load('mapresult/views/result', arguments);
         },
         
         /**
