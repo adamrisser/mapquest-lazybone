@@ -75,7 +75,7 @@ define(['backbone'], function (Backbone) {
          * @method
          */
         index: function () {
-            this.load('directory', arguments);
+            
         },
         
         /**

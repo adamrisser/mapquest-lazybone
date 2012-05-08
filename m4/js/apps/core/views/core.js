@@ -2,8 +2,15 @@
  * The main application which is 'winston lite' 
  * @fileOverview
  */
-define(['backbone', 'router', 'pane', 'map', 'searchform', 'navbar', 'coremodel'], 
-    function (Backbone, Router, Pane, Map, SearchForm, NavBar, CoreModel) {
+define([
+    'backbone', 
+    'router', 
+    'core/views/pane', 
+    'core/views/map/map', 
+    'core/views/searchform', 
+    'core/views/navbar', 
+    'core/models/core'
+], function (Backbone, Router, Pane, Map, SearchForm, NavBar, CoreModel) {
     
     "use strict";
     

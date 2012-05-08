@@ -6,7 +6,7 @@
  * vibe model for the other vibe views to bind on.
  * @fileOverview
  */
-define(['router', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (router, VibePois, VibeHood, HoodSummary, VibeModel) {
+define(['vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (VibePois, VibeHood, HoodSummary, VibeModel) {
     
     /**
      * An individual neighborhood object.

@@ -55,29 +55,23 @@ require.config({
         'gallerycss'    : 'css/gallery',
         'navbarcss'     : 'css/navbar',
         
-        // css -> directions
-        'directions'            : 'js/apps/directions',
-        'directionscss'         : 'css/directions/directions',
-        'directions_inputcss'   : 'css/directions/input',
-        
         //TODO: shorten and remove, add to define statements
         // apps -> core
-        'core'          : 'js/apps/core/views/core',
-        'directory'     : 'js/apps/core/views/directory',
-        'pane'          : 'js/apps/core/views/pane', 
-        'searchform'    : 'js/apps/core/views/searchform',
-        'navbar'        : 'js/apps/core/views/navbar',
+        'core'          : 'js/apps/core',
+        
+        //TODO: move into their own applications
         'mapresult'     : 'js/apps/core/views/mapresult',
         'searchresults' : 'js/apps/core/views/searchresults',
-        'coremodel'     : 'js/apps/core/models/core',
         
+        //TODO: move into core/models?
         'location'      : 'js/model/location',
         'mapstate'      : 'js/model/mapstate',
         'route'         : 'js/model/route',
         
-        // apps -> core -> map
-        'map'        : 'js/apps/core/views/map/map',
-        'poimanager' : 'js/apps/core/views/map/poimanager',
+        // apps -> directions
+        'directions'            : 'js/apps/directions',
+        'directionscss'         : 'css/directions/directions',
+        'directions_inputcss'   : 'css/directions/input',
         
         // apps - vibe
         'vibe'            : 'js/apps/vibe/vibe',
