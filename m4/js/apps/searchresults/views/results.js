@@ -5,10 +5,11 @@
  * have been added to the model.
  * @description
  */
+//TODO: poi code should be stripped from this view and moved elswhere
 define([
-    'tmpl!core/html/searchresults', 
+    'tmpl!searchresults/html/results', 
     'tmpl!core/html/location', 
-    'less!core/css/results'
+    'less!searchresults/css/results'
 ], function (template, locationTemplate) {
     
     var SearchResultsList = Backbone.View.extend({
@@ -34,28 +35,44 @@ define([
         initialize: function (frags, core) {
             var self = this;
             
-            _.bindAll(self, 'handleLoc', 'render');
+            self.map = core.map;
             
+            self.sc = new MQA.ShapeCollection();
+            self.sc.collectionName = 'searchpois';
+            
+            _.bindAll(self, 'handleLoc', 'render');
             core.model.on('change:location', self.render);
             
-            self.map = core.map;
+            // render any results that were inserted before the change:location
+            // event was bound onto
+            self.render(core.model)
         },
         
         /**
          * Render the view to the page
-         * @param {Backbone.Model} core  core model
+         * @param {Backbone.Model} model  core model
          * @method
          */
-        render: function (core) {
+        render: function (model) {
+            var self = this;
             
-            var html = this.template({
-                locs: core.get('location').get('unresolvedLocations'), 
-                locTemplate: this.handleLoc
-            });
+            // only render search results
+            if (model.get('state') === 'search') {
+                    
+                var html = self.template({
+                    locs: model.get('location').get('unresolvedLocations'), 
+                    locTemplate: self.handleLoc
+                });
+                
+                self.$el.empty().append(html);
+                
+                //TODO: move this logic into own view
+                // add to the map and best fit
+                self.map.mqa.addShapeCollection(sc);
+                self.map.bestFit();
+            }
             
-            this.$el.append(html);
-            
-            return this;
+            return self;
         },
         
         /**
@@ -69,7 +86,7 @@ define([
             
             //TODO: probably need a POI manager, this is out of place here
             // add POI
-            this.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
+            this.sc.add(new MQA.Poi(adr.latLng));
                     
             // create the location object html
             return locationTemplate({
@@ -84,7 +101,7 @@ define([
          */
         dispose: function () {
             this.$el.empty();
-            this.unbind();
+            this.off();
         }
         
     });

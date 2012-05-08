@@ -38,7 +38,7 @@ require.config({
         
         //TODO: move into their own applications
         'mapresult'     : 'js/apps/core/views/mapresult',
-        'searchresults' : 'js/apps/core/views/searchresults',
+        //'searchresults' : 'js/apps/core/views/searchresults',
         
         //TODO: move into core/models?
         'location' : 'js/model/location',
@@ -53,7 +53,8 @@ require.config({
         // app shortcuts
         'core'  : 'js/apps/core/',
         'vibe'  : 'js/apps/vibe/',
-        'parks' : 'js/apps/parks/'
+        'parks' : 'js/apps/parks/',
+        'searchresults' : 'js/apps/searchresults/',
     }
     
 });

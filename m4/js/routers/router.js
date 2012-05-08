@@ -99,7 +99,7 @@ define(['backbone'], function (Backbone) {
          * @method
          */
         search: function () {
-            this.load('searchresults', arguments);
+            this.load('searchresults/views/results', arguments);
         },
         
         /**
