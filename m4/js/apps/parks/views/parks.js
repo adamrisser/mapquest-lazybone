@@ -1,12 +1,16 @@
 /**
- * Vibe app controll
+ * Parkquest App Controller
  * 
- * Central brain of the vibe app. Instantiates the vibe model and makes
- * the calls to the vibe api.  Sets information from the responses onto the
- * vibe model for the other vibe views to bind on.
+ * Central brain of the parkquest app. Instantiates the parkquest model and 
+ * views. Responsible for cleaning up everything on dispose.
  * @description
  */
-define(['router', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'], function (router, ParksModel, ParksPois, ParksGeom, ParksSummary) {
+define([
+    'parks/models/parks', 
+    'parks/views/pois', 
+    'parks/views/geom', 
+    'parks/views/summary'
+], function (ParksModel, ParksPois, ParksGeom, ParksSummary) {
     
     /**
      * Parkquest controller
@@ -29,14 +33,14 @@ define(['router', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'], funct
         
         /**
          * Initialize this hood.
-         * @param {Array}        frags   route fragments that initialized the app
-         * @param {BackboneView} coreApp core  winston application
+         * @param {Array}        frags route fragments that initialized the app
+         * @param {BackboneView} core  core  winston application
          * @constructor        
          */
-        initialize: function (frags, coreApp) {
+        initialize: function (frags, core) {
             var self = this, 
                 model = self.model = new ParksModel(),
-                map = coreApp.map;
+                map = core.map;
             
             self.pois = new ParksPois(model, map);
             self.geom = new ParksGeom(model, map);

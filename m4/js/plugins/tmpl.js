@@ -9,7 +9,7 @@ define(['jquery', 'underscore'], function ($, _) {
         // find if this is a path set thru require.conf.path
         // require will try and prepend .js to the file name (and 
         // there is nothing you can do about it) so blow it away
-        url = require.toUrl(url).replace(/\.js$/, '');
+        url = require.toUrl(url).replace(/\.js$/, '.html');
         
         $.ajax({
             url: url,

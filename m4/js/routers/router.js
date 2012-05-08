@@ -91,7 +91,7 @@ define(['backbone'], function (Backbone) {
          * @method
          */
         parks: function () {
-            this.load('parks', arguments);
+            this.load('parks/views/parks', arguments);
         },
         
         /**

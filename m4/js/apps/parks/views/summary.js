@@ -4,7 +4,10 @@
  * The summary of a neighborhood that lives in the summary pane.
  * @description
  */
-define(['tmpl!parkssummaryhtml', 'tmpl!parkspoishtml'], function (summaryTmpl, poisTmpl) {
+define([
+    'tmpl!parks/html/summary', 
+    'tmpl!parks/html/pois'
+], function (summaryTmpl, poisTmpl) {
     
     var ParksSummary = Backbone.View.extend({
         

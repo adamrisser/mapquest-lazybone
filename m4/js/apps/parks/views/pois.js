@@ -4,7 +4,7 @@
  * A view to handle placing vibe pois on the map.
  * @description
  */
-define(['vibemodel'], function (VibeModel) {
+define([], function () {
     
     /**
      * Small vibe icon

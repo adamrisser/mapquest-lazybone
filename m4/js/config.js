@@ -37,15 +37,15 @@ require.config({
         'twittercss': 'js/ext/bootstrap/css/bootstrap',
         
         // html
-        'searchresultshtml' : 'html/searchresults.html',
-        'mapresulthtml'  : 'html/mapresult.html', 
-        'searchformhtml' : 'html/searchform.html',
-        'directionshtml' : 'html/directions.html',
-        'directoryhtml'  : 'html/directory.html',
-        'galleryhtml'    : 'html/gallery.html',
-        'resulthtml'     : 'html/result.html',
-        'locationhtml'   : 'html/location.html',
-        'navbarhtml'     : 'html/navbar.html',
+        'searchresultshtml' : 'html/searchresults',
+        'mapresulthtml'  : 'html/mapresult', 
+        'searchformhtml' : 'html/searchform',
+        'directionshtml' : 'html/directions',
+        'directoryhtml'  : 'html/directory',
+        'galleryhtml'    : 'html/gallery',
+        'resulthtml'     : 'html/result',
+        'locationhtml'   : 'html/location',
+        'navbarhtml'     : 'html/navbar',
         
         // css
         'panecss'       : 'css/pane',
@@ -80,20 +80,12 @@ require.config({
         'vibeutil'        : 'js/apps/vibe/vibeutil',
         'vibemodel'       : 'js/apps/vibe/vibemodel',
         'hoodsummary'     : 'js/apps/vibe/hoodsummary',
-        'hoodsummaryhtml' : 'html/vibe/hoodsummary.html',
-        'hoodpoishtml'    : 'html/vibe/hoodpois.html',
+        'hoodsummaryhtml' : 'html/vibe/hoodsummary',
+        'hoodpoishtml'    : 'html/vibe/hoodpois',
         'hoodsummarycss'  : 'css/vibe/hoodsummary',
         
         // apps - parks
-        'parks'           : 'js/apps/parks/parks',
-        'parksmodel'      : 'js/apps/parks/parksmodel',
-        'parkspois'       : 'js/apps/parks/parkspois',
-        'parksgeom'       : 'js/apps/parks/parksgeom',
-        'parkssummary'    : 'js/apps/parks/parkssummary',
-        'parkssummaryhtml' : 'html/parks/parkssummary.html',
-        'parkspoishtml'    : 'html/parks/parkspois.html',
-        'parksummarycss'  : 'css/vibe/parksummary'
-        
+        'parks' : 'js/apps/parks/'
     }
     
 });
