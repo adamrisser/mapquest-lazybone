@@ -66,10 +66,14 @@ require.config({
         'twittercss': 'js/ext/bootstrap/css/bootstrap',
         
         /*
-         * Winston Lite
+         * Applications can be thought of as modes of the site or large pieces 
+         * of functionality.
+         * 
+         * The core app is the main application for winston lite. It is always 
+         * active or "on".  When the router hears a change to the URL and
+         * instantiates a new app, that new app gets a references to core. This
+         * is how it is able to interface with the app as a whole.
          */
-        
-        // App shortcuts
         'core'  : 'apps/core/',
         'vibe'  : 'apps/vibe/',
         'parks' : 'apps/parks/',
@@ -77,12 +81,22 @@ require.config({
         'mapresult'  : 'apps/mapresult/',
         'searchresults' : 'apps/searchresults/',
         
-        // Router
+        /*
+         * Backbone routers are used for routing the apps URL's when using hash tags(#).
+         * Route are mapped to a single function, which then acts upon the app.
+         * 
+         * The router intepret anything after '#' tag in the url. All links in the 
+         * application should target '/#/action'.
+         * 
+         * The router listens for URL changes. When it "hears" a change, it 
+         * finds the corresponding application and instantiates it.
+         * 
+         * (http://documentcloud.github.com/backbone/#Router)
+         */
         'router' : 'js/routers/router',
         
         // Utils 
         'resizer' : 'js/util/resizer',
-        'html'    : 'js/util/html',
         
         //TODO: move into core/models?
         'location' : 'js/model/location',
