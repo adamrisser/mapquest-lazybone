@@ -1,12 +1,12 @@
 /**
- * Vibe app controll
+ * Vibe app control
  * 
  * Central brain of the vibe app. Instantiates the vibe model and makes
  * the calls to the vibe api.  Sets information from the responses onto the
  * vibe model for the other vibe views to bind on.
- * @description
+ * @fileOverview
  */
-define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (router, Base, VibePois, VibeHood, HoodSummary, VibeModel) {
+define(['router', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], function (router, VibePois, VibeHood, HoodSummary, VibeModel) {
     
     /**
      * An individual neighborhood object.
@@ -29,17 +29,19 @@ define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], funct
         
         /**
          * Initialize this hood.
-         * @param {Array}  routeFragments route fragments that initialized the app
+         * @param {Array}        routeFragments route fragments that initialized the app
+         * @param {BackboneView} coreApp        core winston application
          * @constructor        
          */
-        initialize: function (routeFragments) {
-            var self = this, 
-                model = self.model = new VibeModel();
+        initialize: function (routeFragments, coreApp) {
+            var self = this,
+                model = self.model = new VibeModel(),
+                map = coreApp.map;
             
             // init the vibe views
             self.summary = new HoodSummary(model);
-            self.hood    = new VibeHood(model),
-            self.pois    = new VibePois(model);
+            self.hood    = new VibeHood(model, map),
+            self.pois    = new VibePois(model, map);
             
             // this basically starts the show
             model.set('placeId', routeFragments[0]);
@@ -66,7 +68,7 @@ define(['router', 'base', 'vibepois', 'hood', 'hoodsummary', 'vibemodel'], funct
             self.$el.empty();
         }
         
-    }, Base.prototype);
+    });
     
     return VibeController;
 });

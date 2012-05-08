@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'], function (coreModel, template, locationTemplate) {
+define(['coremodel', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'], function (coreModel, template, locationTemplate) {
     
     var SearchResultsList = Backbone.View.extend({
         
@@ -23,20 +23,29 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'
         
         /**
          * Initialize the view. Bind it to the model
+         * @param {Array}        frags route fragments that initialized the app
+         * @param {Backbone.View} core  core winston application
          * @constructor
          */
-        initialize: function () {
-            this.render();
+        initialize: function (frags, core) {
+            var self = this;
+            
+            _.bindAll(self, 'handleLoc', 'render');
+            
+            core.model.on('change:location', self.render);
+            
+            self.map = core.map;
         },
         
         /**
          * Render the view to the page
-         * @param {Backbone.Model} loc location model
+         * @param {Backbone.Model} core  core model
          * @method
          */
-        render: function (location) {
+        render: function (core) {
+            
             var html = this.template({
-                locs: coreModel.get('location').get('unresolvedLocations'), 
+                locs: core.get('location').get('unresolvedLocations'), 
                 locTemplate: this.handleLoc
             });
             
@@ -56,7 +65,7 @@ define(['core', 'tmpl!searchresultshtml', 'tmpl!locationhtml', 'less!resultscss'
             
             //TODO: probably need a POI manager, this is out of place here
             // add POI
-            m4.views.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
+            this.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
                     
             // create the location object html
             return locationTemplate({

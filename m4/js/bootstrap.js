@@ -1,69 +1,25 @@
 
 /**
  * Get base libs and boot strap the application
+ * @fileOverview
  */
-require(['require', 'config'], function (require) {
+require(['config'], function () {
     
-    require(['order!underscore', 'order!backbone', 'jquery', 'pane', 'map', 'searchform', 'resizer', 'router', 'navbar'], 
-        function (_, Backbone, $, Pane, Map, SearchForm, resizer, router, NavBar) {
+    /*
+     * Main winston lite application. Only the most corest of things should
+     * be placed in here, such as the router or the core model.
+     */
+    require(['core', 'resizer'], function (CoreApp, resizer) {
         
-        /**
-         * Main global namespace
-         * @namespace
-         */
-        m4 = {
-            
-            /**
-             * Backbone router. Handles state changes in the URL
-             * @type {Backbone.Router}
-             */
-            router: router,
-            
-            views: {
-                
-                /**
-                 * Main info pane that accompanies the map. Used to show
-                 * information about searches, directions etc.
-                 * @type {Backbone.View}
-                 * @property 
-                 */
-                pane: new Pane(),
-                
-                /**
-                 * Top navigation for the site
-                 * @type {Backbone.View}
-                 * @property
-                 */
-                navBar: new NavBar(),
-                
-                /**
-                 * Main entry form for the site
-                 * @type {Backbone.View}
-                 * @property
-                 */
-                searchForm: new SearchForm(),
-                
-                /**
-                 * Main map
-                 * @type {Backbone.View}
-                 * @property
-                 */
-                map: new Map({
-                    zoom: 7,
-                    center: {
-                        lat:   39.743943,
-                        lng: -105.020089
-                    }
-                })
-            }
-            
-        };
+        window.core = new CoreApp();
         
         // initialize the main window event listener for the resizer
         $(window).resize(resizer.resize);
         
+        // Start listening for history events
         Backbone.history.start();
         
     });
     
 });
+

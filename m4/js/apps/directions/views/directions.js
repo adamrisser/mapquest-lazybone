@@ -29,9 +29,11 @@ define(['underscore', 'backbone',
 
         /**
          * Initialize our template.
+         * @param {Array}         frags route fragments that initialized the app
+         * @param {Backbone.View} core  core winston application
          * @return {void} 
          */
-        initialize: function() {
+        initialize: function(frags, core) {
             this.render();
         },
 
@@ -41,7 +43,10 @@ define(['underscore', 'backbone',
          */
         render: function() {
             var query = new Query(),
-                form = new Form({model: query});
+                form = new Form({
+                    model: query,
+                    map: core.map
+                });
 
             this.$el.append(form.render().el);
             $('#pane').append(this.el);

@@ -2,7 +2,7 @@
  * Main application model. A collection of map models
  * @fileoverview
  */
-define(['map'], function (map) {
+define(['backbone'], function (Backbone) {
     
     /**
      * Create a blank core application backbone model
@@ -61,6 +61,6 @@ define(['map'], function (map) {
     });
     
     // Export into public namespace
-    return new Core();
+    return Core;
     
 });

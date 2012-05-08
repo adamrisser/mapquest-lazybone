@@ -33,7 +33,8 @@ define(['underscore', 'backbone',
          */
         initialize: function(options) {
             var stops = this.model.get('stops');
-
+            
+            this.map = options.map;
             this.inputs = [];
             this.html = _.template(template);
 
@@ -84,7 +85,7 @@ define(['underscore', 'backbone',
             $.when(promises)
             .pipe (
                 function() {
-                    return route.route(m4.views.map.mqa, self.model)
+                    return route.route(self.map.mqa, self.model)
                 }
             ).done(
                 function(narrative) { 

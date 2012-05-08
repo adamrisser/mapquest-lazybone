@@ -12,20 +12,21 @@ define(['vibeutil'], function (util) {
         
         /**
          * Initialize the hood view.
-         * @param {Backbone.Model} model vibe model 
+         * @param {Backbone.Model} model vibe model
+         * @param {Backbone.View}  map   map view 
          * @constructor        
          */
-        initialize: function (model) {
+        initialize: function (model, map) {
             var self = this;
             
             self.model = model;
             
-            self.map = m4.views.map;
+            self.map = map;
             
             _.bindAll(self, 'render', 'save', 'handlePlaceId');
             
-            model.on('change:hood', this.render);
-            model.on('change:placeId', this.handlePlaceId);
+            model.on('change:hood', self.render);
+            model.on('change:placeId', self.handlePlaceId);
         },
         
         /**
@@ -36,7 +37,6 @@ define(['vibeutil'], function (util) {
         handlePlaceId: function () {
             $.when(
                 this.fetch()
-            // is 
             ).done(
                 this.save
             );
@@ -105,7 +105,6 @@ define(['vibeutil'], function (util) {
                 // add to the map and best fit
                 self.map.mqa.addShapeCollection(sc);
                 self.map.bestFit();
-                
             });
         },
         

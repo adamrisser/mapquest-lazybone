@@ -1,5 +1,5 @@
-define(['backbone', 'base', 'tmpl!directoryhtml'], function (Backbone, Base, template) {
-
+define(['backbone', 'tmpl!directoryhtml'], function (Backbone, template) {
+    
     /**
      * Our directory listing.
      * @type {Backbone.View}
@@ -46,7 +46,7 @@ define(['backbone', 'base', 'tmpl!directoryhtml'], function (Backbone, Base, tem
             this.unbind();
         }
 
-    }, Base.prototype);
+    });
     
     return Directory;
     

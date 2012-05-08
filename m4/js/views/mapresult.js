@@ -5,7 +5,7 @@
  * have been added to the model.
  * @description
  */
-define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'less!resultscss'], 
+define(['coremodel', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'less!resultscss'], 
     function (coreModel, template, locationTemplate) {
     
     var MapResults = Backbone.View.extend({
@@ -24,25 +24,33 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'less!resultscss'],
         
         /**
          * Initialize the view. Bind it to the model
+         * @param {Array}         frags route fragments that initialized the app
+         * @param {Backbone.View} core  core winston application
          * @constructor
          */
-        initialize: function () {
-            this.render();
+        initialize: function (frags, core) {
+            var self = this;
+            
+            _.bindAll(self, 'handleLoc', 'render');
+            
+            core.model.on('change:location', self.render);
+            
+            self.map = core.map;
         },
         
         /**
          * Render the view to the page
-         * @return {Backbone.View} this
+         * @param  {Backbone.Model} core  core model
+         * @return {Backbone.View}  this
          * @method
          */
-        render: function () {
-            var self = this,
-                loc = coreModel.get('location'),
-                html = self.handleLoc(loc);
+        render: function (core) {
+            var loc = core.get('location'),
+                html = this.handleLoc(loc);
             
-            self.$el.append(html);
+            this.$el.empty().append(html);
 
-            return self;
+            return this;
         },
         
         /**
@@ -56,7 +64,7 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'less!resultscss'],
             
             //TODO: probably need a POI manager, this is out of place here
             // add POI
-            m4.views.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
+            this.map.mqa.addShape(new MQA.Poi(adr.latLng)); 
                     
             // create the location object html
             return locationTemplate({
@@ -71,7 +79,7 @@ define(['core', 'tmpl!mapresulthtml', 'tmpl!locationhtml', 'less!resultscss'],
          */
         dispose: function () {
             this.$el.empty();
-            this.unbind();
+            this.off();
         }
         
     });

@@ -2,7 +2,7 @@
  * Manager all POIs that display on the map  
  * @fileoverview
  */
-define(['core'], function (coreModel) {
+define(['coremodel'], function (coreModel) {
     
     /**
      * Map builder widget

@@ -1,6 +1,5 @@
 /**
  * Navigation bar
- * 
  * Adds functionality to the navigation bar that sits at the top of the page.
  * 
  * @description

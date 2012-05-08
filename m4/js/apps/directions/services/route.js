@@ -42,7 +42,14 @@ define(function() {
                 deferred = new $.Deferred();
 
             stops.each(function(stop, idx) {
-                addresses.push({ latLng: { lat: stop.get('results')[0].lat, lng: stop.get('results')[0].lon }});
+                var latLng = stop.get('results')[0];
+                
+                addresses.push({ 
+                    latLng: { 
+                        lat: latLng.lat, 
+                        lng: latLng.lon 
+                    }
+                });
             });
 
             MQA.withModule('directions', function() {

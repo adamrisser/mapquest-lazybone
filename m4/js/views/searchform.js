@@ -1,13 +1,12 @@
 /**
- * Summary Form
+ * Search Form
  * 
- * The summary form is the main driver for the core directions/search 
+ * The search form is the main driver for the core directions/search 
  * app.  Locations from the user get geocoded (or routed) and then
  * placed into the model.
  * @description
  */
-define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!searchformcss'], 
-    function (router, Location, coreModel, router, template) {
+define(['location', 'tmpl!searchformhtml', 'less!searchformcss'], function (Location, template) {
     
     /**
      * Search controller url
@@ -44,12 +43,18 @@ define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!sea
         
         /**
          * init the summary form
-         * @method
+         * @param {Backbone.View} config.core winston application
+         * @constructor
          */
-        initialize: function () {
-            var self = this;
+        initialize: function (config) {
+            var self = this,
             
-            _.bindAll(self, 'handleRouting');
+            router = self.router = config.core.router;
+            
+            self.map   = config.core.map;
+            self.model = config.core.model;
+            
+            _.bindAll(self, 'handleRouting', 'handleResponse', 'setRoute');
             
             router.bind('route:map',    self.handleRouting);
             router.bind('route:search', self.handleRouting);
@@ -99,7 +104,7 @@ define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!sea
          * @param {Object} config query
          */
         fetch: function (query) {
-            var ll = m4.views.map.mqa.getCenter();
+            var ll = this.map.mqa.getCenter();
 
             return $.ajax({
                 url: _SEARCH_URL,
@@ -118,7 +123,7 @@ define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!sea
          * @method
          */
         handleResponse: function (response) {
-            coreModel.set({
+            this.model.set({
                 location: new Location(response[0]) 
             });
         },
@@ -129,9 +134,9 @@ define(['router', 'location', 'core', 'router', 'tmpl!searchformhtml', 'less!sea
          */
         setRoute: function () {
             var query = $('#searchFormTin').val().replace(/\s/g, '+'),
-                state = coreModel.get('state');
+                state = this.model.get('state');
             
-            router.navigate('#/' + state + '/' + query, {
+            this.router.navigate('#/' + state + '/' + query, {
                 trigger: true
             });
         }

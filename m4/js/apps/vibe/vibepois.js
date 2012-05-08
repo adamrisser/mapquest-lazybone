@@ -1,22 +1,15 @@
 /**
  * Vibe pois view
- * 
  * A view to handle placing vibe pois on the map.
- * @description
+ * @fileOverview
  */
-define(['vibemodel'], function (VibeModel) {
-    
-    /**
-     * Small vibe icon
-     * @type {MQA.Icon}
-     */
-    var _smallIcon = new MQA.Icon('http://content.mqcdn.com/vibe/2-5-42/images/s1_sm_pin.png', 9, 14),
+define([], function () {
     
     /**
      * Large vibe icon
      * @type {MQA.Icon}
      */
-    _largeIcon = new MQA.Icon('http://content.mqcdn.com/vibe/2-5-42/images/s1_big_pin_selected.png', 25, 40),
+    var _largeIcon = new MQA.Icon('http://content.mqcdn.com/vibe/2-5-42/images/s1_big_pin_selected.png', 25, 40),
     
     /**
      * Neighborhood vibe URL
@@ -31,15 +24,16 @@ define(['vibemodel'], function (VibeModel) {
         
         /**
          * Initialize pois for a neighborhood.
-         * @param {Backbone.Model} model vibe model 
+         * @param {Backbone.Model} model vibe model
+         * @param {Backbone.View}  map   map view
          * @constructor
          */
-        initialize: function (model) {
+        initialize: function (model, map) {
             var self = this;
             
             self.model = model;
             
-            self.map = m4.views.map;
+            self.map = map;
             
             _.bindAll(self, 'render', 'save', 'handlePlaceId');
             
@@ -117,10 +111,12 @@ define(['vibemodel'], function (VibeModel) {
          * @method
          */
         dispose: function () {
-            this.map.mqa.removeShapeCollection('vibepois');
-            this.model.get('pois').unbind('reset', self.render);
-            this.off();
-            this.undelegateEvents();
+            var self = this;
+            
+            self.map.mqa.removeShapeCollection('vibepois');
+            self.model.get('pois').unbind('reset', self.render);
+            self.off();
+            self.undelegateEvents();
         }
         
     });

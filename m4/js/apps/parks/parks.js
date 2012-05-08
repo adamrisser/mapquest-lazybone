@@ -6,7 +6,7 @@
  * vibe model for the other vibe views to bind on.
  * @description
  */
-define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'], function (router, Base, ParksModel, ParksPois, ParksGeom, ParksSummary) {
+define(['router', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'], function (router, ParksModel, ParksPois, ParksGeom, ParksSummary) {
     
     /**
      * Parkquest controller
@@ -29,15 +29,17 @@ define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'
         
         /**
          * Initialize this hood.
-         * @param {Array}  routeFragments route fragments that initialized the app
+         * @param {Array}        frags   route fragments that initialized the app
+         * @param {BackboneView} coreApp core  winston application
          * @constructor        
          */
-        initialize: function (routeFragments) {
+        initialize: function (frags, coreApp) {
             var self = this, 
-                model = self.model = new ParksModel();
+                model = self.model = new ParksModel(),
+                map = coreApp.map;
             
-            self.pois = new ParksPois(model);
-            self.geom = new ParksGeom(model);
+            self.pois = new ParksPois(model, map);
+            self.geom = new ParksGeom(model, map);
             
             self.summary = new ParksSummary(model);
         },
@@ -63,7 +65,7 @@ define(['router', 'base', 'parksmodel', 'parkspois', 'parksgeom', 'parkssummary'
             self.$el.empty();
         }
         
-    }, Base.prototype);
+    });
     
     // export
     return ParksController;

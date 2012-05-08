@@ -8,7 +8,7 @@
  * 
  * http://documentcloud.github.com/backbone/#Router
  */
-define(['backbone', 'core'], function(Backbone, coreModel) {
+define(['backbone'], function (Backbone) {
     
     /**
      * This router should act upon the core model of the app, then
@@ -37,7 +37,18 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         activeApp: null,
         
         /**
+         * Initialize the core router
+         * @param {Backbone.View} config.core winston application
+         * @constructor
+         */
+        initialize: function (config) {
+            this.coreApp = config.core;
+        },
+        
+        /**
          * Load an app
+         * @param {String}    app     amd module name
+         * @param {Arguments} varargs arguments object 
          * @method
          */
         load: function (app, varargs) {
@@ -52,9 +63,11 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
             
             // load the new app
             require([app], function (App) {
-                self.activeApp = new App(Array.prototype.slice.call(varargs));
+                // change the arguments object into an array
+                var args = Array.prototype.slice.call(varargs);
+                
+                self.activeApp = new App(args, self.coreApp);
             });
-            
         },
         
         /**
@@ -82,18 +95,18 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
         },
         
         /**
-         * Set the app into directions mode, showing A to B boxes, etc
+         * Set the app into search mode
          * @method
          */
-        search: function (type) {
+        search: function () {
             this.load('searchresults', arguments);
         },
         
         /**
-         * Set the app into directions mode, showing A to B boxes, etc
+         * Set the app into map mode
          * @method
          */
-        map: function (type) {
+        map: function () {
             this.load('mapresult', arguments);
         },
         
@@ -101,14 +114,12 @@ define(['backbone', 'core'], function(Backbone, coreModel) {
          * Set the app into directions mode, showing A to B boxes, etc
          * @method
          */
-        directions: function (type) {
-            console.log('directions');
-            coreModel.set({ state: 'directions' });
+        directions: function () {
             this.load('directions/views/directions', arguments);
         }
 
     });
 
-    return new Router();
+    return Router;
 
 });

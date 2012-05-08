@@ -25,27 +25,12 @@ require.config({
         // bootstrap files
         'bootstrap' : 'js/bootstrap',
         
-        // models
-        'core'     : 'js/model/core',
-        'location' : 'js/model/location',
-        'mapstate' : 'js/model/mapstate',
-        'route'    : 'js/model/route',
-
-        // view
-        'directory'     : 'js/views/directory',
-        'base'          : 'js/views/base',
-        'pane'          : 'js/views/pane', 
-        'searchform'    : 'js/views/searchform',
-        'navbar'        : 'js/views/navbar',
-        'mapresult'     : 'js/views/mapresult',
-        'searchresults' : 'js/views/searchresults',
-        
         // view -> map
         'map'        : 'js/views/map/map',
         'poimanager' : 'js/views/map/poimanager', 
 
         // router
-        'router'      : 'js/routers/router',
+        'router'    : 'js/routers/router',
         
         // utils 
         'resizer'   : 'js/util/resizer',
@@ -78,6 +63,19 @@ require.config({
         'directions'            : 'js/apps/directions',
         'directionscss'         : 'css/directions/directions',
         'directions_inputcss'   : 'css/directions/input',
+        
+        // apps -> core
+        'core'          : 'js/apps/core/views/core',
+        'directory'     : 'js/views/directory',
+        'pane'          : 'js/views/pane', 
+        'searchform'    : 'js/views/searchform',
+        'navbar'        : 'js/views/navbar',
+        'mapresult'     : 'js/views/mapresult',
+        'searchresults' : 'js/views/searchresults',
+        'coremodel'     : 'js/model/core',
+        'location'      : 'js/model/location',
+        'mapstate'      : 'js/model/mapstate',
+        'route'         : 'js/model/route',
         
         // apps - vibe
         'vibe'            : 'js/apps/vibe/vibe',

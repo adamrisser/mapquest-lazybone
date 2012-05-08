@@ -25,17 +25,18 @@ define(['vibemodel'], function (VibeModel) {
         
         /**
          * Initialize pois for a neighborhood.
-         * @param {Backbone.Model} model vibe model 
+         * @param {Backbone.Model} model vibe model
+         * @param {Backbone.View}  map   map view
          * @constructor
          */
-        initialize: function (model) {
+        initialize: function (model, map) {
             var self = this;
             
             self.model = model;
             
-            self.map = m4.views.map;
+            self.map = map;
             
-            _.bindAll(self, 'render', 'save', 'load');
+            _.bindAll(self, 'render', 'save');
             
             model.get('pois').bind('reset', self.render);
             
