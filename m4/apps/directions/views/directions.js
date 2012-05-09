@@ -59,6 +59,7 @@ define(['underscore', 'backbone',
          * @method
          */
         dispose: function () {
+            core.map.mqa.removeRoute();
             this.$el.empty();
             this.unbind();
         }
