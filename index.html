@@ -9,10 +9,17 @@
 <body>
     
     <div id="header">
-        <a href="#"><img src="img/logo.png" id="logo" /></a>
-        <div id="searchForm"></div>
-        <div id="nav"></div>
+        <div id="logo">
+            <a href="#"><img src="img/logo.png"/></a>
+        </div>
+        <div id="searchForm">
+            <form class="form-search" onsubmit="return false;">
+                <input id="searchFormTin" class="tin" type="text" name="" value="" placeholder="Enter address, business, or landmark..." />&nbsp;
+                <button class="btn btn-primary" id="searchFormBtn">Search</button>
+            </form>
+        </div>        
     </div>
+    <div id="nav"></div>    
     
     <div id="pane"></div>
     

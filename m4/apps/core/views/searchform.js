@@ -8,9 +8,8 @@
  */
 define([
     'location', 
-    'tmpl!core/html/searchform', 
     'less!core/css/searchform'
-], function (Location, template) {
+], function (Location) {
     
     /**
      * Search controller url
@@ -26,24 +25,12 @@ define([
     SearchForm = Backbone.View.extend({
         
         /**
-         * Parent element
-         * @type {HTMLElement}
-         */
-        el: '#searchForm',
-        
-        /**
          * Delegated events
          * @type {Object}
          */
         events: {
             'click #searchFormBtn' : 'submit'
         },
-        
-        /**
-         * Underscore template
-         * @method
-         */
-        template: template,
         
         /**
          * init the summary form
@@ -71,7 +58,6 @@ define([
          * @method
          */
         render: function () {
-            this.$el.append(this.template());
             return this;
         },
         

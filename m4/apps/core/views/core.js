@@ -65,7 +65,7 @@ define([
              * Main entry form for the site
              * @type {Backbone.View}
              */
-            self.searchForm = new SearchForm({ core: self });
+            self.searchForm = new SearchForm({ el: '#searchForm', core: self });
             
         }
     });
