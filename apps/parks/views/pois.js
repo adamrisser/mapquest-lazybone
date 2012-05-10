@@ -16,7 +16,7 @@ define([], function () {
      * Parkquest api url
      * @type {String}
      */
-    _API_URL = 'http://localhost:8000/m4/apps/parks/data',
+    _API_URL = 'http://localhost:8000/apps/parks/data',
     
     /**
      * An individual neighborhood object.

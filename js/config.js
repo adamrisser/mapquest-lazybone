@@ -5,7 +5,7 @@
  */
 require.config({
     
-    baseUrl: '/m4',
+    baseUrl: '/',
     
     paths: {
         

@@ -1,5 +1,5 @@
 
-require(['/m4/js/ext/jquery.js', '/m4/js/config.js'], function () {
+require(['/js/ext/jquery.js', '/js/config.js'], function () {
     
     require(['/test/qunit.js', 'css!/test/qunit.css'], function () {
         
