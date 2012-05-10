@@ -20,14 +20,14 @@ define(['backbone'], function (Backbone) {
 
         routes: {
             ''                  : 'index', 
-            '/build'            : 'build',
-            '/signin'           : 'signIn',
-            '/map/:query'       : 'map',
-            '/search/:query'    : 'search',
-            '/directions'       : 'directions',
-            '/directions/type'  : 'directions',
-            '/explore/nationalparks' : 'parks',
-            '/explore/neighborhoods/:placeId' : 'vibe'
+            'build'            : 'build',
+            'signin'           : 'signIn',
+            'map/:query'       : 'map',
+            'search/:query'    : 'search',
+            'directions'       : 'directions',
+            'directions/type'  : 'directions',
+            'explore/nationalparks' : 'parks',
+            'explore/neighborhoods/:placeId' : 'vibe'
         },
         
         /**

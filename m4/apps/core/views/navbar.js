@@ -24,7 +24,7 @@ define([
          * @type {Object}
          */
         events: {
-            'click a': 'setActive'
+            'click a': 'handleClick'
         },
         
         /**
@@ -34,11 +34,15 @@ define([
         template: template,
         
         /**
-         * Initialize the view. Bind it to the model
+         * Initialize the view.
          * @constructor
          */
         initialize: function () {
             this.render();
+            
+            // element that is active
+            var el = $('#nav a[href$="' + Backbone.history.getHash() + '"]');
+            this._toActive(el);
         },
         
         /**
@@ -52,19 +56,54 @@ define([
         },
         
         /**
-         * Set active tab state
-         * @param {Object} evt event object
+         * Handle click event on a list item
+         * @param {Object} evt click event
          * @method
          */
-        setActive: function (evt) {
-            // this.$el.find('li').removeClass('active');
-            // $(evt.currentTarget).addClass('active');
-
-            var tgt = $(evt.target).parent('li'),
-                tgtPos = (tgt.offset().left + tgt.width()/2) - 5,
-                curr = this.$el.find('.selected');
-
-             $("ul .icon").animate({"left": tgtPos + "px"}, "medium", function() { curr.removeClass('selected'); tgt.addClass('selected'); $('ul.subdir').slideDown('slow'); });            
+        handleClick: function (evt) {
+            this._animateToActive($(evt.target));
+        },
+        
+        /**
+         * Get new position of the cursor
+         * @return {Object}
+         * @method
+         */
+        _getCursorPos: function (tgt) {
+            return { 
+                left: ((tgt.offset().left + tgt.width() / 2) - 5) + 'px' 
+            };
+        },
+        
+        /**
+         * Animate the arrow to a list item
+         * @param {jQuery} el jquery element
+         * @method
+         */
+        _animateToActive: function (el) {
+            var pos = this._getCursorPos(el)
+                callback = _.bind(this._setSelected, this, el);
+            
+            $('ul .icon').animate(pos, 'medium', callback);
+        },
+        
+        /**
+         * Move the arrow to a list item
+         * @method
+         */
+        _toActive: function (el) {
+            $('ul .icon').css(this._getCursorPos(el));
+            this._setSelected(el);
+        },
+        
+        /**
+         * Set selected on active class, remove selected class from previous
+         * @method
+         */
+        _setSelected: function (el) { 
+            this.$el.find('.selected').removeClass('selected'); 
+            el.parent('li').addClass('selected');
+            $('ul.subdir').slideDown('slow');
         }
         
     });
