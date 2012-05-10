@@ -34,6 +34,7 @@ define(['underscore', 'backbone',
          * @return {void} 
          */
         initialize: function(frags, core) {
+            this.map = core.map;
             this.render();
         },
 
@@ -45,7 +46,7 @@ define(['underscore', 'backbone',
             var query = new Query(),
                 form = new Form({
                     model: query,
-                    map: core.map
+                    map: this.map
                 });
 
             this.$el.append(form.render().el);
@@ -59,7 +60,14 @@ define(['underscore', 'backbone',
          * @method
          */
         dispose: function () {
-            core.map.mqa.removeRoute();
+            var removeRoute = this.map.mqa.removeRoute
+            
+            // the module might not be pulled down (ie a route may not
+            // have been run)
+            if (removeRoute) {
+                removeRoute();
+            }
+            
             this.$el.empty();
             this.unbind();
         }
