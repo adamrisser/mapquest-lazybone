@@ -42,7 +42,7 @@ define([
             
             // element that is active
             var el = $('#nav a[href$="' + Backbone.history.getHash() + '"]');
-            this._toActive(el);
+            this._toActive(el.length ? el : $('.nav .selected a'));
         },
         
         /**
