@@ -9,7 +9,9 @@ define([
     'core/views/map/map', 
     'core/views/searchform', 
     'core/views/navbar', 
-    'core/models/core'
+    'core/models/core',
+    'twitter',
+    'css!twittercss'
 ], function (Backbone, Router, Pane, Map, SearchForm, NavBar, CoreModel) {
     
     "use strict";
@@ -59,7 +61,7 @@ define([
              * Top navigation for the site
              * @type {Backbone.View}
              */
-            self.navBar = new NavBar;
+            self.navBar = new NavBar({ hash: Backbone.history.getHash() });
             
             /**
              * Main entry form for the site

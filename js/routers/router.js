@@ -19,7 +19,7 @@ define(['backbone'], function (Backbone) {
     var Router = Backbone.Router.extend({
 
         routes: {
-            ''                  : 'index', 
+            ''                 : 'index', 
             'build'            : 'build',
             'signin'           : 'signIn',
             'map/:query'       : 'map',

@@ -3,18 +3,22 @@
 <head>
     <title>MapQuest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
     <link rel="stylesheet/less" href="css/main.less" />
+    
     <script type="text/javascript" data-main="js/bootstrap" src="js/ext/require.js"></script>
 </head>
 <body>
     <div id="fb-root"></div>
+    
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>        
+    }(document, 'script', 'facebook-jssdk'));</script>
+            
     <div id="header">
         <div class="social">
             <span><a href="#">Sign In</a></span> 
@@ -34,8 +38,13 @@
             </form>
         </div>        
     </div>
-
-    <div id="nav"></div>    
+    
+    <ul id="nav">
+        <li class="selected"><a href="/#/directions">Directions</a><div class="icon"></div></li>
+        <li><a href="/#/search">Places</a></li>
+        <li><a href="/#/explore/neighborhoods/380454">Neighborhoods</a></li>
+        <li><a href="/#/explore/nationalparks">Parks</a></li>
+    </ul>
     
     <div class="wrapper">
         <div id="pane"></div>

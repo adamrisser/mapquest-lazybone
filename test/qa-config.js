@@ -1,7 +1,7 @@
 
 require(['/js/ext/jquery.js', '/js/config.js'], function () {
     
-    require(['/test/qunit.js', 'css!/test/qunit.css'], function () {
+    require(['/test/qunit.js', '/test/sinon.js', 'css!/test/qunit.css'], function () {
         
         var regex = new RegExp(/test=(.+)?/),
         
