@@ -1,5 +1,5 @@
 
-require(['resizer'], function (resizer) {
+require(['js/util/resizer'], function (resizer) {
 
     var a = false,
         b = false,

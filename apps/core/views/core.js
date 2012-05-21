@@ -3,13 +3,13 @@
  * @fileOverview
  */
 define([
-    'router', 
+    'core/routers/router', 
     'core/views/pane', 
     'core/views/map/map', 
     'core/views/searchform', 
     'core/views/navbar', 
     'core/models/core',
-    'order!backbone'
+    'backbone'
 ], function (Router, Pane, Map, SearchForm, NavBar, CoreModel, Backbone) {
     
     "use strict";

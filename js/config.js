@@ -77,24 +77,12 @@ require.config({
         'core'  : 'apps/core',
         'vibe'  : 'apps/vibe',
         'parks' : 'apps/parks',
-        'mapresult'     : 'apps/mapresult',
-        'directions'    : 'apps/directions',
+        'directions' : 'apps/directions',
+        'mapresult'  : 'apps/mapresult',
         'searchresults' : 'apps/searchresults',
         
-        /*
-         * Backbone routers are used for routing the apps URL's when using hash tags(#).
-         * Route are mapped to a single function, which then acts upon the app.
-         * 
-         * The router intepret anything after '#' tag in the url. All links in the 
-         * application should target '/#/action'.
-         * 
-         * The router listens for URL changes. When it "hears" a change, it 
-         * finds the corresponding application and instantiates it.
-         * 
-         * (http://documentcloud.github.com/backbone/#Router)
-         */
-        'router' : 'js/routers/router'
-        
+        // Utils 
+        'resizer' : 'js/util/resizer'
     }
     
 });
