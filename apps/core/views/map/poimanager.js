@@ -1,40 +1,49 @@
 /**
  * Manager all POIs that display on the map  
- * @fileoverview
+ * @fileOverview
  */
-define([], function () {
+define(['location'], function (Location) {
     
     /**
-     * Map builder widget
-     * @namespace
+     * Collection of pois
+     * @type {Backbone.Collection}
+     * @private
      */
-    var PoiManager = Backbone.View.extend({
+    var ShapeCollectionCollection = Backbone.Collection.extend({
+        model: Location
+    });
+    
+    /**
+     * Initialize a new poi manager
+     * @param {Backbone.View} options.map map view
+     * @constructor
+     */
+    function PoiManager (options) {
+        _.extend(this, options);
+    }
+    
+    PoiManager.prototype = _.extend({
+        
+        
+        shapeCollections: new ShapeCollectionCollection,
         
         /**
-         * Delegated Events
-         * @property
+         * @method
          */
-        events: {
+        addCollection: function () {
             
         },
         
         /**
-         * Initiate the poi manager
-         * @constructor
+         * @method
          */
-        initialize: function () {
+        removeCollection: function () {
             
-            /*
-            coreModel.on('', function () {
-                
-            });
-            */
-           
         }
         
-    });
+    }, Backbone.Events);
     
     // Export
-    return Map;
+    return PoiManager;
     
 });

@@ -17,10 +17,6 @@ define([
          */
         el: '#pane',
         
-        events: {
-            'mouseover i': 'popover'
-        },
-        
         /**
          * Summary underscore template
          * @param {object} config object used to embed data into the template
@@ -38,13 +34,11 @@ define([
         /**
          * Initialize summary for a neighborhood
          * @param {Backbone.Model} model vibe model 
-         * @constructor        
+         * @constructor
          */
         initialize: function (model) {
-            _.bindAll(this, 'renderSummary', 'renderTopPois');
-            
-            model.bind('change:properties', this.renderSummary);
-            model.get('pois').bind('reset', this.renderTopPois);
+            model.on('change:properties', this.renderSummary, this);
+            model.get('pois').on('reset', this.renderTopPois, this);
         },
         
         /**
@@ -62,19 +56,15 @@ define([
         
         /**
          * Render the top neighborhood pois.
-         * @param  {Object}         pois top hood pois
+         * @param  {Backbone.Collection} pois top hood pois
          * @return {Backbone.View}  this
          */
         renderTopPois: function (pois) {
-            this.$el.append(this.poisTmpl({ 
-                pois: pois
-            }));
-            
-            return this;
-        },
-        
-        popover: function (evt) {
-            $(evt.currentTarget).popover('show');
+            this.$el.empty().append(
+                this.poisTmpl({ 
+                    pois: pois
+                })
+            );
         },
         
         /**

@@ -25,20 +25,19 @@ define([], function () {
         /**
          * Initialize pois for a neighborhood.
          * @param {Backbone.Model} model vibe model
-         * @param {Backbone.View}  map   map view
+         * @param {Backbone.View}  core  core app
          * @constructor
          */
-        initialize: function (model, map) {
+        initialize: function (model, core) {
             var self = this;
             
+            _.bindAll(self, 'save');
+            
             self.model = model;
+            self.core  = core;
             
-            self.map = map;
-            
-            _.bindAll(self, 'render', 'save', 'handlePlaceId');
-            
-            model.get('pois').bind('reset', self.render);
-            model.bind('change:placeId', self.handlePlaceId);
+            model.get('pois').on('reset', self.render, self);
+            model.on('change:placeId', self.handlePlaceId, self);
         },
         
         /**
@@ -90,20 +89,22 @@ define([], function () {
          * @return {Backbone.View} this
          */
         render: function (pois) {
-            var self = this,
-                sc = new MQA.ShapeCollection();
-                
-            sc.collectionName = 'vibepois';
-            
-            pois.each(function (place) {
-                var mqaPoi = new MQA.Poi(place.get('latLng'));
-                mqaPoi.setIcon(_largeIcon);
-                sc.add(mqaPoi);
+            this.core.model.saveToShapeCollection({
+                name: 'vibe',
+                shapes: pois.map(this.createPoi, this)
             });
-            
-            // add to the map and best fit
-            self.map.mqa.addShapeCollection(sc);
-            self.map.bestFit();
+        },
+        
+        /**
+         * Create a vibe poi
+         * @param  {Backbone.View} place
+         * @return {MQA.Poi}
+         * @method
+         */
+        createPoi: function (place) {
+            var poi = new MQA.Poi(place.get('latLng'));
+            poi.setIcon(_largeIcon);
+            return poi;
         },
         
         /**
@@ -113,8 +114,7 @@ define([], function () {
         dispose: function () {
             var self = this;
             
-            self.map.mqa.removeShapeCollection('vibepois');
-            self.model.get('pois').unbind('reset', self.render);
+            self.model.get('pois').off('reset', self.render);
             self.off();
             self.undelegateEvents();
         }

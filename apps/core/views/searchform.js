@@ -7,9 +7,11 @@
  * @description
  */
 define([
+    'backbone',
     'location', 
-    'less!core/css/searchform'
-], function (Location) {
+    'less!core/css/searchform',
+    'css!twittercss'
+], function (Backbone, Location) {
     
     /**
      * Search controller url
@@ -34,21 +36,21 @@ define([
         
         /**
          * init the summary form
-         * @param {Backbone.View} config.core winston application
+         * @param {Backbone.View} options.core winston application
          * @constructor
          */
-        initialize: function (config) {
+        initialize: function (options) {
             var self = this,
             
-            router = self.router = config.core.router;
+            router = self.router = options.core.router;
             
-            self.map   = config.core.map;
-            self.model = config.core.model;
+            self.map   = options.core.map;
+            self.model = options.core.model;
             
             _.bindAll(self, 'handleRouting', 'handleResponse', 'setRoute');
             
-            router.bind('route:map',    self.handleRouting);
-            router.bind('route:search', self.handleRouting);
+            router.on('route:map',    self.handleRouting);
+            router.on('route:search', self.handleRouting);
             
             self.render();
         },
@@ -91,7 +93,7 @@ define([
         
         /**
          * Fetch the data based off of the query
-         * @param {Object} config query
+         * @param {Object} query
          */
         fetch: function (query) {
             var ll = this.map.mqa.getCenter();
@@ -101,7 +103,7 @@ define([
                 data: {
                     query0: query,
                     mapSearchArea: '(' + ll.lat + ', ' + ll.lng + ', 27734002, 1247, 756, 1.0, 1.0)',
-                    key: 'mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5',
+                    key: 'mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'
                 },
                 dataType: 'json'
             });
@@ -129,6 +131,20 @@ define([
             this.router.navigate('#/' + state + '/' + query, {
                 trigger: true
             });
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            var self = this,
+                router = self.router;
+                
+            router.off('route:map',    self.handleRouting);
+            router.off('route:search', self.handleRouting);
+            
+            self.off();
         }
         
     });

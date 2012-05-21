@@ -15,7 +15,7 @@ require(['config'], function () {
         
         // initialize the main window event listener for the resizer
         $(window).resize(resizer.resize);
-        
+
         // Start listening for history events
         Backbone.history.start();
         

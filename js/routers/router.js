@@ -116,6 +116,14 @@ define(['backbone'], function (Backbone) {
          */
         directions: function () {
             this.load('directions/views/directions', arguments);
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            this.off();
         }
 
     });

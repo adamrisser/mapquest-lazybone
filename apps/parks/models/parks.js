@@ -30,7 +30,7 @@ define(function () {
              * @type {Object}
              */
             geometry: null,
-             
+            
             /**
              * Pois in the current park
              * @type {Backbone.Collection}
@@ -45,14 +45,6 @@ define(function () {
          */
         dispose: function () {
             this.off();
-            
-            var pois = this.get('pois');
-            
-            pois.each(function (poi) {
-                poi.off();
-            });
-            
-            pois.off();
             this.destroy();
         }
         

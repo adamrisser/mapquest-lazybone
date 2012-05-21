@@ -153,6 +153,7 @@
       // For each event, walk through the linked list of callbacks twice,
       // first to trigger the event, then to trigger any `"all"` callbacks.
       while (event = events.shift()) {
+          console.info('Bb event: ' + event);
         if (node = calls[event]) {
           tail = node.tail;
           while ((node = node.next) !== tail) {

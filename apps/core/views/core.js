@@ -3,16 +3,14 @@
  * @fileOverview
  */
 define([
-    'backbone', 
     'router', 
     'core/views/pane', 
     'core/views/map/map', 
     'core/views/searchform', 
     'core/views/navbar', 
     'core/models/core',
-    'twitter',
-    'css!twittercss'
-], function (Backbone, Router, Pane, Map, SearchForm, NavBar, CoreModel) {
+    'order!backbone'
+], function (Router, Pane, Map, SearchForm, NavBar, CoreModel, Backbone) {
     
     "use strict";
     
@@ -27,22 +25,23 @@ define([
             var self = this;
             
             /**
-             * Main application model. A collection of map models
-             * @type {Backbone.Model}
-             */
-            self.model = new CoreModel;
-            
-            /**
              * Backbone router. Handles state changes in the URL
              * @type {Backbone.Router}
              */
             self.router = new Router({ core: self });
             
             /**
+             * Main application model. A collection of map models
+             * @type {Backbone.Model}
+             */
+            self.model = new CoreModel({ core: self });
+            
+            /**
              * Main map
              * @type {Backbone.View}
              */
             self.map = new Map({
+                core: self,
                 zoom: 7,
                 center: {
                     lat:   39.743943,
@@ -69,6 +68,20 @@ define([
              */
             self.searchForm = new SearchForm({ el: '#searchForm', core: self });
             
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            //TODO: switch to proper dispose methods (not unbinds)
+            var self = this;
+            self.model.off();
+            self.router.off();
+            self.map.off();
+            self.map.pane.off();
+            self.map.searchForm.dispose();
         }
     });
    

@@ -22,6 +22,26 @@ define(['less!core/css/pane'], function () {
         el: '#pane',
         
         /**
+         * Initialize the pane
+         * @constructor
+         */
+        initialize: function () {
+            _.bindAll(this, '_resize');
+            this._resize();
+            $(window).resize(this._resize);
+        },
+        
+        /**
+         * Resize the pane
+         * @method
+         */
+        _resize: function () {
+            this.$el.css({
+                height: (window.innerHeight - 80 || 0) + 'px'
+            });
+        },
+        
+        /**
          * Add html into the pane from a backbone view. 
          * Note: The backbone view must support returning itself from 
          *       its own view method!

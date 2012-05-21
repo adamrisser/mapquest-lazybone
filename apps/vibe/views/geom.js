@@ -13,20 +13,18 @@ define(['vibe/shapeutil'], function (util) {
         /**
          * Initialize the hood view.
          * @param {Backbone.Model} model vibe model
-         * @param {Backbone.View}  map   map view 
+         * @param {Backbone.View}  core  core app 
          * @constructor        
          */
-        initialize: function (model, map) {
+        initialize: function (model, core) {
             var self = this;
             
             self.model = model;
+            self.core  = core;
             
-            self.map = map;
+            _.bindAll(self, 'save', 'saveAsShapeCollection');
             
-            _.bindAll(self, 'render', 'save', 'handlePlaceId');
-            
-            model.on('change:hood', self.render);
-            model.on('change:placeId', self.handlePlaceId);
+            model.on('change:placeId', self.handlePlaceId, self);
         },
         
         /**
@@ -38,7 +36,8 @@ define(['vibe/shapeutil'], function (util) {
             $.when(
                 this.fetch()
             ).done(
-                this.save
+                this.save,
+                this.saveAsShapeCollection
             );
         },
         
@@ -48,9 +47,7 @@ define(['vibe/shapeutil'], function (util) {
          * @method
          */
         save: function (response) {
-            this.model.set({ 
-                hood: response.features[0]
-            });
+            this.model.set({ hood: response.features[0] });
         },
         
         /**
@@ -73,22 +70,18 @@ define(['vibe/shapeutil'], function (util) {
         
         /**
          * Render our neighborhood and all it's pois for the category.
-         * @param  {Object}        core core model
          * @param  {Object}        hood vibe neighborhood
          * @return {Backbone.View} this
          * @method
          */
-        render: function (core, hood) {
-            var self = this;
-            
+        saveAsShapeCollection: function (hood) {
             MQA.withModule('shapes', function () {
                 
-                var sc = new MQA.ShapeCollection(),
-                    overlay = new MQA.PolygonOverlay(),
+                hood = hood.features[0];
+                
+                var overlay = new MQA.PolygonOverlay(),
                     style   = util.getVibeScoreParams(hood.properties.vibe_score),
                     shapePoints = util.flattenPoints(hood.geometry);
-                
-                sc.collectionName = 'vibeoverlay';
                 
                 overlay.setShapePoints(shapePoints);
                 
@@ -100,11 +93,10 @@ define(['vibe/shapeutil'], function (util) {
                     fillColorAlpha: style.opacity
                 });
                 
-                sc.add(overlay);
-                
-                // add to the map and best fit
-                self.map.mqa.addShapeCollection(sc);
-                self.map.bestFit();
+                self.core.model.saveToShapeCollection({
+                    name: 'vibe',
+                    shapes: overlay
+                });
             });
         },
         
@@ -113,7 +105,6 @@ define(['vibe/shapeutil'], function (util) {
          * @method
          */
         dispose: function () {
-            this.map.mqa.removeShapeCollection('vibeoverlay');
             this.off();
         }
         

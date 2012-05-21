@@ -17,6 +17,7 @@
  * limitations under the License.
  * ========================================================== */
 
+define(['jquery'], function($) {
 
 !function ($) {
 
@@ -1833,3 +1834,8 @@
   })
 
 }(window.jQuery);
+
+
+    // In this case we just return jquery back, because bootstrap itself just adds to jquery
+    return $;
+});

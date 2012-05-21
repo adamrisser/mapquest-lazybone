@@ -16,12 +16,17 @@ define([
      */
     var Map = Backbone.View.extend({
         
+        /**
+         * Map parent
+         * @type {String}
+         * @property
+         */
         el: '#map',
         
         /**
          * Tilemap instance
          * @type {MQA}
-         * @param
+         * @property
          */
         mqa: null,
         
@@ -49,21 +54,18 @@ define([
         
         /**
          * Build a MQA Tile map
-         * @param {Object} config {
-         *     center {lat/lng}
-         *     zoom   {Number}
-         * }
+         * @param {Backbone.View} options.core
+         * @param {Object}        options.center.lat
+         * @param {Object}        options.center.lng
+         * @param {Object}        options.zoom
          * @method
          */
-        initialize: function (config) {
-            var self = this;
+        initialize: function (options) {
+            var self = this, 
+                core = self.options.core,
+                mqa;
             
-            self.mqa = new MQA.TileMap(
-                self.el,
-                config.zoom,
-                config.center,
-                'map'
-            );
+            self.mqa = mqa = new MQA.TileMap(self.el, options.zoom, options.center, 'map');
             
             MQA.withModule('largezoom', function() {
                 self.mqa.addControl(
@@ -80,6 +82,19 @@ define([
             // resize map based off of window height/width
             resizer.subscribe('mapbuilder', this._resize);
             
+            core.model.get('shapeCollections').on('add', self.addShapeCollection, self);
+            core.model.get('shapeCollections').on('update', mqa.bestFit, mqa);
+            core.router.on('all', mqa.removeAllShapes, mqa);
+        },
+        
+        /**
+         * Add a shape collection to the map
+         * @param {Background.View || MQA.ShapeCollection} sc
+         * @method
+         */
+        addShapeCollection: function (sc) {
+            this.mqa.addShapeCollection(sc.attributes || sc);
+            this.mqa.bestFit();
         },
         
         /**
@@ -89,6 +104,15 @@ define([
         bestFit: function () {
             this.mqa.bestFit();
             this.trigger('bestFit');
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            resizer.unsubscribe('mapbuilder');
+            this.off();
         }
         
     });

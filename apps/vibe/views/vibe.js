@@ -36,7 +36,7 @@ define([
          * Initialize this hood.
          * @param {Array}         frags route fragments that initialized the app
          * @param {Backbone.View} core  core winston application
-         * @constructor        
+         * @constructor
          */
         initialize: function (frags, core) {
             var self = this,
@@ -45,8 +45,8 @@ define([
             
             // init the vibe views
             self.summary = new HoodSummary(model);
-            self.hood    = new VibeHood(model, map),
-            self.pois    = new VibePois(model, map);
+            self.hood    = new VibeHood(model, core);
+            self.pois    = new VibePois(model, core);
             
             // this basically starts the show
             model.set('placeId', frags[0]);

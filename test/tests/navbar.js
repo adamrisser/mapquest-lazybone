@@ -1,4 +1,4 @@
-require(['core/views/navbar', 'core/views/core'], function (NavBar) {
+require(['core/views/navbar'], function (NavBar) {
     
     var nav = 
         '<ul id="nav">' + 
@@ -7,7 +7,11 @@ require(['core/views/navbar', 'core/views/core'], function (NavBar) {
             '<li><a class="neighborhoods" href="/#/explore/neighborhoods/380454">Neighborhoods</a></li>' + 
             '<li><a class="parks" href="/#/explore/nationalparks">Parks</a></li>' + 
         '</ul>';
-        
+    
+    test('Should be defined', 1, function () {
+        ok(NavBar);
+    });
+    
     module('Initialization', {
         
         setup: function () {
@@ -16,16 +20,10 @@ require(['core/views/navbar', 'core/views/core'], function (NavBar) {
         },
         
         teardown: function () {
-            if (this.bar) {
-                this.bar.dispose();
-            }
+            this.bar.dispose();
             NavBar.prototype._toActive.restore();
         }
         
-    });
-    
-    test('Should be defined', 1, function () {
-        ok(NavBar);
     });
     
     test('Can be instantiated', 1, function () {
@@ -121,17 +119,17 @@ require(['core/views/navbar', 'core/views/core'], function (NavBar) {
     test('_getCursorPos finds the correct left position of the caret', 4, function () {
 
         var pos = this.bar._getCursorPos($('.directions'));        
-        equal('-9954.5px', pos.left, 'Correct position found for directions');
+        equal('-9948.5px', pos.left, 'Correct position found for directions');
         
         var pos = this.bar._getCursorPos($('.places'));        
-        equal('-9871.533203125px', pos.left, 'Correct position found for places');
+        equal('-9858.25px', pos.left, 'Correct position found for places');
         
         var pos = this.bar._getCursorPos($('.neighborhoods'));        
-        equal('-9766.31640625px', pos.left, 'Correct position found for vibe');
+        equal('-9745.56640625px', pos.left, 'Correct position found for vibe');
         
         var pos = this.bar._getCursorPos($('.parks'));        
-        equal('-9665.716796875px', pos.left, 'Correct position found for parks');
-        
+        equal('-9636.4833984375px', pos.left, 'Correct position found for parks');
+                
     });
     
     test('_animateTo calls jQuery.animate using the CursorPos', 3, function () {
@@ -142,7 +140,7 @@ require(['core/views/navbar', 'core/views/core'], function (NavBar) {
         ok(NavBar.prototype._getCursorPos.calledTwice);
         ok(jQuery.prototype.animate.calledTwice);
         
-        equal('-9665.716796875px', jQuery.prototype.animate.secondCall.args[0].left, 'Called with the correct parameter');
+        equal('-9636.4833984375px', jQuery.prototype.animate.secondCall.args[0].left, 'Called with the correct parameter');
     });
     
     test('Test that _setSelected correctly removes the previous selected class and adds a new selected class to the proper element', 2, function () {
