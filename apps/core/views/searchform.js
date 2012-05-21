@@ -8,7 +8,7 @@
  */
 define([
     'backbone',
-    'location', 
+    'core/models/location', 
     'less!core/css/searchform',
     'css!twittercss'
 ], function (Backbone, Location) {
@@ -47,10 +47,10 @@ define([
             self.map   = options.core.map;
             self.model = options.core.model;
             
-            _.bindAll(self, 'handleRouting', 'handleResponse', 'setRoute');
+            _.bindAll(self, 'handleResponse', 'setRoute');
             
-            router.on('route:map',    self.handleRouting);
-            router.on('route:search', self.handleRouting);
+            router.on('route:map',    self.handleRouting, self);
+            router.on('route:search', self.handleRouting, self);
             
             self.render();
         },

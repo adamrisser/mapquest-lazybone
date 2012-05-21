@@ -77,8 +77,8 @@ require.config({
         'core'  : 'apps/core',
         'vibe'  : 'apps/vibe',
         'parks' : 'apps/parks',
-        'directions' : 'apps/directions',
-        'mapresult'  : 'apps/mapresult',
+        'mapresult'     : 'apps/mapresult',
+        'directions'    : 'apps/directions',
         'searchresults' : 'apps/searchresults',
         
         /*
@@ -93,15 +93,7 @@ require.config({
          * 
          * (http://documentcloud.github.com/backbone/#Router)
          */
-        'router' : 'js/routers/router',
-        
-        // Utils 
-        'resizer' : 'js/util/resizer',
-        
-        //TODO: move into core/models?
-        'location' : 'js/model/location',
-        'mapstate' : 'js/model/mapstate',
-        'route'    : 'js/model/route'
+        'router' : 'js/routers/router'
         
     }
     

@@ -2,7 +2,7 @@
  * Manager all POIs that display on the map  
  * @fileOverview
  */
-define(['location'], function (Location) {
+define(['core/models/location'], function (Location) {
     
     /**
      * Collection of pois

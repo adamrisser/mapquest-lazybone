@@ -9,7 +9,7 @@ require(['config'], function () {
      * Main winston lite application. Only the most corest of things should
      * be placed in here, such as the router or the core model.
      */
-    require(['core/views/core', 'resizer'], function (CoreApp, resizer) {
+    require(['core/views/core', 'js/util/resizer'], function (CoreApp, resizer) {
         
         window.core = new CoreApp();
         
