@@ -3,11 +3,13 @@ define(['underscore', 'backbone',
     'directions/models/locationcollection',
     'directions/models/location',
     'directions/views/form', 
+    'directions/views/narrative',    
+    'directions/services/route',    
     'less!directions/css/directions',
     'twitter', 
     'css!twittercss'
 ], 
-    function (_, Backbone, Query, LocationCollection, Location, Form) {
+    function (_, Backbone, Query, LocationCollection, Location, Form, Narrative, route) {
 
     var Directions = Backbone.View.extend({
 
@@ -28,6 +30,8 @@ define(['underscore', 'backbone',
          * @type {Object}
          */ 
         events: {
+            "click #routeType a": "setRouteType",
+            "click #getDirections": "getDirections"            
         },
 
         /**
@@ -38,6 +42,13 @@ define(['underscore', 'backbone',
          */
         initialize: function(frags, core) {
             this.map = core.map;
+
+            _.bindAll(this);
+
+            this.model = new Query({
+                stops: new LocationCollection
+            }),
+
             this.render();
         },
 
@@ -46,17 +57,53 @@ define(['underscore', 'backbone',
          * @return {Directions} *this*
          */
         render: function() {
-            var query = new Query(),
-                form = new Form({
-                    model: query,
+            var stops = this.model.get('stops'),
+                inputs = this.inputs = new Form({
+                    model: stops,
                     map: this.map
                 });
 
-            this.$el.append(form.render().el);
+            this.$el.append(inputs.render().el);
             $('#pane').append(this.el);
 
             return this;
         },
+
+        /**
+         * Sets our route type -- driving, pedestrian, transit, bicycle
+         * @param {Object} event object
+         */
+        setRouteType: function(evt) {
+            var target = event.target;
+
+            evt.preventDefault();
+
+            this.model.set({'routeType': target.value});
+        },   
+
+        /**
+         * Runs our route
+         * @param  {Object} evt object
+         * @return {void}     
+         */
+        getDirections: function(evt) {
+            var self = this;
+
+            //- prevent the form from submitting
+            evt.preventDefault();
+
+            $.when(self.inputs.ready())
+            .pipe (
+                function() {
+                    return route.route(self.map.mqa, self.model)
+                }
+            ).done(
+                function(narrative) { 
+                    self.narrative = new Narrative({narrative: narrative});
+                    $('#pane').append(self.narrative.render().el);
+                }
+            );
+        },        
         
         /**
          * Clean up the view

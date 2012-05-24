@@ -1,12 +1,10 @@
 define(['underscore', 'backbone', 
     'directions/views/input', 
-    'directions/views/narrative',
     'directions/models/locationcollection',
     'directions/models/location',
-    'directions/services/route',
     'text!directions/html/form.html', 
     'less!directions/css/directions'], 
-    function (_, Backbone, Input, Narrative, LocationCollection, Location, route, template) {
+    function (_, Backbone, Input, LocationCollection, Location, template) {
 
     var Form = Backbone.View.extend({
 
@@ -21,9 +19,7 @@ define(['underscore', 'backbone',
          * @type {Object}
          */
         events: {
-            "click #addStop": "nextStop",
-            "click #routeType a": "setRouteType",
-            "click #getDirections": "getDirections"
+            "click #addStop"        : "newStop"
         },
 
         /**
@@ -32,7 +28,7 @@ define(['underscore', 'backbone',
          * @return {void}         
          */
         initialize: function(options) {
-            var stops = this.model.get('stops');
+            var stops = this.model;
             
             this.map = options.map;
             this.inputs = [];
@@ -45,8 +41,9 @@ define(['underscore', 'backbone',
                 this.model.set({'stops': stops});
             }
 
-            stops.on('add',   this.addStop);
-            stops.on('reset', this.addStops);
+            stops.on('add',     this.addStop);
+            stops.on('reset',   this.addStops);
+            stops.on('destroy',  this.removeStop);
         },
 
         /**
@@ -54,7 +51,7 @@ define(['underscore', 'backbone',
          * @return {[type]} [description]
          */
         render: function() {
-            var stops = this.model.get('stops');
+            var stops = this.model;
 
             this.$el.html(this.html);
 
@@ -67,32 +64,17 @@ define(['underscore', 'backbone',
         },
 
         /**
-         * Runs our route
-         * @param  {Object} evt object
-         * @return {void}     
+         * 
+         * @return {Promis} 
          */
-        getDirections: function(evt) {
-            var self = this,
-                promises = [];
-
-            //- prevent the form from submitting
-            evt.preventDefault();
+        ready: function() {
+            var promises = [];
 
             _.each(this.inputs, function(input) {
                 promises.push(input.resolve());
             });
 
-            $.when(promises)
-            .pipe (
-                function() {
-                    return route.route(self.map.mqa, self.model)
-                }
-            ).done(
-                function(narrative) { 
-                    self.narrative = new Narrative({narrative: narrative});
-                    $('#pane').append(self.narrative.render().el);
-                }
-            );
+            return promises;
         },
 
         /**
@@ -100,9 +82,22 @@ define(['underscore', 'backbone',
          * @param  {Object} event object
          * @return {void}       
          */
-        nextStop: function(evt) {
-            var stops = this.model.get('stops');
+        newStop: function(evt) {
+            var stops = this.model;
             stops.add(new Location);
+        },
+
+        /**
+         * Stop has been removed, need to ensure that there is atleast two.
+         * @param  {Object} evt event object
+         * @return {void}     
+         */
+        removeStop: function(evt) {
+
+            if (this.model.length <= 2) {
+                this.$el.removeClass('multi');
+            } 
+
         },
 
         /**
@@ -117,6 +112,10 @@ define(['underscore', 'backbone',
 
             //- render and append
             this.$el.find('ol').append(input.render().el);
+
+            if (this.model.length > 2) {
+                this.$el.addClass('multi');
+            }
         },
 
         /**
@@ -125,20 +124,7 @@ define(['underscore', 'backbone',
          */
         addStops: function(stops) {
             stops.each(this.addStop);
-        },
-
-        /**
-         * Sets our route type -- driving, pedestrian, transit, bicycle
-         * @param {Object} event object
-         */
-        setRouteType: function(evt) {
-            var target = event.target;
-
-            evt.preventDefault();
-
-            this.model.set({'routeType': target.value});
-
-        }   
+        }
 
     });
 

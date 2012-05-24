@@ -11,7 +11,7 @@ define(['underscore',
          */
         events: {
             'blur input': 'search',
-            'click .close': 'remove'
+            'click .close': 'deleteStop'
         },
 
         /**
@@ -39,6 +39,7 @@ define(['underscore',
          */
         initialize: function(options) {
             _.bind(this.search, this);
+            this.model.on('destroy', this.remove, this);
         },
 
         /**
@@ -94,8 +95,14 @@ define(['underscore',
             return promise;
         },
 
-        remove: function(event) {
-            this.$el.remove();
+        /**
+         * Deletes this stop.
+         * @param  {Object} evt event object
+         * @return {void}     
+         */
+        deleteStop: function(evt) {
+            evt.preventDefault();
+            this.model.destroy();
         }
 
     });
