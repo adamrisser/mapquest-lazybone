@@ -30,7 +30,7 @@ define(['underscore',
          * Our input template.
          * @type {String}
          */
-        template: '<div class="control"><input type="text"/><button class="close">&times;</button></div>',
+        template: '<span class="marker"></span><div class="control"><input type="text"/><button class="close">&times;</button></div>',
 
         /**
          * Backbone initializer.

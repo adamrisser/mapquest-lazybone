@@ -2,14 +2,14 @@ define(['underscore', 'backbone',
     'directions/models/query', 
     'directions/models/locationcollection',
     'directions/models/location',
-    'directions/views/form', 
+    'directions/views/inputs', 
     'directions/views/narrative',    
     'directions/services/route',    
     'less!directions/css/directions',
     'twitter', 
     'css!twittercss'
 ], 
-    function (_, Backbone, Query, LocationCollection, Location, Form, Narrative, route) {
+    function (_, Backbone, Query, LocationCollection, Location, Inputs, Narrative, route) {
 
     var Directions = Backbone.View.extend({
 
@@ -58,7 +58,7 @@ define(['underscore', 'backbone',
          */
         render: function() {
             var stops = this.model.get('stops'),
-                inputs = this.inputs = new Form({
+                inputs = this.inputs = new Inputs({
                     model: stops,
                     map: this.map
                 });

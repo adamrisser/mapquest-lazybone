@@ -2,11 +2,11 @@ define(['underscore', 'backbone',
     'directions/views/input', 
     'directions/models/locationcollection',
     'directions/models/location',
-    'text!directions/html/form.html', 
+    'text!directions/html/inputs.html', 
     'less!directions/css/directions'], 
     function (_, Backbone, Input, LocationCollection, Location, template) {
 
-    var Form = Backbone.View.extend({
+    var Inputs = Backbone.View.extend({
 
         /**
          * Our root element.
@@ -128,5 +128,5 @@ define(['underscore', 'backbone',
 
     });
 
-    return Form;
+    return Inputs;
 });
