@@ -5,12 +5,15 @@
  * have been added to the model.
  * @fileOverview
  */
+/*global define, Backbone, MQA */
 define([
     'tmpl!mapresult/html/result',
     'tmpl!core/html/location', 
     'less!searchresults/css/results'
 ], function (template, locationTemplate) {
     
+    "use strict";
+
     var MapResults = Backbone.View.extend({
         
         /**
@@ -32,18 +35,24 @@ define([
          * @constructor
          */
         initialize: function (options) {
-            var self = this;
+            var core = this.core = options.core;
             
-            self.map = core.map;
-            self.sc = new MQA.ShapeCollection();
-            self.sc.collectionName = 'mappoi';
+            core.model.on('change:location', this.render, this);
             
-            _.bindAll(self, 'handleLoc', 'render');
-            core.model.on('change:location', self.render);
-            
-            // render any results that were inserted before the change:location
-            // event was bound onto
-            self.render(core.model)
+            // render any results that were inserted before the 
+            // change:location event was bound onto
+            this.render(core.model);
+        },
+        
+        /**
+         * Handle a model location change, only render map results
+         * @param  {Backbone.Model} model core model
+         * @method
+         */
+        handleLocation: function (model) {
+            if (model.get('state') === 'map') {
+                this.render(model);
+            }
         },
         
         /**
@@ -53,40 +62,41 @@ define([
          * @method
          */
         render: function (model) {
-            var self = this;
+            var self = this,
             
-            // only render map results
-            if (model.get('state') === 'map') {
-                var loc = model.get('location'),
-                    html = self.handleLoc(loc);
-                
-                self.$el.empty().append(html);
-                
-                //TODO: move this logic into own view
-                // add to the map and best fit
-                self.map.mqa.addShapeCollection(self.sc);
-                self.map.bestFit();
-            }
+            loc  = model.get('location'),
+            html = self.getHtml(loc);
+            
+            self.$el.empty().append(html);
+            
+            // add to the map
+            self.core.model.saveToShapeCollection({
+                name: 'mapresults',
+                shapes: self.createPoi(loc)
+            });
             
             return self;
         },
         
         /**
-         * Handle a new location model coming into the results view
+         * Create a map results POI
+         * @param  {Backbone.Model} loc location model
+         * @return {MQA.Poi}
+         * @method
+         */
+        createPoi: function (loc) {
+            return new MQA.Poi(loc.get('address').latLng);
+        },
+        
+        /**
+         * Get HTML for a location
          * @param  {Backbone.Model} loc location model that contains map results
          * @return {String}             location in html form
          * @method
          */
-        handleLoc: function (loc) {
-            var adr = loc.get('address');
-            
-            //TODO: probably need a POI manager, this is out of place here
-            // add POI
-            this.sc.add(new MQA.Poi(adr.latLng)); 
-                    
-            // create the location object html
+        getHtml: function (loc) {
             return locationTemplate({
-                adr: adr, 
+                adr: loc.get('address'),
                 name: loc.get('name')
             });
         },
@@ -96,10 +106,6 @@ define([
          * @method
          */
         dispose: function () {
-            var mqa = this.map.mqa;
-            mqa.getShapeCollection('mappoi').removeAll();
-            mqa.removeShapeCollection('mappoi');
-            
             this.$el.empty();
             this.off();
         }
