@@ -36,12 +36,12 @@ define(['underscore', 'backbone',
 
         /**
          * Initialize our template.
-         * @param {Array}         frags route fragments that initialized the app
-         * @param {Backbone.View} core  core winston application
+         * @param {Array}         options.fragments route fragments that initialized the app
+         * @param {Backbone.View} options.core      core winston application
          * @return {void} 
          */
-        initialize: function(frags, core) {
-            this.map = core.map;
+        initialize: function(options) {
+            this.map = options.core.map;
 
             _.bindAll(this);
 

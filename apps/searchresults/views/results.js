@@ -3,7 +3,7 @@
  * 
  * The results list is displayed on the summary pane after locations
  * have been added to the model.
- * @description
+ * @fileOverview
  */
 //TODO: poi code should be stripped from this view and moved elswhere
 define([
@@ -28,14 +28,14 @@ define([
         
         /**
          * Initialize the view. Bind it to the model
-         * @param {Array}        frags route fragments that initialized the app
-         * @param {Backbone.View} core  core winston application
+         * @param {Array}         options.fragments route fragments that initialized the app
+         * @param {Backbone.View} options.core      core winston application
          * @constructor
          */
-        initialize: function (frags, core) {
+        initialize: function (options) {
             var self = this;
             
-            self.map = core.map;
+            self.map = options.core.map;
             
             self.sc = new MQA.ShapeCollection();
             self.sc.collectionName = 'searchpois';
@@ -45,7 +45,7 @@ define([
             
             // render any results that were inserted before the change:location
             // event was bound onto
-            self.render(core.model)
+            self.render(options.core.model)
         },
         
         /**

@@ -3,7 +3,7 @@
  * 
  * The results list is displayed on the summary pane after locations
  * have been added to the model.
- * @description
+ * @fileOverview
  */
 define([
     'tmpl!mapresult/html/result',
@@ -27,11 +27,11 @@ define([
         
         /**
          * Initialize the view. Bind it to the model
-         * @param {Array}         frags route fragments that initialized the app
-         * @param {Backbone.View} core  core winston application
+         * @param {Array}         options.fragments route fragments that initialized the app
+         * @param {Backbone.View} options.core      core winston application
          * @constructor
          */
-        initialize: function (frags, core) {
+        initialize: function (options) {
             var self = this;
             
             self.map = core.map;

@@ -35,19 +35,17 @@ define([
         
         /**
          * Initialize this hood.
-         * @param {Array}        frags route fragments that initialized the app
-         * @param {BackboneView} core  core  winston application
+         * @param {Array}         options.fragments route fragments that initialized the app
+         * @param {Backbone.View} options.core      core winston application
          * @constructor        
          */
-        initialize: function (frags, core) {
-            var self = this, 
-                model = self.model = new ParksModel();
-            
-            self.core = core;
-            
+        initialize: function (options) {
+            var self = this;
             _.bindAll(self, 'save', 'saveAsShapeCollection');
             
-            self.summary = new ParksSummary(model);
+            self.core = options.core; 
+            self.model = new ParksModel();
+            self.summary = new ParksSummary(self.model);
             
             self.load();
         },
