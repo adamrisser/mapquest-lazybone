@@ -30,7 +30,7 @@ define(['backbone'], function (Backbone) {
              * but technically anything goes amirite?
              * @type {Backbone.Collection<MQA.ShapeCollections>}
              */
-            shapeCollections: new ShapeCollectionCollection,
+            shapeCollections: new ShapeCollectionCollection(),
             
             /**
              * An easy way to tell the state of the model
@@ -115,7 +115,7 @@ define(['backbone'], function (Backbone) {
                 this.get('shapeCollections').trigger('update', backboneModel);
             }
             
-        },
+        }
         
     });
     

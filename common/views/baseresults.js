@@ -8,7 +8,7 @@
  * 
  * @fileOverview
  */
-/*global define, Backbone, MQA */
+/*global define, Backbone, MQA, _ */
 define(function () {
     
     "use strict";
