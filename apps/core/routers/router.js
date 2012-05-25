@@ -66,7 +66,10 @@ define(['backbone'], function (Backbone) {
                 // change the arguments object into an array
                 var args = Array.prototype.slice.call(varargs);
                 
-                self.activeApp = new App(args, self.coreApp);
+                self.activeApp = new App({
+                    fragments: args,
+                    core: self.coreApp
+                });
             });
         },
         

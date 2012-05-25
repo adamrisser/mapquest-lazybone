@@ -51,16 +51,6 @@ define([
             
             router.on('route:map',    self.handleRouting, self);
             router.on('route:search', self.handleRouting, self);
-            
-            self.render();
-        },
-        
-        /**
-         * Render the summary form
-         * @method
-         */
-        render: function () {
-            return this;
         },
         
         /**
