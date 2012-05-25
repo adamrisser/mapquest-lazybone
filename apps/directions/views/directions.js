@@ -47,7 +47,7 @@ define(['underscore', 'backbone',
 
             this.model = new Query({
                 stops: new LocationCollection
-            }),
+            });
 
             this.render();
         },
