@@ -2,7 +2,7 @@ define(['backbone'], function (Backbone) {
 
 	var Stop = Backbone.Model.extend({
 
-		default: {
+		defaults: {
 
 			type: 'stop',
 
