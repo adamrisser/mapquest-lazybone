@@ -59,7 +59,7 @@ define([
          * @method
          */
         handleRouting: function (query) {
-            $('#searchFormTin').val(query.replace('+', ' '));
+            $('#searchFormTin').val(query.replace(/\+/g, ' '));
             this.submit();
         },
         

@@ -5,9 +5,9 @@
  * and on the right for languages that do the opposite.  The summary holds
  * all the information that compliments the map. The pane can also be collapse 
  * to give the map more space on the page.
- * @fileoverview
+ * @fileOverview
  */
-define(['less!core/css/pane'], function () {
+define(['backbone', 'less!core/css/pane'], function (Backbone) {
     
     /**
      * Pane widget

@@ -77,6 +77,7 @@ require.config({
         'core'  : 'apps/core',
         'vibe'  : 'apps/vibe',
         'parks' : 'apps/parks',
+        'common': 'common',
         'directions' : 'apps/directions',
         'mapresult'  : 'apps/mapresult',
         'searchresults' : 'apps/searchresults',

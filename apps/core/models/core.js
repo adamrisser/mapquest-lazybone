@@ -40,7 +40,6 @@ define(['backbone'], function (Backbone) {
              * - search
              * @type {String}
              */
-            //TODO: needed anymore?
             state: 'index'
         },
         
