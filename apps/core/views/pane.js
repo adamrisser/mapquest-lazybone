@@ -7,7 +7,7 @@
  * to give the map more space on the page.
  * @fileoverview
  */
-define(['less!core/css/pane'], function () {
+define(['backbone', 'less!core/css/pane'], function (Backbone) {
     
     /**
      * Pane widget
