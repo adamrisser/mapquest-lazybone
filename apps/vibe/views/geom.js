@@ -4,7 +4,7 @@
  * View for putting neighborhood shapes on the map
  * @description
  */
-define(['vibe/shapeutil'], function (util) {
+define(['backbone', 'vibe/shapeutil'], function (Backbone, util) {
     
     var _API_URL = 'http://mqvibe-api.mapquest.com/places/search',
     
