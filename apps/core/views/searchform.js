@@ -31,7 +31,8 @@ define([
          * @type {Object}
          */
         events: {
-            'click #searchFormBtn' : 'submit'
+            'submit' : 'submit',
+            'keypress input' : 'handleKeyPress'
         },
         
         /**
@@ -47,7 +48,7 @@ define([
             self.map   = options.core.map;
             self.model = options.core.model;
             
-            _.bindAll(self, 'handleResponse', 'setRoute');
+            _.bindAll(self, 'handleRouting', 'handleResponse', 'handleKeyPress', 'setRoute');
             
             router.on('route:map',    self.handleRouting, self);
             router.on('route:search', self.handleRouting, self);
@@ -59,7 +60,7 @@ define([
          * @method
          */
         handleRouting: function (query) {
-            $('#searchFormTin').val(query.replace('+', ' '));
+            this.$el.find('input').val(query.replace('+', ' '));
             this.submit();
         },
         
@@ -67,8 +68,12 @@ define([
          * Submit the Summary Form. Load the service util if not present
          * @method
          */
-        submit: function () {
-            var query = $('#searchFormTin').val();
+        submit: function (evt) {
+            var query = this.$el.find('input').val();
+            
+            if (evt) {
+                evt.preventDefault();
+            } 
             
             if (query) {
                 $.when(
@@ -78,6 +83,17 @@ define([
                     this.handleResponse,
                     this.setRoute
                 );
+            }
+        },
+
+        /**
+         * On enter, submit the search form
+         * @param  {Object} evt 
+         * @return {void}     
+         */
+        handleKeyPress: function (evt) {
+            if (evt.keyCode == 13) {
+                this.submit();
             }
         },
         
@@ -115,7 +131,7 @@ define([
          * @method
          */
         setRoute: function () {
-            var query = $('#searchFormTin').val().replace(/\s/g, '+'),
+            var query = this.$el.find('input').val().replace(/\s/g, '+'),
                 state = this.model.get('state');
             
             this.router.navigate('#/' + state + '/' + query, {

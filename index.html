@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en" class="gecko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>MapQuest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -8,48 +8,29 @@
     
     <script type="text/javascript" data-main="js/bootstrap" src="js/ext/require.js"></script>
 </head>
-<body>
-    <div id="fb-root"></div>
-    
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-            
-    <div id="header">
-        <div class="social">
-            <span><a href="#">Sign In</a></span> 
-            <span class="sep">|</span>
-            <span><a href="#">Preferences</a></span>
-            <a href="https://twitter.com/mapquest" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @mapquest</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>            
-            <div class="fb-like" data-href="http://www.facebook.com/MapQuest" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="verdana"></div>
-        </div>        
-        <div id="logo">
-            <a href="#"><img src="img/logo.png"/></a>
-        </div>
-        <div id="searchForm">
-            <form class="form-search" onsubmit="return false;">
-                <input id="searchFormTin" class="tin" type="text" name="" value="" placeholder="Enter address, business, or landmark..." />&nbsp;
-                <button class="btn btn-primary" id="searchFormBtn"><span></span></button>
+<body>      
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a class="brand" href="#"><img src="/img/ilogo.png"/></a>
+            <form id="searchForm" class="navbar-search pull-left form-search">
+                <input type="text" class="search-query" placeholder="Search">
             </form>
-        </div>        
+            <ul class="nav">
+                <li><a href="/#/directions">Directions</a></li>
+                <li><a href="/#/places">Places</a></li>
+                <li><a href="/#/explore/neighborhoods/380454">Neighborhoods</a></li>
+                <li><a href="/#/explore/nationalparks">Parks</a></li>
+            </ul>
+        </div>
     </div>
     
-    <ul id="nav">
-        <li class="selected"><a href="/#/directions">Directions</a><div class="icon"></div></li>
-        <li><a href="/#/search">Places</a></li>
-        <li><a href="/#/explore/neighborhoods/380454">Neighborhoods</a></li>
-        <li><a href="/#/explore/nationalparks">Parks</a></li>
-    </ul>
-    
-    <div class="wrapper">
-        <div id="pane"></div>
-    	<div id="map" style="width: 500px; height: 300px"></div>
+    <div id="wrapper">
+        <div id="content">
+            <div id="pane"></div>
+            <div id="map-wrapper">
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
-	
 </body>
 </html>

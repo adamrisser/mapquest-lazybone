@@ -27,19 +27,6 @@ define(['backbone', 'less!core/css/navbar'], function (Backbone) {
          * @constructor
          */
         initialize: function (options) {
-            var el;
-            
-            // passed in selector or the first link
-            if (options && options.hash) {
-                el = $('#nav a[href$="' + options.hash + '"]');                
-            }
-            
-            if (!el || el.length < 1) {
-                el = $('#nav .selected a');
-            }
-            
-            // set element that is active
-            this._toActive(el);
         },
                 
         /**

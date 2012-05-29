@@ -37,13 +37,12 @@ define([
          */
          _resize: function () {
              //TODO: fix the padding 20 and height 80
-            var pane = $('#pane').width() + 20,
-                h = window.innerHeight - 80 || 0,
-                w = window.outerWidth - pane;
-            
+            var pane = $('#pane').width(),
+                h = $('#map').closest('#wrapper').height() || 0,
+                w = $('#map').closest('#wrapper').width() - pane;
+
             // resize the map parent
             this.$el.css({
-                left: pane + 'px',
                 width: (w > 0 ? w : 0) + 'px',
                 height: h + 'px'
             });

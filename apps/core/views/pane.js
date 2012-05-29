@@ -27,7 +27,6 @@ define(['backbone', 'less!core/css/pane'], function (Backbone) {
          */
         initialize: function () {
             _.bindAll(this, '_resize');
-            this._resize();
             $(window).resize(this._resize);
         },
         
@@ -36,9 +35,6 @@ define(['backbone', 'less!core/css/pane'], function (Backbone) {
          * @method
          */
         _resize: function () {
-            this.$el.css({
-                height: (window.innerHeight - 80 || 0) + 'px'
-            });
         },
         
         /**
