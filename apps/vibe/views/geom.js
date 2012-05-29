@@ -64,7 +64,7 @@ define(['vibe/shapeutil'], function (util) {
                     include_children: 1,
                     description_limit: 141
                 },
-                dataType: 'jsonp',
+                dataType: 'jsonp'
             });
         },
         
