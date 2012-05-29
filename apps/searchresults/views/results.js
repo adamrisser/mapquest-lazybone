@@ -1,18 +1,21 @@
 /**
- * Results List
+ * Search Results List
  * 
  * The results list is displayed on the summary pane after locations
  * have been added to the model.
  * @fileOverview
  */
-//TODO: poi code should be stripped from this view and moved elswhere
+/*global define, Backbone, MQA */
 define([
+    'common/views/baseresults',
     'tmpl!searchresults/html/results', 
     'tmpl!core/html/location', 
     'less!searchresults/css/results'
-], function (template, locationTemplate) {
+], function (BaseResults, template, locationTemplate) {
     
-    var SearchResultsList = Backbone.View.extend({
+    "use strict";
+    
+    var SearchResultsList = BaseResults.extend({
         
         /**
          * Parent element
@@ -27,85 +30,49 @@ define([
         template: template,
         
         /**
-         * Initialize the view. Bind it to the model
-         * @param {Array}         options.fragments route fragments that initialized the app
-         * @param {Backbone.View} options.core      core winston application
-         * @constructor
-         */
-        initialize: function (options) {
-            var self = this;
-            
-            self.map = options.core.map;
-            
-            self.sc = new MQA.ShapeCollection();
-            self.sc.collectionName = 'searchpois';
-            
-            _.bindAll(self, 'handleLoc', 'render');
-            core.model.on('change:location', self.render);
-            
-            // render any results that were inserted before the change:location
-            // event was bound onto
-            self.render(options.core.model)
-        },
-        
-        /**
-         * Render the view to the page
-         * @param {Backbone.Model} model  core model
+         * Underscore template to display a single location
          * @method
          */
-        render: function (model) {
-            var self = this;
-            
-            // only render search results
+        locationTemplate: locationTemplate,
+        
+        /**
+         * Handle a model location change, only render search results
+         * @param  {Backbone.Model} model core model
+         * @method
+         */
+        handleLocation: function (model) {
             if (model.get('state') === 'search') {
-                    
-                var html = self.template({
-                    locs: model.get('location').get('unresolvedLocations'), 
-                    locTemplate: self.handleLoc
-                });
-                
-                self.$el.empty().append(html);
-                
-                //TODO: move this logic into own view
-                // add to the map and best fit
-                self.map.mqa.addShapeCollection(self.sc);
-                self.map.bestFit();
+                this.render(model);
+                this.renderShapes(model);
             }
-            
-            return self;
         },
         
         /**
-         * Handle a new location model coming into the results view
-         * @param  {Backbone.Model} loc location model that contains map results
-         * @return {String}             location in html form
+         * Render shapes on the map
+         * @param  {Backbone.Model} model core model
          * @method
          */
-        handleLoc: function (loc) {
-            var adr = loc.get('address');
+        renderShapes: function (model) {
+            var locs = model.get('location').get('unresolvedLocations'),
+                pois = locs.map(this.createPoi, this);
             
-            //TODO: probably need a POI manager, this is out of place here
-            // add POI
-            this.sc.add(new MQA.Poi(adr.latLng));
-                    
-            // create the location object html
-            return locationTemplate({
-                adr: adr, 
-                name: loc.get('name')
+            this.core.model.saveToShapeCollection({
+                name: 'searchresults',
+                shapes: pois
             });
         },
         
         /**
-         * Clean up the view
+         * Get result list HTML
+         * @param  {Backbone.Model} loc location model that contains map results
+         * @return {String}             location in html form
          * @method
          */
-        dispose: function () {
-            var mqa = this.map.mqa;
-            mqa.getShapeCollection('searchpois').removeAll();
-            mqa.removeShapeCollection('searchpois');
-            
-            this.$el.empty();
-            this.off();
+        getHtml: function (loc) {
+            return this.template({
+                locs: loc.get('unresolvedLocations'), 
+                locTemplate: this.getLocationHtml
+            });
         }
         
     });

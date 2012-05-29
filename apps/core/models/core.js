@@ -30,7 +30,7 @@ define(['backbone'], function (Backbone) {
              * but technically anything goes amirite?
              * @type {Backbone.Collection<MQA.ShapeCollections>}
              */
-            shapeCollections: new ShapeCollectionCollection,
+            shapeCollections: new ShapeCollectionCollection(),
             
             /**
              * An easy way to tell the state of the model
@@ -40,7 +40,6 @@ define(['backbone'], function (Backbone) {
              * - search
              * @type {String}
              */
-            //TODO: needed anymore?
             state: 'index'
         },
         
