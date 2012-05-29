@@ -62,11 +62,12 @@ define(['backbone'], function (Backbone) {
          * Set the model's state
          * @method
          */
+        //TODO: remove
         setState: function () {
             var loc = this.get('location'), state, query;
             
             if (loc.get('unresolvedLocations').length > 0) {
-                state = 'search';
+                state = 'map';
             }
             else {
                 state = 'map';

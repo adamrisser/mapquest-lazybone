@@ -19,13 +19,13 @@ define(['backbone'], function (Backbone) {
     var Router = Backbone.Router.extend({
 
         routes: {
-            ''                 : 'index', 
-            'build'            : 'build',
-            'signin'           : 'signIn',
-            'map/:query'       : 'map',
-            'search/:query'    : 'search',
-            'directions'       : 'directions',
-            'directions/type'  : 'directions',
+            ''                : 'index', 
+            'build'           : 'build',
+            'signin'          : 'signIn',
+            'map'             : 'places',
+            'map/:query'      : 'places',
+            'directions'      : 'directions',
+            'directions/type' : 'directions',
             'explore/nationalparks' : 'parks',
             'explore/neighborhoods/:placeId' : 'vibe'
         },
@@ -98,19 +98,11 @@ define(['backbone'], function (Backbone) {
         },
         
         /**
-         * Set the app into search mode
+         * Set the app into places mode
          * @method
          */
-        search: function () {
-            this.load('searchresults/views/results', arguments);
-        },
-        
-        /**
-         * Set the app into map mode
-         * @method
-         */
-        map: function () {
-            this.load('mapresult/views/result', arguments);
+        places: function () {
+            this.load('places/views/places', arguments);
         },
         
         /**

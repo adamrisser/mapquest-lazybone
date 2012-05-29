@@ -8,7 +8,7 @@
  */
 define([
     'backbone',
-    'core/models/location', 
+    'core/models/location',
     'less!core/css/searchform',
     'css!twittercss'
 ], function (Backbone, Location) {
@@ -60,7 +60,7 @@ define([
          * @method
          */
         handleRouting: function (query) {
-            this.$el.find('input').val(query.replace('+', ' '));
+            this.$el.find('input').val(query.replace(/\+/g, ' '));
             this.submit();
         },
         

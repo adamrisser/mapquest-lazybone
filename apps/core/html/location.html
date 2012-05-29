@@ -1,13 +1,28 @@
 
 
 <div class="vcard">    
-    <% if (name) { %>
-        <div class="name"><%= name %></div>
-    <% } %>
+    
+    <% if (name) { %><div class="name org line1"><%= name %></div><% } %>
+    
+    <div class="adr <% if (name) { %>line2<% } else { %>line1<% } %>">
         
-    <div class="address">
-        <% if (adr.street) { %> <span class="street"><%= adr.street %></span> <% } %>
-        <%= adr.locality %><% if (adr.locality) { %>, <% } %>
-        <%= adr.region %> <%= adr.postalCode %>
+        <% if (adr.street) { %><span class="street line2"><%= adr.street %></span><br /><% } %>
+        
+        <% if (adr.locality) { %><span class="locality"><%= adr.locality %></span><span class="separator">, </span><% } %>
+        
+        <% if (adr.region) { %><span class="region"><%= adr.region %></a><% } %>
+            
+        <% if (adr.postalCode) { %><span class="postal-code"><%= adr.postalCode %></span><% } %>
+        
+        <% if (adr.country) { %><span class="country-name"><%= adr.country %></span><% } %>
+        
+        <% if (adr.latLng && adr.latLng.lat && adr.latLng.lng) { %>
+        <div class="lat-lng">
+            <span class="latitude" ><%= adr.latLng.lat %></span>, 
+            <span class="longitude"><%= adr.latLng.lng %></span>
+        </div>
+        <% } %>
+        
     </div>
+    
 </div>

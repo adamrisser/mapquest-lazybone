@@ -74,13 +74,12 @@ require.config({
          * instantiates a new app, that new app gets a references to core. This
          * is how it is able to interface with the app as a whole.
          */
-        'core'  : 'apps/core',
-        'vibe'  : 'apps/vibe',
-        'parks' : 'apps/parks',
-        'common': 'common',
+        'core'   : 'apps/core',
+        'vibe'   : 'apps/vibe',
+        'parks'  : 'apps/parks',
+        'places' : 'apps/places',
+        'common' : 'common',
         'directions' : 'apps/directions',
-        'mapresult'  : 'apps/mapresult',
-        'searchresults' : 'apps/searchresults',
         
         // Utils 
         'resizer' : 'js/util/resizer'
