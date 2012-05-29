@@ -116,7 +116,7 @@ define(['backbone'], function (Backbone) {
                 this.get('shapeCollections').trigger('update', backboneModel);
             }
             
-        },
+        }
         
     });
     
