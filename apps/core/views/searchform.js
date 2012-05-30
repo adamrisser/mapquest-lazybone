@@ -32,6 +32,7 @@ define([
          */
         events: {
             'submit' : 'submit',
+            'click .search-action' : 'submit',            
             'keypress input' : 'handleKeyPress'
         },
         
@@ -93,7 +94,12 @@ define([
          */
         handleKeyPress: function (evt) {
             if (evt.keyCode == 13) {
-                this.submit();
+                
+                //- prevent default so that other browser don't submit the from,
+                //- then trigger manually
+                evt.preventDefault();
+
+                this.$el.trigger('submit');
             }
         },
         
