@@ -7,7 +7,7 @@ define([
     'core/utils/resizer',
     'core/models/location', 
     'less!core/css/map', 
-    'http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'
+    'http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'
 ], function (resizer, LocationModel) {
     
     /**
@@ -64,7 +64,13 @@ define([
                 core = self.options.core,
                 mqa;
             
-            self.mqa = mqa = new MQA.TileMap(self.el, options.zoom, options.center, 'map');
+            self.mqa = mqa = new MQA.TileMap({
+                mtype: 'osm',
+                elt: self.el, 
+                bestFitMargin: 25,
+                zoom: options.zoom, 
+                latLng: options.center
+            });
             
             MQA.withModule('largezoom', function() {
                 self.mqa.addControl(
