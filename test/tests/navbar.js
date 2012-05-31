@@ -16,9 +16,9 @@ require(['core/views/navbar'], function (NavBar) {
         ok(NavBar);
     });
     
-    QUnit.module('Initialization', {
+    module('Initialization', {
         
-        QUnit.setup: function () {
+        setup: function () {
             $('#qunit-fixture').html(nav);
             sinon.spy(NavBar.prototype, 'setActive');
         },
@@ -29,12 +29,12 @@ require(['core/views/navbar'], function (NavBar) {
         
     });
     
-    QUnit.test('Can be instantiated', 1, function () {
+    test('Can be instantiated', 1, function () {
         this.bar = new NavBar();
         ok(this.bar);
     });
     
-    QUnit.test('Navbar defaults to the first list item', 2, function () {
+    test('Navbar defaults to the first list item', 2, function () {
         var setActive = NavBar.prototype.setActive;
         
         // init bar to the vibe tab
@@ -47,7 +47,7 @@ require(['core/views/navbar'], function (NavBar) {
         ok($('#first-item').hasClass('active'), 'First element should of have been active.');
     });
     
-    QUnit.test('Navbar loads to the proper list item in the hash', 3, function () {
+    test('Navbar loads to the proper list item in the hash', 3, function () {
         var setActive = NavBar.prototype.setActive,
             hash = '/two';
         
@@ -64,7 +64,7 @@ require(['core/views/navbar'], function (NavBar) {
         equal(1, $('.navbar li.active').length);
     });
 
-    QUnit.test('Bad hash should not set any thing active.', 2, function () {
+    test('Bad hash should not set any thing active.', 2, function () {
         var setActive = NavBar.prototype.setActive,
             hash = '/tootoo';
         
@@ -76,7 +76,7 @@ require(['core/views/navbar'], function (NavBar) {
 
         // make sure only one item is active
         equal(0, $('.navbar li.active').length);
-    });
+    });    
     
     // ----------------------------------------------------------------------
     
