@@ -1,8 +1,6 @@
 require(['core/views/navbar'], function (NavBar) {
     
-    "use strict";
-
-    var nav = 
+    var nav =
         '<div class="navbar">' +
         '    <div class="navbar-inner">' +
         '        <ul class="nav">' +
@@ -18,7 +16,7 @@ require(['core/views/navbar'], function (NavBar) {
         ok(NavBar);
     });
     
-    module('Initialization', {
+    QUnit.module('Initialization', {
         
         setup: function () {
             $('#qunit-fixture').html(nav);
@@ -31,12 +29,12 @@ require(['core/views/navbar'], function (NavBar) {
         
     });
     
-    test('Can be instantiated', 1, function () {
+    QUnit.test('Can be instantiated', 1, function () {
         this.bar = new NavBar();
         ok(this.bar);
     });
     
-    test('Navbar defaults to the first list item', 2, function () {
+    QUnit.test('Navbar defaults to the first list item', 2, function () {
         var setActive = NavBar.prototype.setActive;
         
         // init bar to the vibe tab
@@ -49,7 +47,7 @@ require(['core/views/navbar'], function (NavBar) {
         ok($('#first-item').hasClass('active'), 'First element should of have been active.');
     });
     
-    test('Navbar loads to the proper list item in the hash', 3, function () {
+    QUnit.test('Navbar loads to the proper list item in the hash', 3, function () {
         var setActive = NavBar.prototype.setActive,
             hash = '/two';
         
@@ -66,7 +64,7 @@ require(['core/views/navbar'], function (NavBar) {
         equal(1, $('.navbar li.active').length);
     });
 
-    test('Bad hash should not set any thing active.', 2, function () {
+    QUnit.test('Bad hash should not set any thing active.', 2, function () {
         var setActive = NavBar.prototype.setActive,
             hash = '/tootoo';
         
@@ -78,7 +76,7 @@ require(['core/views/navbar'], function (NavBar) {
 
         // make sure only one item is active
         equal(0, $('.navbar li.active').length);
-    });    
+    });
     
     // ----------------------------------------------------------------------
     
