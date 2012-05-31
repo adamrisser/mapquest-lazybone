@@ -7,10 +7,13 @@
  */
 /*global define, Backbone, MQA */
 define([
+    'backbone',
+    'underscore',
     'tmpl!places/html/results', 
-    'tmpl!core/html/location', 
+    'tmpl!core/html/location',
+    'common/views/poi', 
     'less!places/css/results'
-], function (template, locationTemplate) {
+], function (Backbone, _, template, locationTemplate, Poi) {
     
     "use strict";
     
@@ -110,7 +113,7 @@ define([
             
             // decide whether to render a single location or a results list
             if (loc.get('status') === 'RESOLVED') {
-                html = this.getLocationHtml(loc)
+                html = this.getLocationHtml(loc);
             }
             else {
                 html = this.template({
@@ -129,10 +132,7 @@ define([
          * @method
          */
         getLocationHtml: function (loc) {
-            return this.locationTemplate({
-                adr: loc.get('address'),
-                name: loc.get('name')
-            });
+            return this.locationTemplate({ loc: loc.attributes });
         },
         
         /**
@@ -142,7 +142,10 @@ define([
          * @method
          */
         createPoi: function (loc) {
-            return new MQA.Poi(loc.get('address').latLng);
+            return new Poi({
+                loc:  loc,
+                path: 'tmpl!core/html/location'
+            });
         },
         
         /**

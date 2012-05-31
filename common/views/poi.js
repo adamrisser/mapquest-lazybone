@@ -20,7 +20,9 @@ define(['tmpl!common/html/infowindow'], function (tmpl) {
             // accept a location object or a location model
             self.loc = options.loc.attributes || options.loc;
             
-            latLng = self.loc.latLng;
+            // TODO: standardize location object so this is going to be a pain
+            latLng = self.loc.latLng || self.loc.address.latLng;
+            
             self.poi = new MQA.Poi(new MQA.LatLng(latLng.lat, latLng.lng));
             
             self.setOptions();
@@ -38,12 +40,15 @@ define(['tmpl!common/html/infowindow'], function (tmpl) {
             poi.setIconOffset({ x: -11, y: -36 });
             
             poi.setShadow(null);
-            poi.setIcon(this.icon);
+            
+            if (this.icon) {
+                poi.setIcon(this.icon);
+            }
             
             // have to run these once so the poi will listen for events
             poi.setInfoContentHTML('&nbsp;');
-            poi.setRolloverContent(this.loc.name);
-            poi.setRolloverContent('<div class="rollover">' + this.loc.name + '</div>');
+            poi.setRolloverContent('<div class="rollover">' + 
+                (this.loc.name || this.loc.address.singleLineAddress) + '</div>');
             
             // have to run these once so the poi will listen for events
             poi.setInfoContentHTML('&nbsp;');
