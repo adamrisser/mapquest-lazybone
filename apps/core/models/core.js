@@ -103,7 +103,7 @@ define(['backbone'], function (Backbone) {
                 
                 // populate the new collection
                 _.each(options.shapes, function (shape) {                    
-                    sc.add(shape.toMQA())
+                    sc.add(shape.toMQA());
                 });    
                 
                 this.get('shapeCollections').add(sc);

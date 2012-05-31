@@ -144,10 +144,10 @@ define([
                 geometry: geometry,
                 properties: {
                     color: '#000000',
-                    colorAlpha: .2,
+                    colorAlpha: 0.2,
                     borderWidth: 2,
                     fillColor: '#075053',
-                    fillColorAlpha: .1    
+                    fillColorAlpha: 0.1    
                 }
             });
         },
