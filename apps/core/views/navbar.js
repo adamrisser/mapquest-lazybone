@@ -3,7 +3,7 @@
  * Adds functionality to the navigation bar that sits at the top of the page.
  * @fileOverview
  */
-define(['backbone', 'less!core/css/navbar'], function (Backbone) {
+define(['underscore', 'backbone', 'less!core/css/navbar'], function (_, Backbone) {
     
     var NavBar = Backbone.View.extend({
         
@@ -11,14 +11,14 @@ define(['backbone', 'less!core/css/navbar'], function (Backbone) {
          * Parent
          * @property
          */
-        el: '#nav',
+        el: '.navbar',
         
         /**
          * Delegated events off of parent
          * @type {Object}
          */
         events: {
-            'click a': '_handleClick'
+            'click a': 'handleClick'
         },
         
         /**
@@ -27,72 +27,40 @@ define(['backbone', 'less!core/css/navbar'], function (Backbone) {
          * @constructor
          */
         initialize: function (options) {
-        },
-                
-        /**
-         * Handle click event on a list item
-         * @param {Object} evt click event
-         * @method
-         */
-        _handleClick: function (evt) {
-            var el = $(evt.target);
+            var el;
             
-            $.when(
-                this._animateTo(el)
-            ).done(
-                _.bind(this._setSelected, this, el)
-            );
+            // passed in selector or the first link
+            if (options && options.hash) {
+                el = this.$el.find('a[href$="' + options.hash + '"]').closest('li');                
+            }
+            else {
+                el = this.$el.find('li:eq(0)');
+            }
+            
+            // set element that is active
+            this.setActive(el);            
         },
-        
+
         /**
-         * Get new position of the cursor
-         * @param  {jQuery} tgt target
-         * @return {Object}
-         * @method
+         * Handles individual click events.
+         * @param  {Object} evt event object
+         * @return {void}     
          */
-        _getCursorPos: function (tgt) {
-            return { 
-                left: ((tgt.offset().left + tgt.width() / 2) - 5) + 'px' 
-            };
+        handleClick: function(evt) {
+            var el = $(evt.target).closest('li');
+            this.setActive(el);
         },
-        
+
         /**
-         * Animate the arrow to a list item
-         * @param {jQuery}          el jquery element
-         * @param {jQuery.Promise}  the promise that the animation is done
-         * @method
+         * Sets the active link in the navbar
+         * @param {Object} active jquery object representing the item to set active
+         * @return {void} 
          */
-        _animateTo: function (el) {
-            return $('ul .icon').animate(this._getCursorPos(el), 'medium');
-        },
-        
-        /**
-         * Move the arrow to a list item
-         * @param  {jQuery} el
-         * @method
-         */
-        _toActive: function (el) {
-            $('ul .icon').css(this._getCursorPos(el));
-            this._setSelected(el);
-        },
-        
-        /**
-         * Set selected on active class, remove selected class from previous
-         * @param  {jQuery} el
-         * @method
-         */
-        _setSelected: function (el) {
-            this.$el.find('.selected').removeClass('selected'); 
-            el.parent('li').addClass('selected');
-            $('ul.subdir').slideDown('slow');
-        },
-        
-        /**
-         * Clean up the view
-         * @method
-         */
-        dispose: function () {
-            this.off();
+        setActive: function(active) {
+            var prev = this.$el.find('li.active');
+
+            prev.removeClass('active');
+            active.addClass('active');            
         }
         
     });
