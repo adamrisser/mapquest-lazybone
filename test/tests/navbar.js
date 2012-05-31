@@ -18,7 +18,7 @@ require(['core/views/navbar'], function (NavBar) {
     
     QUnit.module('Initialization', {
         
-        setup: function () {
+        QUnit.setup: function () {
             $('#qunit-fixture').html(nav);
             sinon.spy(NavBar.prototype, 'setActive');
         },
