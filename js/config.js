@@ -65,6 +65,12 @@ require.config({
         'twitter'   : 'js/ext/bootstrap/js/bootstrap',
         'twittercss': 'js/ext/bootstrap/css/bootstrap',
         
+        /**
+         * Mapquest toolkit
+         * An easy way to shortcut which version of our own toolkit we are using
+         */
+        'MQA': 'http://open.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5',
+        
         /*
          * Applications can be thought of as modes of the site or large pieces 
          * of functionality.
