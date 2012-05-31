@@ -2,7 +2,7 @@
  * A poi (with infowindow attached) view
  * @fileOverview
  */
-define(function () {
+define(['tmpl!common/html/infowindow'], function (tmpl) {
     
     var Poi = Backbone.View.extend({
         
@@ -43,6 +43,7 @@ define(function () {
             // have to run these once so the poi will listen for events
             poi.setInfoContentHTML('&nbsp;');
             poi.setRolloverContent(this.loc.name);
+            poi.setRolloverContent('<div class="rollover">' + this.loc.name + '</div>');
             
             // have to run these once so the poi will listen for events
             poi.setInfoContentHTML('&nbsp;');
@@ -55,11 +56,33 @@ define(function () {
         renderInfoWindow: function () {
             var self = this;
             
-            require([self.path], function (tmpl) {
+            require([self.path], function (pathtmpl) {
+                var html = pathtmpl({
+                    loc: self.loc 
+                });
+                
+                // wrap html around infowindow html and attach
                 self.poi.infoWindow.setContent(tmpl({
-                    loc: self.loc
-                }));    
+                    html: html
+                }));
+                
+                self.resetSize();
             });
+        },
+        
+        /**
+         * Recalculate and set the infowindow's height
+         * @method
+         */
+        resetSize: function () {
+            var self = this,
+                poi = self.poi,
+                map = self.poi.map,
+                poiDim = poi.infoWindow ? poi.infoWindow.getNaturalDimensions() : { height:0, width:0 },
+                dy = poiDim.height + 5,
+                dx = Math.max(0, poiDim.width + 5);
+            
+            map.windowManager.resizePoiWindow(poi, dx, dy);
         },
         
         /**
