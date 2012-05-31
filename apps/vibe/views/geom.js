@@ -4,7 +4,7 @@
  * View for putting neighborhood shapes on the map
  * @description
  */
-define(['backbone', 'vibe/shapeutil'], function (Backbone, util) {
+define(['backbone', 'vibe/shapeutil', 'common/views/poi', 'common/views/shape'], function (Backbone, util, Poi, Shape) {
     
     var _API_URL = 'http://mqvibe-api.mapquest.com/places/search',
     
@@ -36,7 +36,7 @@ define(['backbone', 'vibe/shapeutil'], function (Backbone, util) {
             $.when(
                 this.fetch()
             ).done(
-                this.save,
+                this.save, 
                 this.saveAsShapeCollection
             );
         },
@@ -76,26 +76,22 @@ define(['backbone', 'vibe/shapeutil'], function (Backbone, util) {
          */
         saveAsShapeCollection: function (hood) {
             MQA.withModule('shapes', function () {
-                
                 hood = hood.features[0];
                 
-                var overlay = new MQA.PolygonOverlay(),
-                    style   = util.getVibeScoreParams(hood.properties.vibe_score),
-                    shapePoints = util.flattenPoints(hood.geometry);
-                
-                overlay.setShapePoints(shapePoints);
-                
-                overlay.updateProperties({
-                    colorAlpha: 1.0,
-                    color: '#000',
-                    borderWidth: 3,
-                    fillColor: style.rgb,
-                    fillColorAlpha: style.opacity
-                });
+                var style = util.getVibeScoreParams(hood.properties.vibe_score);
                 
                 self.core.model.saveToShapeCollection({
                     name: 'vibe',
-                    shapes: overlay
+                    shapes: new Shape({
+                        geometry: hood.geometry,
+                        properties: {
+                            colorAlpha: 1.0,
+                            color: '#000',
+                            borderWidth: 3,
+                            fillColor: style.rgb,
+                            fillColorAlpha: style.opacity
+                        }
+                    })
                 });
             });
         },
