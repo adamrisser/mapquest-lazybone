@@ -7,12 +7,11 @@
  * @fileOverview
  */
 define([
-    'places/views/form',
     'places/models/places',
     'places/views/results',
     'core/models/location',
     'tmpl!places/html/places'
-], function (form, resultsModel, results, Location, template) {
+], function (ResultsModel, results, Location, template) {
     
     var Places = Backbone.View.extend({
         
@@ -43,23 +42,14 @@ define([
          * @constructor        
          */
         initialize: function (options) {
-            var self = this;
+            var self = this, model;
             _.bindAll(self, 'handleResponse', 'setRoute');
             
-            self.core   = options.core;
-            self.model = new resultsModel();
+            self.core  = options.core;
+            model = self.model = new ResultsModel();
             
             // add the basic places skeleton divs to the DOM
             self.render();
-            
-            /**
-             * Form used to make searches
-             * @type {Backbone.View}
-             * @property
-             */
-            self.form = new form({
-                model: self.model
-            });
             
             /**
              * Numerated list of found pois
@@ -68,19 +58,20 @@ define([
              */
             self.results = new results({ 
                 core: options.core,
-                model: self.model
+                model: model
             });
             
             // when the query changes, re-load the places
-            self.model.on('change:query', self.load, self);
+            model.on('change:query', self.load, self);
             
             // set up router and handle the first route event
-            core.router.on('route:map', self.handleRouting, self);
+            //core.router.on('route:map', self.handleRouting, self);
+            core.router.on('route:map', model.setQueryFromRoute, model);
             
             // fire the event if the app is loading with a query
             // ie. /#/map/pizza+17601
             if (options.fragments[0]) {
-                self.handleRouting(options.fragments[0]);
+                model.setQueryFromRoute(options.fragments[0]);
             }
         },
         
@@ -139,22 +130,6 @@ define([
         },
         
         /**
-         * Handle a new page load. Get the query from the URL and move it 
-         * into the search box and into the places model
-         * @param {String} query search query 
-         * @method
-         */
-        handleRouting: function (query) {
-            query = (query || '').replace(/\+/g, ' ');
-            
-            $('.placesFormTin').val(query);
-            
-            this.model.set({
-                query: query
-            });
-        },
-        
-        /**
          * Record the route in history
          * @method
          */
@@ -174,11 +149,9 @@ define([
             var self = this;
             
             self.model.dispose();
-            self.form.dispose();
             self.results.dispose();
             
             self.model = null;
-            self.form = null;
             self.results = null;
             
             self.core.router.off('route:map', this.handleRouting);
