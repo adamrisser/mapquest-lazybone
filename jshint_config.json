@@ -17,7 +17,7 @@
     "mootools"      : false,
     "dojo"          : false,
 
-    "predef"        : [  "define", "require" ],
+    "predef"        : [  "define", "require", "sinon", "asyncTest", "deepEqual", "equal", "expect", "module", "notDeepEqual", "notEqual", "notStrictEqual", "ok", "QUnit", "raises", "start", "stop", "strictEqual", "test" ],
 
 
     // Development.
