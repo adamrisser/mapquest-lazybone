@@ -76,7 +76,7 @@ require(['core/views/navbar'], function (NavBar) {
 
         // make sure only one item is active
         equal(0, $('.navbar li.active').length);
-    });    
+    });
     
     // ----------------------------------------------------------------------
     
