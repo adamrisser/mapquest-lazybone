@@ -2,7 +2,7 @@
  * A poi (with infowindow attached) view
  * @fileOverview
  */
-define(['tmpl!common/html/infowindow'], function (tmpl) {
+define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, tmpl) {
     
     var Poi = Backbone.View.extend({
         
