@@ -104,7 +104,7 @@ require(['core/views/navbar'], function (NavBar) {
         // did instantiating the NavBar try and activate a tab?
         ok(NavBar.prototype.handleClick.calledOnce, 'Click handler was called');
         
-        // make sure it tried to animate
+        // should have been called twice
         ok(NavBar.prototype.setActive.calledTwice, 'setActive was called only once.');
 
         // esnure only one item is active
