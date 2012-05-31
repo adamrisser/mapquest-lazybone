@@ -42,7 +42,7 @@ define([
              */
             self.map = new Map({
                 core: self,
-                zoom: 7,
+                zoom: 4,
                 center: {
                     lat:   39.743943,
                     lng: -105.020089
