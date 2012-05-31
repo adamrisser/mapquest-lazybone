@@ -92,7 +92,7 @@ define(['backbone'], function (Backbone) {
             // see if this shape collection already exists
             var backboneModel = this.get('shapeCollections').where({
                 collectionName: options.name
-            })[0];
+            })[0], sc;
             
             // nothing? create a new one
             if (_.isEmpty(backboneModel)) {
@@ -102,7 +102,9 @@ define(['backbone'], function (Backbone) {
                 sc.collectionName = options.name;
                 
                 // populate the new collection
-                _.each(options.shapes, sc.add, sc);
+                _.each(options.shapes, function (shape) {                    
+                    sc.add(shape.toMQA())
+                });    
                 
                 this.get('shapeCollections').add(sc);
             }
@@ -110,7 +112,9 @@ define(['backbone'], function (Backbone) {
             else {
                 
                 // add new shapes to the collection
-                _.each(options.shapes, backboneModel.attributes.add, backboneModel.attributes);
+                _.each(options.shapes, function (shape) {
+                    backboneModel.attributes.add(shape.toMQA());
+                });
                 
                 // make sure to alert everything that this happened
                 this.get('shapeCollections').trigger('update', backboneModel);

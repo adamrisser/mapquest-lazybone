@@ -3,7 +3,7 @@
  * A view to handle placing vibe pois on the map.
  * @fileOverview
  */
-define([], function () {
+define(['common/views/poi'], function (Poi) {
     
     /**
      * Large vibe icon
@@ -102,9 +102,11 @@ define([], function () {
          * @method
          */
         createPoi: function (place) {
-            var poi = new MQA.Poi(place.get('latLng'));
-            poi.setIcon(_largeIcon);
-            return poi;
+            return new Poi({
+                loc:  place,
+                path: 'tmpl!core/html/location',
+                icon: _largeIcon
+            });
         },
         
         /**

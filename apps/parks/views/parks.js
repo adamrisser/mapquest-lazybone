@@ -8,8 +8,9 @@
 define([
     'parks/models/parks', 
     'parks/views/summary',
-    'parks/util/parksutil'
-], function (ParksModel, ParksSummary, parksUtil) {
+    'common/views/poi',
+    'common/views/shape'
+], function (ParksModel, ParksSummary, Poi, Shape) {
     
     var ParksController = Backbone.View.extend({
         
@@ -34,6 +35,12 @@ define([
         _url: 'http://localhost:8000/apps/parks/data',
         
         /**
+         * Small vibe icon
+         * @type {MQA.Icon}
+         */
+        _icon: new MQA.Icon('http://content.mqcdn.com/mapbuilder-190/cdn/dotcom3/images/icons/collection/v2/themes/recreation/1.png', 30, 30),
+        
+        /**
          * Initialize this hood.
          * @param {Array}         options.fragments route fragments that initialized the app
          * @param {Backbone.View} options.core      core winston application
@@ -43,7 +50,7 @@ define([
             var self = this;
             _.bindAll(self, 'save', 'saveAsShapeCollection');
             
-            self.core = options.core; 
+            self.core = options.core;
             self.model = new ParksModel();
             self.summary = new ParksSummary(self.model);
             
@@ -114,6 +121,38 @@ define([
         },
         
         /**
+         * Create a parks poi
+         * @param {Object} loc parks api location
+         * @method
+         */
+        createPoi: function (loc) {
+            
+            return new Poi({
+                loc:  loc,
+                path: 'tmpl!core/html/location',
+                icon: this._icon
+            });
+        },
+        
+        /**
+         * Create a park shape overlay
+         * @param {Array} geometry shape points
+         * @method
+         */
+        createShape: function (geometry) {
+            return new Shape({
+                geometry: geometry,
+                properties: {
+                    color: '#000000',
+                    colorAlpha: .2,
+                    borderWidth: 2,
+                    fillColor: '#075053',
+                    fillColorAlpha: .1    
+                }
+            });
+        },
+        
+        /**
          * Save data as a shape collection to the core model
          * @param {Object} response  parks api response
          * @method
@@ -125,8 +164,8 @@ define([
             MQA.withModule('shapes', function () {
                 
                 // combine mqa.shapes into an array
-                shapes = response.pois.map(parksUtil.createPoi);
-                shapes.push(parksUtil.createOverlay(response.geometry));
+                shapes = response.pois.map(self.createPoi, self);
+                shapes.push(self.createShape(response.geometry));
                 
                 self.core.model.saveToShapeCollection({
                     name: 'parks',
