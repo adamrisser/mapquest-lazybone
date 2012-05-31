@@ -1,16 +1,18 @@
 require(['core/views/navbar'], function (NavBar) {
     
+    "use strict";
+
     var nav = 
-        '<div class="navbar">'
-        + '    <div class="navbar-inner">'
-        + '        <ul class="nav">'
-        + '            <li id="first-item"><a href="/#/one">one</a></li>'
-        + '            <li id="second-item"><a href="/#/two">two</a></li>'
-        + '            <li id="third-item"><a href="/#/three">three</a></li>'
-        + '            <li id="fourth-item"><a href="/#/four">four</a></li>'
-        + '        </ul>'
-        + '    </div>'
-        + '</div>';
+        '<div class="navbar">' +
+        '    <div class="navbar-inner">' +
+        '        <ul class="nav">' +
+        '            <li id="first-item"><a href="/#/one">one</a></li>' +
+        '            <li id="second-item"><a href="/#/two">two</a></li>' +
+        '            <li id="third-item"><a href="/#/three">three</a></li>' +
+        '            <li id="fourth-item"><a href="/#/four">four</a></li>' +
+        '        </ul>' +
+        '    </div>' +
+        '</div>';
     
     test('Should be defined', 1, function () {
         ok(NavBar);
@@ -38,7 +40,7 @@ require(['core/views/navbar'], function (NavBar) {
         var setActive = NavBar.prototype.setActive;
         
         // init bar to the vibe tab
-        this.bar = new NavBar;
+        this.bar = new NavBar();
         
         // did instantiating the NavBar try and activate a tab?
         ok(setActive.calledOnce);
@@ -86,7 +88,7 @@ require(['core/views/navbar'], function (NavBar) {
             $('#qunit-fixture').html(nav);
             sinon.spy(NavBar.prototype, 'handleClick');
             sinon.spy(NavBar.prototype, 'setActive');
-            this.bar = new NavBar;
+            this.bar = new NavBar();
         },
         
         teardown: function () {
