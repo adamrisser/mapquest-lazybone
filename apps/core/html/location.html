@@ -3,7 +3,7 @@
     
     <% if (loc.name) { %><div class="name org line1"><%= loc.name %></div><% } %>
     
-    <% if (adr = loc.adr) { %>
+    <% if (adr = loc.adr || loc.address) { %>
         <div class="adr <% if (loc.name) { %>line2<% } else { %>line1<% } %>">
             
             <% if (adr.street) { %><span class="street line2"><%= adr.street %></span><br /><% } %>

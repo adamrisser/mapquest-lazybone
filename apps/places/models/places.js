@@ -46,6 +46,17 @@ define(function () {
         },
         
         /**
+         * Set the query, stripping out bad chars (+, etc)
+         * @param {String} query
+         * @method
+         */
+        setQueryFromRoute: function (query) {
+            this.set({
+                query: (query || '').replace(/\+/g, ' ')
+            });
+        },
+        
+        /**
          * Clean up
          * @method
          */

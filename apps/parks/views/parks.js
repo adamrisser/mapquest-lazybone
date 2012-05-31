@@ -126,7 +126,6 @@ define([
          * @method
          */
         createPoi: function (loc) {
-            
             return new Poi({
                 loc:  loc,
                 path: 'tmpl!core/html/location',
