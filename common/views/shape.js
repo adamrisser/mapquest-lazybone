@@ -2,7 +2,7 @@
  * A shape for the toolkit
  * @fileOverview
  */
-define(['vibe/shapeutil'], function (shapesUtil) {
+define(['backbone', 'vibe/shapeutil', 'MQA'], function (Backbone, shapesUtil) {
     
     var Shape = Backbone.View.extend({
         
