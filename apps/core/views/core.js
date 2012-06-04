@@ -54,7 +54,7 @@ define([
              * information about searches, directions etc. 
              * @type {Backbone.View}
              */
-            self.pane = new Pane;
+            self.pane = new Pane();
             
             /**
              * Top navigation for the site
