@@ -48,6 +48,15 @@ define(['backbone'], function (Backbone) {
             this.set({
                 unresolvedLocations: new LocationCollection(loc.unresolvedLocations)
             });
+        },
+        
+        /**
+         * Clean up
+         * @method
+         */
+        dispose: function () {
+            this.get('unresolvedLocations').off();
+            this.off();
         }
         
     });

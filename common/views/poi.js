@@ -7,6 +7,20 @@ define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, t
     var Poi = Backbone.View.extend({
         
         /**
+         * Location model that the poi represents
+         * @type {Backbone.Model}
+         * @property
+         */
+        loc: null,
+        
+        /**
+         * MQA toolkit poi
+         * @type {MQA.Poi}
+         * @property
+         */
+        poi: null,
+        
+        /**
          * Initialize the poi
          * @param {Backbone.View||Object} options.loc  location
          * @param {String}                options.path file path
@@ -27,7 +41,9 @@ define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, t
             
             self.setOptions();
             
-            MQA.EventManager.addListener(self.poi, 'infowindowopen', self.renderInfoWindow, self);
+            MQA.EventManager.addListener(self.poi, 'infowindowopen', function () {
+                self.renderInfoWindow();
+            }, self);
         },
         
         /**
@@ -38,7 +54,6 @@ define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, t
             var poi = this.poi;
             
             poi.setIconOffset({ x: -11, y: -36 });
-            
             poi.setShadow(null);
             
             if (this.icon) {
@@ -49,9 +64,6 @@ define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, t
             poi.setInfoContentHTML('&nbsp;');
             poi.setRolloverContent('<div class="rollover">' + 
                 (this.loc.name || this.loc.address.singleLineAddress) + '</div>');
-            
-            // have to run these once so the poi will listen for events
-            poi.setInfoContentHTML('&nbsp;');
         },
         
         /**
@@ -59,20 +71,39 @@ define(['backbone', 'tmpl!common/html/infowindow', 'MQA'], function (Backbone, t
          * @method
          */
         renderInfoWindow: function () {
-            var self = this;
-            
-            require([self.path], function (pathtmpl) {
-                var html = pathtmpl({
-                    loc: self.loc 
-                });
-                
-                // wrap html around infowindow html and attach
-                self.poi.infoWindow.setContent(tmpl({
-                    html: html
-                }));
-                
-                self.resetSize();
+            require([this.path], _.bind(this.load, this));
+        },
+        
+        /**
+         * Load template into infowindow
+         * @method
+         */
+        load: function (pathTmpl) {
+            this.setHtml(this.getHtml(pathTmpl));
+        },
+        
+        /**
+         * Get infowindow html
+         * @param  {Function} pathtmpl underscore template
+         * @return {String}
+         * @method
+         */
+        getHtml: function (pathtmpl) {
+            return tmpl({
+                html: pathtmpl({
+                    loc: this.loc 
+                })
             });
+        },
+        
+        /**
+         * Set infowindow HTML
+         * @param {String} html
+         * @method
+         */
+        setHtml: function (html) {
+            this.poi.infoWindow.setContent(html);
+            this.resetSize();
         },
         
         /**
