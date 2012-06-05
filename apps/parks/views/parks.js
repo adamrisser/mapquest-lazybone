@@ -6,25 +6,24 @@
  * @fileOverview
  */
 define([
+    'backbone',
     'parks/models/parks', 
     'parks/views/summary',
     'common/views/poi',
     'common/views/shape'
-], function (ParksModel, ParksSummary, Poi, Shape) {
+], function (Backbone, ParksModel, ParksSummary, Poi, Shape) {
     
-    var ParksController = Backbone.View.extend({
+    var ParksMain = Backbone.View.extend({
         
         /**
          * Parent
          * @type {String}
-         * @property
          */
         el: '#pane',
         
         /**
          * Vibe model
          * @type {Backbone.Model}
-         * @property
          */
         model: null,
         
@@ -193,6 +192,6 @@ define([
     });
     
     // export
-    return ParksController;
+    return ParksMain;
     
 });

@@ -45,17 +45,10 @@ define(['backbone'], function (Backbone) {
         
         /**
          * Init the core model
-         * @param {Backbone.View} options.core
          * @method
          */
-        initialize: function (options) {
-            var self = this,
-                shapes = self.get('shapeCollections');
-            
-            self.bind('change:location', self.setState, self);
-            
-            // when a route changes, remove all shapes
-            options.core.router.on('all', shapes.reset, shapes);
+        initialize: function () {
+            this.bind('change:location', this.setState, this);
         },
         
         /**

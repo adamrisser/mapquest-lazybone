@@ -2,7 +2,7 @@
  * Vibe 'parkquest' app
  * @fileoverview
  */
-define(function () {
+define(['backbone'], function (Backbone) {
     
     /**
      * Collection of pois

@@ -18,28 +18,59 @@ define([
     var WinstonCore = Backbone.View.extend({
         
         /**
+         * Backbone router. Handles state changes in the URL
+         * @type {Backbone.Router}
+         */
+        router: null,
+        
+        /**
+         * Main application model. A collection of map models
+         * @type {Backbone.Model}
+         */
+        model: null,
+        
+        /**
+         * Main map
+         * @type {Backbone.View}
+         */
+        map: null,
+        
+        /**
+         * Main info pane that accompanies the map. Used to show
+         * information about searches, directions etc. 
+         * @type {Backbone.View}
+         */
+        pane: null,
+        
+        /**
+         * Top navigation for the site
+         * @type {Backbone.View}
+         */
+        navBar: null,
+        
+        /**
+         * Main entry form for the site
+         * @type {Backbone.View}
+         */
+        searchForm: null,
+        
+        /**
          * Init the core application
          * @constructor
          */
         initialize: function () {
-            var self = this;
+            var self = this, shapes;
             
-            /**
-             * Backbone router. Handles state changes in the URL
-             * @type {Backbone.Router}
-             */
+            // init the router and the model, which are the main drivers
+            // of the core application
             self.router = new Router({ core: self });
+            self.model  = new CoreModel();
             
-            /**
-             * Main application model. A collection of map models
-             * @type {Backbone.Model}
-             */
-            self.model = new CoreModel({ core: self });
+            // when a route changes, remove all shapes
+            shapes = self.model.get('shapeCollections');
+            self.router.on('all', shapes.reset, shapes);
             
-            /**
-             * Main map
-             * @type {Backbone.View}
-             */
+            // init the core views
             self.map = new Map({
                 core: self,
                 zoom: 4,
@@ -49,25 +80,17 @@ define([
                 }
             });
             
-            /**
-             * Main info pane that accompanies the map. Used to show
-             * information about searches, directions etc. 
-             * @type {Backbone.View}
-             */
             self.pane = new Pane();
             
-            /**
-             * Top navigation for the site
-             * @type {Backbone.View}
-             */
-            self.navBar = new NavBar({ hash: Backbone.history.getHash() });
+            //TODO: move getHash into navbar
+            self.navBar = new NavBar({
+                hash: Backbone.history.getHash()
+            });
             
-            /**
-             * Main entry form for the site
-             * @type {Backbone.View}
-             */
-            self.searchForm = new SearchForm({ el: '#searchForm', core: self });
-            
+            self.searchForm = new SearchForm({
+                el: '#searchForm', 
+                core: self 
+            });
         },
         
         /**
