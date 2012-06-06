@@ -51,7 +51,12 @@ define(function() {
                     }
                 });
             });
-
+            
+            //Key='key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5';
+            MQPLATFORMSERVER='http://mq-devhost-lm39.ihost.aol.com:8800/_svc/routeio/route';
+            MQPLATFORMSERVER='http://mq-devhost-lm39.ihost.aol.com:8800/_svc';
+            //MQPLATFORMSERVER='http://mq-devhost-lm39.ihost.aol.com:8800';
+            
             MQA.withModule('directions', function() {
                 map.addRoute(addresses, {}, function(narrative) { deferred.resolve(narrative); });
             });

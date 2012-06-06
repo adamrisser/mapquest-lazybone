@@ -4,12 +4,13 @@ define(['underscore', 'backbone',
     'directions/models/location',
     'directions/views/inputs', 
     'directions/views/narrative',    
-    'directions/services/route',    
+    'directions/services/route',
+    'planning/views/main',    
     'less!directions/css/directions',
     'twitter', 
     'css!twittercss'
 ], 
-    function (_, Backbone, Query, LocationCollection, Location, Inputs, Narrative, route) {
+    function (_, Backbone, Query, LocationCollection, Location, Inputs, Narrative, route, Planning) {
 
     var Directions = Backbone.View.extend({
 
@@ -48,6 +49,8 @@ define(['underscore', 'backbone',
             this.model = new Query({
                 stops: new LocationCollection
             });
+
+            this.planning = new Planning(options);
 
             this.render();
         },

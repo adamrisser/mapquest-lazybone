@@ -7,7 +7,7 @@ define([
     'core/utils/resizer',
     'core/models/location', 
     'less!core/css/map', 
-    'MQA'
+    'http://www.mapquestapi.com/sdk/js/v7.0.s/mqa.toolkit.js?key=mjtd%7Clu6t2hu725%2Cr5%3Do5-la7x5'
 ], function (resizer, LocationModel) {
     
     /**
@@ -38,11 +38,13 @@ define([
          _resize: function () {
              //TODO: fix the padding 20 and height 80
             var pane = $('#pane').width(),
-                h = $('#map').closest('#wrapper').height() || 0,
+                control = $('.planningcontrol').height() || 0,
+                h = ($('#map').closest('#wrapper').height() - control) || 0,
                 w = $('#map').closest('#wrapper').width() - pane;
 
             // resize the map parent
             this.$el.css({
+                top: control || 0,
                 width: (w > 0 ? w : 0) + 'px',
                 height: h + 'px'
             });

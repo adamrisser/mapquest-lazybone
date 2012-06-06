@@ -50,11 +50,15 @@ require.config({
          * LESS         - extends CSS with dynamic behavior such as variables, 
          *                mixins, operations and functions
          *                (http://lesscss.org/)
+         * 
+         * jQueryUI     - Similar to twitter bootstrap, base components for
+         *                quick development 
          */
         'underscore' : 'js/ext/underscore',
         'backbone'   : 'js/ext/backbone',
         'jquery'     : 'js/ext/jquery',
         'lessmin'    : 'js/ext/less-1.3.0.min',
+        'jqueryui'   : 'js/ext/jqueryui',
         
         /*
          * Twitter Bootstrap
@@ -86,6 +90,7 @@ require.config({
         'places' : 'apps/places',
         'common' : 'common',
         'directions' : 'apps/directions',
+        'planning' : 'apps/planning',
         
         // Utils 
         'resizer' : 'js/util/resizer'
